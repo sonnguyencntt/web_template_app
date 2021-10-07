@@ -117,6 +117,7 @@ function isJson(str) {
   return true;
 }
 function standardProductLink(str) {
+  str = str.replace(/%/g, "");
   str = removeAccents(str);
   str = str.replace(/\s/g, "-");
   str = replaceAll(str, "/", "-");

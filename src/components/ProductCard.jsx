@@ -2,20 +2,19 @@ import { formatPrice, handleImgErr } from "../helper";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import {standardProductLink} from "../helper"
+import { standardProductLink } from "../helper"
 export default function ProductCard(props) {
- 
   const appTheme = useSelector(state => state.app.appTheme);
   const profile = useSelector(state => state.user.profile);
   const myLink = useRef(null);
-  let {min_price, price, product_discount, percent_collaborator, images, name, id } = props.product;
+  let { min_price, price, product_discount, percent_collaborator, images, name, id } = props.product;
   let pastPrice = min_price;
   let discount = 0;
   let discount_percent = 0;
   let avt = "/img/default_product.jpg";
   if (product_discount) {
     discount_percent = product_discount.value;
-    discount =  min_price * 0.01 *  product_discount.value;
+    discount = min_price * 0.01 * product_discount.value;
     price = min_price - discount;
   }
   if (images.length)
@@ -26,7 +25,7 @@ export default function ProductCard(props) {
   return (
     <div onClick={handleClick} className="product-card">
       <div style={{ display: "none" }}>
-        <Link ref={myLink} to={`/san-pham/${ standardProductLink(name) }-${id}`} />
+        <Link ref={myLink} to={`/san-pham/${standardProductLink(name)}-${id}`} />
       </div>
       <div className="image">
         <div className="img-container">

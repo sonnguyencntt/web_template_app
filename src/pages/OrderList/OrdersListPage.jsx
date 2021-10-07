@@ -27,34 +27,22 @@ function OrdersListPage() {
       dispatch(a.getOrdersList(""));
     }
   });
-
   function handleShowInfo(id) {
     window.location.href = `/don-hang/${id}`;
   }
-
   function handleInputChange(e) {
     setSearchValue(e.target.value);
   }
-
   function handleChangeQueryString(q) {
     let queryKeys = [...Object.keys(q)];
     console.log(queryKeys);
-    if (searchValue !== "") {
-      let queryStr =
-        queryKeys.reduce((rs, v) => `${rs}${v}=${q[v]}&`, "?") +
-        `search=${searchValue}`;
-      console.log(queryStr);
-      dispatch(a.getOrdersList(queryStr));
-    } else {
-      let queryStr = queryKeys.reduce((rs, v) => `${rs}${v}=${q[v]}&`, "?");
-      console.log(queryStr);
-      dispatch(a.getOrdersList(queryStr));
-    }
+    let queryStr = queryKeys.reduce((rs, v) => `${rs}${v}=${q[v]}&`, "?");
+    console.log(queryStr);
+    dispatch(a.getOrdersList(queryStr));
   }
-  function handleReview(e, orderList) {
+  function handleRebuy(e, productsList) {
     e.stopPropagation();
-    var list = JSON.parse(orderList);
-    list.map((v, i) => {
+    productsList.map((v) => {
       dispatch(
         cartActions.addCart(
           {
@@ -65,9 +53,9 @@ function OrdersListPage() {
           true
         )
       );
+      return null
     });
   }
-
   function handleSort(option, e) {
     let newQuery = { ...query };
     let keys = [...Object.keys(option)];
@@ -84,21 +72,18 @@ function OrdersListPage() {
     setQuery(newQuery);
     handleChangeQueryString(newQuery);
   }
-
   function handlePageSelect(page) {
     let cloneQuery = { ...query, ...page };
     handleChangeQueryString(cloneQuery);
   }
-
   function handleSearch() {
-    if (searchValue !== "") handleChangeQueryString();
+    if (searchValue !== "") handleChangeQueryString({ search: searchValue });
   }
-
   function handleEnter(e) {
     if (e.key === "Enter") handleSearch();
   }
-
-  function openPaymentDialog(order) {
+  function openPaymentDialog(e, order) {
+    e.stopPropagation();
     dispatch({
       type: c.CHANGE_POPUP,
       popupType: c.ORDER_POPUP,
@@ -114,7 +99,6 @@ function OrdersListPage() {
       },
     });
   }
-
   return (
     <React.Fragment>
       <Header />
@@ -123,12 +107,11 @@ function OrdersListPage() {
       ) : (
         <div className="orders-list-page container">
           <div className="sort-option row" style={{ zIndex: "3" }}>
-            <span>Có {ordersList.data.length} đơn hàng</span>
             <div className="search-bar-order" onKeyDown={handleEnter}>
               <input
                 className="input-order"
                 type="text"
-                placeholder="Mã đơn hàng"
+                placeholder="Mã đơn hàng..."
                 value={searchValue}
                 onChange={handleInputChange}
               />
@@ -137,16 +120,8 @@ function OrdersListPage() {
                 onClick={() => {
                   handleChangeQueryString(query);
                 }}
-                style={{ background: appTheme.color_main_1 }}
               >
-                <img
-                  src="/img/search.svg"
-                  alt="search"
-                  style={{
-                    width: "1.25em",
-                    objectFit: "contain",
-                  }}
-                />
+                <i className="fas fa-search"></i>
               </button>
             </div>
             <Select
@@ -217,12 +192,8 @@ function OrdersListPage() {
                 <th className="date">Thời gian</th>
                 <th className="n-product">Sản phẩm</th>
                 <th className="total">Tổng tiền</th>
-                <th className="status">Trạng thái đơn hàng</th>
-
-                {currentStatus === "Đã hoàn thành" ? (
-                  <th className="status"></th>
-                ) : null}
-                <th className="status">Trạng thái thanh toán</th>
+                <th className="status">T.t đơn hàng</th>
+                <th className="status">T.t thanh toán</th>
               </tr>
             </thead>
             <tbody>
@@ -238,64 +209,63 @@ function OrdersListPage() {
                         <div>{v.line_items_at_time[0].name}</div>
                         <span>
                           {v.line_items_at_time.length > 1
-                            ? `0${
-                                v.line_items_at_time.length - 1
-                              } sản phẩm khác`
+                            ? `0${v.line_items_at_time.length - 1
+                            } sản phẩm khác`
                             : null}
                         </span>
                       </td>
                       <td className="total">₫ {formatPrice(v.total_final)}</td>
                       <td className="status">{v.order_status_name}</td>
-                      {currentStatus === "Đã hoàn thành" ? (
-                        <td>
-                          <div className="actions">
-                            <button
-                              id="addcart-btn"
-                              type="button"
-                              onClick={(e) => {
-                                if (v.reviewed === true) {
-                                  handleReview(
-                                    e,
-                                    JSON.stringify(v.line_items_at_time)
-                                  );
-                                }
-                              }}
-                              style={{
-                                background: appTheme.color_main_1,
-                                padding: "10px 20px",
-                                maxWidth: "100%",
-                                fontSize: "16px",
-                                color: "white",
-                                borderRadius: "0.25em",
-                              }}
-                            >
-                              {v.reviewed === true ? "Mua lại" : "Đánh giá"}
-                            </button>{" "}
-                          </div>{" "}
-                        </td>
-                      ) : null}
                       <td className="status">
-                      
-                    
-                      
-                      {v.payment_status_name}
-                      <br />
-                      {
-                     v.payment_status_code === "UNPAID" &&
-                      ["WAITING_FOR_PROGRESSING", "PACKING"].includes(v.order_status_code) &&
-                      <button
-                        onClick={()=>{
-                          openPaymentDialog(v);
-                        }}
-                        style={{
-                          padding: "6px 8px",
-                          borderRadius: "0.25em",
-                          color: "white",
-                          marginTop: "0.5em",
-                          background: appTheme.color_main_1
-                        }}
-                      >Thanh toán</button>
-                    }
+                        {v.payment_status_name}
+                        <br />
+                        {
+                          v.payment_status_code === "UNPAID" &&
+                          ["WAITING_FOR_PROGRESSING", "PACKING"].includes(v.order_status_code) &&
+                          <button
+                            onClick={(e) => {
+                              openPaymentDialog(e, v);
+                            }}
+                            style={{
+                              padding: "6px 8px",
+                              borderRadius: "0.25em",
+                              color: "white",
+                              marginTop: "0.5em",
+                              background: appTheme.color_main_1
+                            }}
+                          >Thanh toán</button>
+                        }
+                        {
+                          v.order_status_code === "COMPLETED" &&
+                          (
+                            !v.reviewed ?
+                              <button
+                                onClick={(e) => {
+                                  handleRebuy(e, v.line_items_at_time);
+                                }}
+                                style={{
+                                  padding: "6px 8px",
+                                  borderRadius: "0.25em",
+                                  color: "white",
+                                  marginTop: "0.5em",
+                                  background: appTheme.color_main_1
+                                }}
+                              >Đánh giá</button>
+                              :
+                              <button
+                                onClick={() => {
+                                  openPaymentDialog(v);
+                                }}
+                                style={{
+                                  padding: "6px 8px",
+                                  borderRadius: "0.25em",
+                                  color: "white",
+                                  marginTop: "0.5em",
+                                  background: appTheme.color_main_1
+                                }}
+                              >Mua lại</button>
+                          )
+                        }
                       </td>
                     </tr>
                   )

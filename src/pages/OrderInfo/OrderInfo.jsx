@@ -53,8 +53,6 @@ function OrderInfoPage(props) {
       behavior: "smooth"
     })
   }
-
-
   function openPaymentDialog() {
     dispatch({
       type: c.CHANGE_POPUP,
@@ -71,7 +69,6 @@ function OrderInfoPage(props) {
       },
     });
   }
-
   return (
     <React.Fragment>
       <Header />
@@ -91,7 +88,7 @@ function OrderInfoPage(props) {
                 <div className="date"> {`${orderInfo.info.payment_status_name}`}</div>
                 {
                   orderInfo.info.order_status_code === "COMPLETED"
-                    && !orderInfo.info.reviewed ?
+                  && (!orderInfo.info.reviewed ?
                     <div
                       style={{ cursor: "pointer" }}
                       onClick={handleScrollTo}
@@ -101,6 +98,7 @@ function OrderInfoPage(props) {
                       style={{ cursor: "pointer" }}
                       onClick={handleScrollTo}
                       className="date">&nbsp;| Đã đánh giá</div>
+                  )
                 }
               </div>
               <div className="row">
@@ -200,9 +198,9 @@ function OrderInfoPage(props) {
                             </div>
                           </div>
                         </td>
-                        <td className="prePrice">₫ {formatPrice(v.before_price)}</td>
+                        <td className="prePrice">₫ {formatPrice(v.before_discount_price)}</td>
                         <td className="number">{v.quantity}</td>
-                        <td className="discount">₫ {formatPrice(v.before_price - v.after_discount)}</td>
+                        <td className="discount">₫ {formatPrice(v.before_discount_price - v.after_discount)}</td>
                         <td className="price">₫ {formatPrice(v.after_discount * v.quantity)}</td>
                       </tr>
                     )

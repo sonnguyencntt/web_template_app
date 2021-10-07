@@ -235,7 +235,6 @@ function getOrdersList(query) {
     };
   }
 }
-
 function getOrderInfo(orderCode) {
   return (dispatch) => {
     s.getOrderInfo(orderCode).then((res) => {

@@ -1234,6 +1234,19 @@
   align-items: center;
   text-align: center;
   width: 500px;
+  position: relative;
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    padding: 0;
+    right: -10px;
+    background: white;
+    border-radius: 100%;
+    font-size: 20px;
+    color: $sub-text-color;
+  }
   h4 {
     font-size: 18px;
   }

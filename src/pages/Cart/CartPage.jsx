@@ -93,6 +93,8 @@ function CartPage() {
       is_use_balance_collaborator
     };
     info[type] = value;
+    if (type === "code_voucher" && value === "")
+      setVoucherCode("");
     dispatch(cartActions.applyDiscount(info, type));
   }
   function handleChangeCheckBox(type) {

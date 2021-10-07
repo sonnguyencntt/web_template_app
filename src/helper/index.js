@@ -118,22 +118,23 @@ function isJson(str) {
 }
 function standardProductLink(str) {
   str = removeAccents(str);
-  str = str.replace(/\s/g, '-')
-  str = replaceAll(str, "/", "-")
-  str = replaceAll(str, "--", "-")
+  str = str.replace(/\s/g, "-");
+  str = replaceAll(str, "/", "-");
+  str = replaceAll(str, "--", "-");
   return str;
 }
 function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+  return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
 }
 function escapeRegExp(string) {
-  return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  return string.replace(/[.*+\-?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 function removeAccents(str) {
   var AccentsMap = [
     "aàảãáạăằẳẵắặâầẩẫấậ",
     "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
-    "dđ", "DĐ",
+    "dđ",
+    "DĐ",
     "eèẻẽéẹêềểễếệ",
     "EÈẺẼÉẸÊỀỂỄẾỆ",
     "iìỉĩíị",
@@ -143,22 +144,25 @@ function removeAccents(str) {
     "uùủũúụưừửữứự",
     "UÙỦŨÚỤƯỪỬỮỨỰ",
     "yỳỷỹýỵ",
-    "YỲỶỸÝỴ"    
+    "YỲỶỸÝỴ",
   ];
-  for (var i=0; i<AccentsMap.length; i++) {
-    var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+  for (var i = 0; i < AccentsMap.length; i++) {
+    var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
     var char = AccentsMap[i][0];
     str = str.replace(re, char);
   }
   return str;
 }
 function validURL(str) {
-  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
   return !!pattern.test(str);
 }
 export {

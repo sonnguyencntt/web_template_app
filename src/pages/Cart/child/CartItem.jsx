@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { formatPrice } from "../../../helper";
 export default function CartItem(props) {
   let { price, product_discount, quantity_in_stock, images, id, name, distributes } = props.product;
-  quantity_in_stock = quantity_in_stock >= 0 ? quantity_in_stock : quantity_in_stock == -1 ? 999999 : 0;
+  quantity_in_stock = quantity_in_stock >= 0 ? quantity_in_stock : quantity_in_stock === -1 ? 999999 : 0;
   let pastPrice = price;
   let avt = "/img/default_product.jpg";
   if (product_discount)
@@ -121,7 +121,7 @@ export default function CartItem(props) {
             </div>
           </div>
           {
-            props.distributes_selected &&
+            props.distributes_selected && distributes && distributes.length > 0 &&
             <div className="distributes">
               {
                 props.distributes_selected.map((v, i) =>

@@ -1,7 +1,6 @@
 import { constants as c } from "../constants";
 import { isHexColor, isImageUrl, isNullText } from "../helper";
 const provinces = localStorage.getItem("provinces");
-
 const initialState = {
   home: {
     status: c.LOADING,

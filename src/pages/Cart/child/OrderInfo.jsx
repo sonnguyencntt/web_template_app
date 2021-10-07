@@ -7,6 +7,7 @@ import { constants } from "../../../constants";
 export default function OrderInfo(props) {
   const dispatch = useDispatch();
   const {
+    used_voucher,
     total_after_discount,
     total_before_discount,
     product_discount_amount,
@@ -128,17 +129,28 @@ export default function OrderInfo(props) {
           </button>
           <div className="row">
             <input
+              disabled={used_voucher !== null}
               type="text"
               placeholder="Nhập voucher"
               value={props.code_voucher}
               onChange={props.handleVoucherInput}
             />
-            <button
-              style={{ background: appTheme.color_main_1 }}
-              onClick={props.applyVoucher}
-            >
-              Áp dụng
-            </button>
+            {
+              used_voucher ?
+                <button
+                  style={{ background: appTheme.color_main_1 }}
+                  onClick={() => props.applyDiscount("code_voucher", "")}
+                >
+                  Hủy
+                </button>
+                :
+                <button
+                  style={{ background: appTheme.color_main_1 }}
+                  onClick={() => props.applyDiscount("code_voucher", props.code_voucher)}
+                >
+                  Áp dụng
+                </button>
+            }
           </div>
         </div>
         <div className="voucher-input">

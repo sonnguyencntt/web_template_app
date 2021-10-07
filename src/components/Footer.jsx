@@ -91,15 +91,23 @@ export default function Footer() {
               <button onClick={handlePhoneCheck}>Đăng ký</button>
             </div> */}
             <div className="row">
-            {infoStore.link_google_play != null && infoStore.link_google_play != "" && validURL(infoStore.link_google_play) ?
-              <a href={infoStore.link_google_play}>
-                <img src="/img/play.png" alt="" />
-              </a> : ""
+              {
+                infoStore.link_google_play != null
+                && infoStore.link_google_play !== ""
+                && validURL(infoStore.link_google_play)
+                &&
+                <a href={infoStore.link_google_play}>
+                  <img src="/img/play.png" alt="" />
+                </a>
               }
-              {infoStore.link_apple_store != null && infoStore.link_apple_store != "" && validURL(infoStore.link_apple_store) && 
-              <a href={infoStore.link_apple_store}>
-                <img src="/img/app.png" alt="" />
-              </a>
+              {
+                infoStore.link_apple_store != null
+                && infoStore.link_apple_store !== ""
+                && validURL(infoStore.link_apple_store)
+                &&
+                <a href={infoStore.link_apple_store}>
+                  <img src="/img/app.png" alt="" />
+                </a>
               }
             </div>
           </div>
@@ -108,7 +116,7 @@ export default function Footer() {
               <h2>
                 Liên hệ
               </h2>
-             
+
               <div>
                 <span>Điện thoại:</span> {appTheme.contact_phone_number}
               </div>
@@ -117,8 +125,8 @@ export default function Footer() {
               </div>
               {
                 appTheme.contact_time_work == null ? "" : <div>
-                <span>Thời gian làm việc:</span>  {appTheme.contact_time_work}
-              </div>
+                  <span>Thời gian làm việc:</span>  {appTheme.contact_time_work}
+                </div>
               }
               <div>
                 <span>Địa chỉ:</span>  {appTheme.contact_address}
@@ -194,7 +202,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="mobile footer-mobile">
-     
+
         <div className="footer-icon">
           <a href="/gio-hang" style={{ color: appTheme.color_main_1 }}>
             <div className="cart-number">
@@ -230,13 +238,13 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center" style={{
-        backgroundColor:"#111723",
+        backgroundColor: "#111723",
         textAlign: "center",
-        color:"#f2f3f8",
-        paddingBottom:"10px",
+        color: "#f2f3f8",
+        paddingBottom: "10px",
         fontSize: "13px",
       }} >
-      Design by <a href="https://doapp.vn" style={{  color:"#f2f3f8",}}>DoApp.vn</a>
+        Design by <a href="https://doapp.vn" style={{ color: "#f2f3f8", }}>DoApp.vn</a>
       </div>
     </React.Fragment>
   )

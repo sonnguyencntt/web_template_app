@@ -58,6 +58,21 @@ export default function HomeBanner(props) {
           <h3>Danh mục</h3>
         </div>
         <div className="column">
+          <Link
+            style={{ cursor: "pointer", display: "flex" }}
+            to="/danh-sach-san-pham"
+          >
+            <img
+              src="/img/cubes.png"
+              alt=""
+              style={{
+                width: "30px",
+                objectFir: "contain",
+                marginRight: "8px",
+              }}
+            />
+            <div>Tất cả sản phẩm</div>
+          </Link>
           {
             categories.map((v, i) =>
               <Link

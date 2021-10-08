@@ -125,6 +125,24 @@ export default function Header() {
             >
               <h3>Danh mục sản phẩm</h3>
               <ul>
+                <li>
+                  <Link
+                    onClick={handleCategorySelect}
+                    style={{ cursor: "pointer", display: "flex" }}
+                    to="/danh-sach-san-pham"
+                  >
+                    <img
+                      src="/img/cubes.png"
+                      alt=""
+                      style={{
+                        width: "30px",
+                        objectFir: "contain",
+                        marginRight: "8px",
+                      }}
+                    />
+                    <div>Tất cả sản phẩm</div>
+                  </Link>
+                </li>
                 {categories.map((v, i) => (
                   <li key={i}>
                     <Link

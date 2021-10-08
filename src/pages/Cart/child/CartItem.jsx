@@ -176,7 +176,7 @@ export default function CartItem(props) {
                           distributes[0].element_distributes[0].sub_element_distributes.map((v, i) =>
                             <button
                               key={i}
-                              onClick={() => setNewSubDistribute(v.value)}
+                              onClick={() => { console.log(v.name); setNewSubDistribute(v.name) }}
                               style={
                                 v.name === newSubDistribute
                                   ? {

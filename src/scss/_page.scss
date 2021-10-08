@@ -4064,11 +4064,9 @@
 @media only screen and (min-width: 992px) {
   .home-page {
     .home-banner {
-      .discount-products,
-      .categories-column {
-        .row {
-          height: calc(0.45 * 960px - 0.45 * 440px + 108px - 45px);
-        }
+      .discount-products .row,
+      .categories-column .column {
+        height: calc(0.45 * 960px - 0.45 * 440px + 108px - 45px);
       }
     }
   }
@@ -4076,11 +4074,9 @@
 @media only screen and (min-width: 1200px) {
   .home-page {
     .home-banner {
-      .discount-products,
-      .categories-column {
-        .row {
-          height: calc(0.45 * 1140px - 0.45 * 440px + 140px - 45px);
-        }
+      .discount-products .row,
+      .categories-column .column {
+        height: calc(0.45 * 1140px - 0.45 * 440px + 140px - 45px);
       }
     }
   }
@@ -4088,11 +4084,9 @@
 @media only screen and (min-width: 1500px) {
   .home-page {
     .home-banner {
-      .discount-products,
-      .categories-column {
-        .row {
-          height: calc(0.45 * 1400px - 0.45 * 440px + 194px - 45px);
-        }
+      .discount-products .row,
+      .categories-column .column {
+        height: calc(0.45 * 1400px - 0.45 * 440px + 194px - 45px);
       }
     }
   }

@@ -219,7 +219,7 @@ function getUserBadges() {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
-      "device-id": uuid
+      "device-id": store_code+"-"+uuid
     },
   };
   return fetch(`${c.API_URL}/customer/${store_code}/badges`, requestOptions)

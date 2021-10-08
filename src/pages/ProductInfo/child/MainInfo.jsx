@@ -41,6 +41,7 @@ export default function MainInfo(props) {
   const profile = useSelector((state) => state.user.profile);
   const vouchers = useSelector((state) => state.voucher.list);
   const appTheme = useSelector((state) => state.app.appTheme);
+  const badges = useSelector((state) => state.user.badges);
   const productVouchers = useMemo(() => {
     return vouchers.data.filter((v) => {
       if (v.voucher_type === 0) return false;
@@ -328,7 +329,7 @@ export default function MainInfo(props) {
               </div>
             )}
 
-            {profile.is_collaborator ? (
+            {badges.status_collaborator == 1 ? (
               <div>
                 {currentPrice == null ? (
                   min_price == max_price || percent_collaborator == 0 ? (
@@ -494,7 +495,7 @@ export default function MainInfo(props) {
                 }}
                 id="soldout-btn">{ currentQuantityInStock === 0 ? "Hết hàng":"Vượt quá số lượng trong kho" }</button>
               )}
-              {profile.is_collaborator && (
+              {badges.status_collaborator == 1 && (
                 <button onClick={hanldeShare} id="share-btn">
                   Đăng bài
                 </button>

@@ -1,7 +1,8 @@
 import { constants as c } from "../constants";
 import { appServices } from "../services/appServices";
 function formatPrice(p) {
-  if (!p) return "0";
+  if (!p) return "Liên hệ";
+  if (p==0) return "Liên hệ";
   p = Math.round(p);
   p = p.toString();
   let n = 0;

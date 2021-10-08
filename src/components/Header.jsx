@@ -374,7 +374,7 @@ export default function Header() {
                     <img src="/img/heart.png" alt="" />
                     <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                   </li>
-                  {profile.is_collaborator && (
+                  {badges.status_collaborator == 1 && (
                     <li>
                       <img src="/img/handshake.png" alt="" />
                       <Link to="/cong-tac-vien">Ví cộng tác viên</Link>

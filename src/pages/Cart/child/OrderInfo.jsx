@@ -19,6 +19,7 @@ export default function OrderInfo(props) {
   const appTheme = useSelector((state) => state.app.appTheme);
   const profile = useSelector((state) => state.user.profile);
   const tokenInfo = useSelector((state) => state.user.tokenInfo);
+  const badges = useSelector((state) => state.user.badges);
   let defaultAddress = {};
   if (defaultAddressArr.length > 0) defaultAddress = defaultAddressArr[0];
   const [shipmentInfo, setShipmentInfo] = useState({ name: "", fee: 0 });
@@ -242,7 +243,7 @@ export default function OrderInfo(props) {
                 ></span>
               </label>
             </div>
-            {profile.is_collaborator && balance_collaborator_can_use > 0 && (
+            {badges.status_collaborator == 1 && balance_collaborator_can_use > 0 && (
               <div className="row">
                 <div className="row">
                   <label>

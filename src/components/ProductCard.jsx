@@ -1,4 +1,4 @@
-import { formatPrice, handleImgErr } from "../helper";
+import { formatPrice,formatPriceOrContact, handleImgErr } from "../helper";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
@@ -47,14 +47,14 @@ export default function ProductCard(props) {
           {name}
         </div>
         <div className="current-price" style={{ color: appTheme.color_main_1 }}>
-          ₫{formatPrice(price)}
+          ₫{formatPriceOrContact(price)}
         </div>
         {
           <div className="row" style={{ height: "15px" }}>
             <div className="past-price">
               {
                 product_discount &&
-                `₫${formatPrice(pastPrice)}`
+                `₫${formatPriceOrContact(pastPrice)}`
               }
             </div>
             <div className="discount">

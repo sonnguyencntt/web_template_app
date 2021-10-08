@@ -8,7 +8,7 @@ import { cartActions } from "../../../actions/cartActions";
 import { userActions } from "../../../actions/userActions";
 import { productActions } from "../../../actions/productActions";
 import { voucherActions } from "../../../actions/voucherActions";
-import { formatPrice } from "../../../helper";
+import { formatPrice,formatPriceOrContact } from "../../../helper";
 import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -254,7 +254,7 @@ export default function MainInfo(props) {
               min_price == max_price ? (
                 <div className="price" style={{ color: appTheme.color_main_1 }}>
                   ₫
-                  {formatPrice(
+                  {formatPriceOrContact(
                     discount_percent == null
                       ? min_price
                       : min_price - min_price * discount_percent * 0.01
@@ -263,13 +263,13 @@ export default function MainInfo(props) {
               ) : (
                 <div className="price" style={{ color: appTheme.color_main_1 }}>
                   ₫
-                  {formatPrice(
+                  {formatPriceOrContact(
                     discount_percent == null
                       ? min_price
                       : min_price - min_price * discount_percent * 0.01
                   )}{" "}
                   - ₫
-                  {formatPrice(
+                  {formatPriceOrContact(
                     discount_percent == null
                       ? max_price
                       : max_price - max_price * discount_percent * 0.01
@@ -279,7 +279,7 @@ export default function MainInfo(props) {
             ) : (
               <div className="price" style={{ color: appTheme.color_main_1 }}>
                 ₫
-                {formatPrice(
+                {formatPriceOrContact(
                   discount_percent == null
                     ? currentPrice
                     : currentPrice - currentPrice * discount_percent * 0.01

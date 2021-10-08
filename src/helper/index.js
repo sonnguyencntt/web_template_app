@@ -1,8 +1,28 @@
 import { constants as c } from "../constants";
 import { appServices } from "../services/appServices";
-function formatPrice(p) {
+function formatPriceOrContact(p) {
   if (!p) return "Liên hệ";
   if (p==0) return "Liên hệ";
+  p = Math.round(p);
+  p = p.toString();
+  let n = 0;
+  let tmp = "";
+  let rs = p[0];
+  for (let i = p.length - 1; i > 0; i--) {
+    n++;
+    tmp += p[i];
+    if (n % 3 === 0) {
+      tmp += ".";
+    }
+  }
+  for (let i = tmp.length - 1; i >= 0; i--) {
+    rs += tmp[i];
+  }
+  return rs;
+}
+
+function formatPrice(p) {
+  if (!p) return "0";
   p = Math.round(p);
   p = p.toString();
   let n = 0;
@@ -181,4 +201,5 @@ export {
   requestOtp,
   isJson,
   standardProductLink,
+  formatPriceOrContact
 };

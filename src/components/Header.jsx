@@ -18,7 +18,6 @@ export default function Header() {
   const profile = useSelector((state) => state.user.profile);
   const notify = useSelector((state) => state.user.notify);
   const badges = useSelector((state) => state.user.badges);
-  const boxChatState = useSelector((state) => state.user.boxChatState);
   useEffect(() => {
     if (badges.status === c.LOADING) {
       dispatch(userActions.getUserBadges());
@@ -93,6 +92,9 @@ export default function Header() {
     let arr = v.title.split(" ");
     let orderID = arr[arr.length - 1];
     window.location.href = `/don-hang/${orderID}`;
+  }
+  function handleShowCollaboratorRegisForm(e) {
+    e.preventDefault();
   }
   return (
     <React.Fragment>
@@ -184,7 +186,6 @@ export default function Header() {
               <img src="/img/search.svg" alt="search" />
             </button>
           </div>
-
           <Link to="/gio-hang" className="header-btn row">
             <img src="/img/shopping-cart.png" alt="" />
             <div>
@@ -202,7 +203,6 @@ export default function Header() {
               <div className="title">Giỏ hàng</div>
             </div>
           </Link>
-
           <div className="row">
             {!tokenInfo ? (
               ""
@@ -215,11 +215,7 @@ export default function Header() {
                   <img src="/img/bell (1).png" alt="" />
                   <div style={{ width: "70px" }}>
                     {notify.total_unread === 0 ? (
-                      <div
-                        style={{
-                          margin: 18,
-                        }}
-                      >
+                      <div style={{ margin: 18 }} >
                         {null}
                       </div>
                     ) : (
@@ -229,12 +225,9 @@ export default function Header() {
                   </div>
                 </div>
                 <div
-                  className={
-                    currentActive === "notify"
-                      ? "menu dropdown active"
-                      : "menu dropdown"
-                  }
-                >
+                  className={currentActive === "notify"
+                    ? "menu dropdown active"
+                    : "menu dropdown"}>
                   <h3>Thông báo mới</h3>
                   <div className="column hide-scroll">
                     {notify.data.map((v, i) => (
@@ -242,13 +235,15 @@ export default function Header() {
                         key={i}
                         className="item"
                         style={{ width: "100%", float: "left" }}
-                        onClick={() => handleNotificationClick(v)}
-                      >
+                        onClick={() => handleNotificationClick(v)}>
                         <div className="title" style={{ textAlign: "left" }}>
                           {v.title}
                         </div>
                         <div className="content" style={{ textAlign: "left" }}>
                           {v.content}
+                        </div>
+                        <div className="date">
+                          {`${v.created_at.split(" ")[0]}  ${v.created_at.split(" ")[1].slice(0, 5)}`}
                         </div>
                       </button>
                     ))}
@@ -266,7 +261,7 @@ export default function Header() {
               >
                 <img src="/img/heart1.png" alt="" />
                 <div>
-                  {badges.favorite_products == 0 ? (
+                  {badges.favorite_products === 0 ? (
                     <div
                       style={{
                         margin: 18,
@@ -392,12 +387,17 @@ export default function Header() {
                     <img src="/img/heart.png" alt="" />
                     <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                   </li>
-                  {profile.is_collaborator && (
+                  {badges.status_collaborator === 1 ?
                     <li>
                       <img src="/img/handshake.png" alt="" />
                       <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
                     </li>
-                  )}
+                    :
+                    <li>
+                      <img src="/img/handshake.png" alt="" />
+                      <Link onClick={handleShowCollaboratorRegisForm} to="/cong-tac-vien">Đăng ký cộng tác viên</Link>
+                    </li>
+                  }
                   <li onClick={handleShowProfile}>
                     <img src="/img/refresh.png" alt="" />
                     Cập nhật thông tin

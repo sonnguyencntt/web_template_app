@@ -16,7 +16,6 @@ export default function MainInfo(props) {
   let {
     id,
     name,
-    price,
     images,
     distributes,
     product_discount,
@@ -27,18 +26,11 @@ export default function MainInfo(props) {
     percent_collaborator,
   } = props.product;
   if (!images.length) images.push({ image_url: "/img/default_product.jpg" });
-  let discount = 0;
   let discount_percent = null;
-  let prevPrice = price;
-  let currentDiscount = min_price;
-  if (product_discount) {
+  if (product_discount)
     discount_percent = product_discount.value;
-    discount = product_discount.value;
-    price = product_discount.discount_price;
-  }
   const dispatch = useDispatch();
   const myShareBtn = useRef(null);
-  const profile = useSelector((state) => state.user.profile);
   const vouchers = useSelector((state) => state.voucher.list);
   const appTheme = useSelector((state) => state.app.appTheme);
   const productVouchers = useMemo(() => {
@@ -50,16 +42,17 @@ export default function MainInfo(props) {
   const [currentImages, setCurrentImages] = useState(images);
   const [currentPrice, setCurrentPrice] = useState(null);
   const [currentQuantityInStock, setCurrentQuantityInStock] = useState(quantity_in_stock_with_distribute);
-
   const [selectedDistributes, setSelectedDistributes] = useState(-1);
   const [selectedSubDistribute, setSelectedSubdistribute] = useState(-1);
   const [selectedNumber, setSelectedNumber] = useState(
     quantity_in_stock_with_distribute > 0
       ? 1
       : quantity_in_stock_with_distribute === -1
-      ? 1
-      : 0
+        ? 1
+        : 0
   );
+  const badges = useSelector(state => state.user.badges);
+  const profile = useSelector(state => state.user.profile);
   const productState = useSelector((state) => state.product);
   var settings = {
     infinite: true,
@@ -149,7 +142,6 @@ export default function MainInfo(props) {
         p = min_price;
         q = quantity_in_stock_with_distribute;
       }
-
       setCurrentPrice(p ? p : currentPrice);
       setCurrentQuantityInStock(q);
       return;
@@ -157,18 +149,14 @@ export default function MainInfo(props) {
     if (
       distributes[0].element_distributes[index].image_url &&
       Array.isArray(distributes[0].element_distributes[index].image_url) &&
-      distributes[0].element_distributes[index].image_url.length
-    )
+      distributes[0].element_distributes[index].image_url.length)
       setCurrentImages(distributes[0].element_distributes[index].image_url);
-
-      if( distributes[0].element_distributes[index].sub_element_distributes.length == 0) {
-        p = distributes[0].element_distributes[index].price;
-        q = distributes[0].element_distributes[index].quantity_in_stock;
-    
-        setCurrentPrice(p ? p : currentPrice);
-        setCurrentQuantityInStock(q);
-      }
-  
+    if (distributes[0].element_distributes[index].sub_element_distributes.length === 0) {
+      p = distributes[0].element_distributes[index].price;
+      q = distributes[0].element_distributes[index].quantity_in_stock;
+      setCurrentPrice(p ? p : currentPrice);
+      setCurrentQuantityInStock(q);
+    }
   }
   function handleSelectSubdistribute(index, price) {
     setSelectedSubdistribute(index);
@@ -189,7 +177,6 @@ export default function MainInfo(props) {
         p = min_price;
         q = quantity_in_stock_with_distribute;
       }
-
       setCurrentPrice(p ? p : currentPrice);
       setCurrentQuantityInStock(q);
     }
@@ -198,22 +185,19 @@ export default function MainInfo(props) {
     navigator.clipboard.writeText(code);
     dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Đã lưu mã giảm giá"));
   }
+  function copySharedLink() {
+    const link = `${window.location.origin}/san-pham/${id}?cowc=${profile.id}`
+    navigator.clipboard.writeText(link);
+    dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Đã copy link chia sẻ"));
+  }
   return (
     <div>
       <div className="breadcrumbs">
         <h4>
-          <span
-            onClick={() => {
-              window.location.href = "/";
-            }}
-          >
+          <span onClick={() => { window.location.href = "/"; }} >
             Trang chủ /{" "}
           </span>
-          <span
-            onClick={() => {
-              window.location.href = "/danh-sach-san-pham";
-            }}
-          >
+          <span onClick={() => { window.location.href = "/danh-sach-san-pham"; }} >
             Sản phẩm /{" "}
           </span>
           {name}
@@ -250,7 +234,7 @@ export default function MainInfo(props) {
           <div className="name">{name}</div>
           <div className="price-wraper">
             {currentPrice == null ? (
-              min_price == max_price ? (
+              min_price === max_price ? (
                 <div className="price" style={{ color: appTheme.color_main_1 }}>
                   ₫
                   {formatPrice(
@@ -285,11 +269,10 @@ export default function MainInfo(props) {
                 )}
               </div>
             )}
-
             {product_discount && (
               <div>
                 {currentPrice == null ? (
-                  min_price == max_price ? (
+                  min_price === max_price ? (
                     <div className="row">
                       <div className="past-price">
                         ₫
@@ -327,11 +310,10 @@ export default function MainInfo(props) {
                 )}
               </div>
             )}
-
-            {profile.is_collaborator ? (
+            {badges.status_collaborator === 1 ? (
               <div>
                 {currentPrice == null ? (
-                  min_price == max_price || percent_collaborator == 0 ? (
+                  min_price === max_price || percent_collaborator === 0 ? (
                     <div
                       className="price"
                       style={{
@@ -343,8 +325,8 @@ export default function MainInfo(props) {
                       Hoa hồng: ₫
                       {formatPrice(
                         min_price *
-                          (percent_collaborator * 0.01) *
-                          (discount_percent * 0.01)
+                        (percent_collaborator * 0.01) *
+                        (discount_percent * 0.01)
                       )}
                     </div>
                   ) : (
@@ -360,19 +342,19 @@ export default function MainInfo(props) {
                       {formatPrice(
                         discount_percent == null
                           ? min_price *
-                              (percent_collaborator * 0.01) *
-                              (1 - discount_percent * 0.01)
+                          (percent_collaborator * 0.01) *
+                          (1 - discount_percent * 0.01)
                           : min_price *
-                              (1 - discount_percent * 0.01) *
-                              (percent_collaborator * 0.01)
+                          (1 - discount_percent * 0.01) *
+                          (percent_collaborator * 0.01)
                       )}{" "}
                       - ₫
                       {formatPrice(
                         discount_percent == null
                           ? max_price * percent_collaborator * 0.01
                           : max_price *
-                              (1 - discount_percent * 0.01) *
-                              (percent_collaborator * 0.01)
+                          (1 - discount_percent * 0.01) *
+                          (percent_collaborator * 0.01)
                       )}
                     </div>
                   )
@@ -389,11 +371,11 @@ export default function MainInfo(props) {
                     {formatPrice(
                       discount_percent == null
                         ? currentPrice *
-                            (percent_collaborator * 0.01) *
-                            (1 - discount_percent * 0.01)
+                        (percent_collaborator * 0.01) *
+                        (1 - discount_percent * 0.01)
                         : currentPrice *
-                            (1 - discount_percent * 0.01) *
-                            (percent_collaborator * 0.01)
+                        (1 - discount_percent * 0.01) *
+                        (percent_collaborator * 0.01)
                     )}
                   </div>
                 )}
@@ -406,15 +388,13 @@ export default function MainInfo(props) {
               <div className="remain">Còn hàng</div>
             ) : (
               <div className="remain">
-                {`Còn lại ${
-                  currentQuantityInStock > 0
-                    ? currentQuantityInStock
-                    : 0
-                } sản phẩm`}
+                {`Còn lại ${currentQuantityInStock > 0
+                  ? currentQuantityInStock
+                  : 0
+                  } sản phẩm`}
               </div>
             )}
           </div>
-
           <div className="distributes-list">
             {distributes.map((d, i) => (
               <div className="distribute" key={i}>
@@ -425,9 +405,9 @@ export default function MainInfo(props) {
                       style={
                         selectedDistributes === j
                           ? {
-                              backgroundColor: appTheme.color_main_1,
-                              color: "white",
-                            }
+                            backgroundColor: appTheme.color_main_1,
+                            color: "white",
+                          }
                           : {}
                       }
                       onClick={() =>
@@ -453,9 +433,9 @@ export default function MainInfo(props) {
                         style={
                           selectedSubDistribute === i
                             ? {
-                                backgroundColor: appTheme.color_main_1,
-                                color: "white",
-                              }
+                              backgroundColor: appTheme.color_main_1,
+                              color: "white",
+                            }
                             : {}
                         }
                         onClick={() => handleSelectSubdistribute(i)}
@@ -473,31 +453,42 @@ export default function MainInfo(props) {
             Số lượng <br />
             <div className="row">
               <button onClick={decreaseNumber}>-</button>
-              <input type="number" value={selectedNumber} onChange={() => {}} />
+              <input type="number" value={selectedNumber} onChange={() => { }} />
               <button onClick={increaseNumber}>+</button>
             </div>
             <div className="actions">
-              { currentQuantityInStock === null || currentQuantityInStock < 0 ||   (currentQuantityInStock !== 0 && selectedNumber <= currentQuantityInStock ) ? (
+              <div style={{ display: "none" }}>
+                <FacebookShareButton
+                  ref={myShareBtn}
+                  url={window.location.href}
+                  quote={content_for_collaborator}
+                >
+                  <FacebookIcon size={40} round />
+                </FacebookShareButton>
+              </div>
+              {currentQuantityInStock === null || currentQuantityInStock < 0 || (currentQuantityInStock !== 0 && selectedNumber <= currentQuantityInStock) ? (
                 <button
                   id="addcart-btn"
                   onClick={handleAddCart}
-                  style={{
-                    background: appTheme.color_main_1,
-                  }}
-                >
+                  style={{ background: appTheme.color_main_1 }}>
                   Thêm vào giỏ hàng
                 </button>
               ) : (
-                <button 
-                style={{ 
-                  marginTop: "0em"
-                }}
-                id="soldout-btn">{ currentQuantityInStock === 0 ? "Hết hàng":"Vượt quá số lượng trong kho" }</button>
+                <button
+                  style={{
+                    marginTop: "0em"
+                  }}
+                  id="soldout-btn">{currentQuantityInStock === 0 ? "Hết hàng" : "Vượt quá số lượng trong kho"}</button>
               )}
-              {profile.is_collaborator && (
-                <button onClick={hanldeShare} id="share-btn">
-                  Đăng bài
-                </button>
+              {badges.status_collaborator === 1 && (
+                <div className="collaborator-action">
+                  <button onClick={hanldeShare} id="share-btn">
+                    Đăng bài
+                  </button>
+                  <button onClick={copySharedLink} id="link-btn">
+                    Link chia sẻ
+                  </button>
+                </div>
               )}
               {productState.error_distribute !== "" ? (
                 <p
@@ -513,43 +504,33 @@ export default function MainInfo(props) {
                 ""
               )}
             </div>
-            <div style={{ display: "none" }}>
-              <FacebookShareButton
-                ref={myShareBtn}
-                url={window.location.href}
-                quote={content_for_collaborator}
-              >
-                <FacebookIcon size={40} round />
-              </FacebookShareButton>
-            </div>
           </div>
           {productVouchers.length > 0 && (
             <div className="product-voucher">
               Mã giảm giá <br />
               <div className="column">
                 {productVouchers.map((v) => (
-                  <div className="voucher-card">
+                  <div className="voucher-card" key={v.id}>
                     <div className="voucher-image">
                       <div className="image">
                         <div className="img-container">
-                          <img src="/img/default_product.jpg" alt="" />
+                          <img src={v.image_url ? v.image_url : "/img/default_product.jpg"} alt="" />
                         </div>
                       </div>
                     </div>
                     <div className="voucher-info">
                       <h3>
-                        Giảm ₫
+                        Giảm
                         {v.discount_type === 1
-                          ? v.value_discount
+                          ? ` ${v.value_discount}%`
                           : formatPrice(v.value_discount)}
                       </h3>
-                      <h4>Đơn tối thiểu ₫{v.value_limit_total}</h4>
+                      <h4>Đơn tối thiểu ₫{formatPrice(v.value_limit_total)}</h4>
                       <div>HSD: {v.end_time.slice(0, 10)}</div>
                     </div>
                     <button
                       onClick={() => copyVoucherCode(v.code)}
-                      style={{ background: appTheme.color_main_1 }}
-                    >
+                      style={{ background: appTheme.color_main_1 }}>
                       Lưu
                     </button>
                   </div>

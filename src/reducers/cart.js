@@ -98,6 +98,13 @@ export function cart(state = initialState, action) {
           status: c.FAILURE,
         },
       };
+    case c.RESET_ORDERS_LIST_STATUS:
+      return {
+        ...state,
+        ordersList: {
+          status: c.LOADING,
+        },
+      };
     case c.GET_ORDER_INFO_SUCCESS:
       return {
         ...state,

@@ -23,10 +23,9 @@ function OrdersListPage() {
       top: 0,
       behavior: "smooth",
     });
-    if (ordersList.status === c.LOADING) {
-      dispatch(a.getOrdersList(""));
-    }
-  });
+    handleChangeQueryString(query);
+
+  }, [query]);
   function handleShowInfo(id) {
     window.location.href = `/don-hang/${id}`;
   }
@@ -38,6 +37,7 @@ function OrdersListPage() {
     console.log(queryKeys);
     let queryStr = queryKeys.reduce((rs, v) => `${rs}${v}=${q[v]}&`, "?");
     console.log(queryStr);
+    dispatch({ type: c.RESET_ORDERS_LIST_STATUS });
     dispatch(a.getOrdersList(queryStr));
   }
   function handleRebuy(e, productsList) {
@@ -70,14 +70,13 @@ function OrdersListPage() {
       }
     }
     setQuery(newQuery);
-    handleChangeQueryString(newQuery);
   }
   function handlePageSelect(page) {
     let cloneQuery = { ...query, ...page };
     handleChangeQueryString(cloneQuery);
   }
   function handleSearch() {
-    if (searchValue !== "") handleChangeQueryString({ search: searchValue });
+    if (searchValue !== "") setQuery({ search: searchValue });
   }
   function handleEnter(e) {
     if (e.key === "Enter") handleSearch();
@@ -117,10 +116,7 @@ function OrdersListPage() {
               />
               <button
                 className="button-order"
-                onClick={() => {
-                  handleChangeQueryString(query);
-                }}
-              >
+                onClick={() => { handleChangeQueryString(query); }}>
                 <i className="fas fa-search"></i>
               </button>
             </div>

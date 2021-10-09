@@ -389,13 +389,21 @@
         padding-top: 0.5em;
         .actions {
           margin-top: 10px;
-          #share-btn {
+          display: flex;
+          flex-wrap: wrap;
+          .collaborator-action {
+            width: fit-content;
+          }
+          #share-btn,
+          #link-btn {
             color: white;
             font-size: 16px;
-            margin-left: 1em;
             padding: 10px 20px;
             border-radius: 0.25em;
             background-color: rgb(255, 57, 69);
+          }
+          #link-btn {
+            margin-left: 1em;
           }
           #addcart-btn {
             padding: 10px 20px;
@@ -404,6 +412,8 @@
             background-color: rgb(255, 57, 69);
             color: white;
             border-radius: 0.25em;
+            margin-right: 1em;
+            margin-bottom: 1em;
           }
           #soldout-btn {
             width: 16em;
@@ -3048,6 +3058,10 @@
     padding-left: 0;
     padding-right: 0;
     padding: 0.5em;
+    .breadcrumbs {
+      padding: 0;
+      margin: 8px 0;
+    }
     .main-info.row {
       flex-direction: column;
       .product-images {
@@ -3066,6 +3080,11 @@
             font-size: 26px;
           }
         }
+        .product-voucher {
+          .column {
+            width: 100%;
+          }
+        }
         .cart-action {
           .actions {
             display: flex;
@@ -3076,11 +3095,17 @@
               margin-top: 1em;
               padding: 10px 0;
             }
-            #share-btn {
-              width: calc(40% - 10px);
-              padding: 10px 0;
+            .collaborator-action {
+              width: 100%;
+            }
+            #share-btn,
+            #link-btn {
+              width: 40%;
               margin: 0;
               margin-top: 1em;
+            }
+            #link-btn {
+              margin-left: 1em;
             }
           }
         }
@@ -3596,14 +3621,21 @@
         }
         .cart-action {
           .actions {
+            .collaborator-action {
+              width: 100%;
+            }
             #addcart-btn,
-            #share-btn {
+            #share-btn,
+            #link-btn {
               width: 100%;
               margin: 0;
               margin-top: 1em;
             }
           }
         }
+      }
+      .product-voucher {
+        display: none;
       }
     }
     .detail-info {
@@ -3871,6 +3903,9 @@
             font-size: 24px;
           }
         }
+      }
+      .product-voucher {
+        display: none;
       }
     }
     .detail-info {

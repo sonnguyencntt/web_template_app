@@ -11,8 +11,8 @@ const initialState = {
   profile: profile
     ? { ...JSON.parse(profile), status: c.SUCCESS }
     : {
-      status: c.LOADING,
-    },
+        status: c.LOADING,
+      },
   address: {
     list: [],
     status: c.LOADING,
@@ -32,6 +32,7 @@ const initialState = {
     cart_quantity: 0,
     favorite_products: 0,
     voucher_total: 0,
+    status_collaborator: 0,
     status: c.LOADING,
   },
 };
@@ -156,10 +157,10 @@ export function user(state = initialState, action) {
           data: [],
         },
       };
-      case c.TOGGLE_BOX_CHAT:
+    case c.TOGGLE_BOX_CHAT:
       return {
         ...state,
-        boxChatState : action.boxChatState,
+        boxChatState: action.boxChatState,
       };
     default:
       return state;

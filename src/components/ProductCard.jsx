@@ -6,7 +6,6 @@ import { standardProductLink } from "../helper"
 
 export default function ProductCard(props) {
   const appTheme = useSelector(state => state.app.appTheme);
-  const badges = useSelector(state => state.user.badges);
   const myLink = useRef(null);
   const badges = useSelector((state) => state.user.badges);
   let { min_price, price, product_discount, percent_collaborator, images, name, id } = props.product;
@@ -35,11 +34,7 @@ export default function ProductCard(props) {
             onError={handleImgErr}
             style={{ background: "url(/img/default_product.jpg)", backgroundSize: "contain" }} />
           {
-<<<<<<< HEAD
-            badges.status_collaborator == 1 &&
-=======
             badges.status_collaborator === 1 &&
->>>>>>> thai
             <label style={{ background: appTheme.color_main_1 }}>
               {`Hoa hồng: ${formatPrice(min_price * percent_collaborator / 100)}`}
             </label>

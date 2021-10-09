@@ -52,7 +52,6 @@ export default function MainInfo(props) {
         ? 1
         : 0
   );
-  const badges = useSelector(state => state.user.badges);
   const profile = useSelector(state => state.user.profile);
   const productState = useSelector((state) => state.product);
   var settings = {

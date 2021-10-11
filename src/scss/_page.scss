@@ -759,6 +759,27 @@
       padding-right: 8px;
     }
   }
+  .modal {
+    .link-popup {
+      padding: 1em;
+      border-radius: 0.5em;
+      background-color: white;
+      max-width: 90%;
+      overflow: hidden;
+      > div {
+        width: 100%;
+      }
+      button {
+        display: block;
+        margin: auto;
+        font-size: 14px;
+        padding: 6px 8px;
+        margin-top: 8px;
+        border-radius: 4px;
+        background-color: rgb(240, 240, 240);
+      }
+    }
+  }
 }
 .products-list-page {
   padding-top: 1em;

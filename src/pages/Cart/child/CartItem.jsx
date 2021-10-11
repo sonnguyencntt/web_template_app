@@ -103,7 +103,11 @@ export default function CartItem(props) {
               </a>
               <div className="price">
                 <div className="current-price" style={{ color: appTheme.color_main_1 }}>
-                  ₫ {formatPrice(props.item_price)}
+                  {
+                    props.item_price > 0
+                      ? `₫ ${formatPrice(props.item_price)}`
+                      : "Liên hệ"
+                  }
                 </div>
                 {
                   pastPrice !== price &&

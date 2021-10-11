@@ -76,7 +76,7 @@ function OrdersListPage() {
     handleChangeQueryString(cloneQuery);
   }
   function handleSearch() {
-    if (searchValue !== "") setQuery({ search: searchValue });
+    setQuery({ search: searchValue });
   }
   function handleEnter(e) {
     if (e.key === "Enter") handleSearch();
@@ -246,7 +246,7 @@ function OrdersListPage() {
                                   marginTop: "0.5em",
                                   background: appTheme.color_main_1
                                 }}
-                              >Đánh giá</button>
+                              >Mua lại</button>
                               :
                               <button
                                 onClick={() => {

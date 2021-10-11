@@ -8,7 +8,7 @@ import { cartActions } from "../../../actions/cartActions";
 import { userActions } from "../../../actions/userActions";
 import { productActions } from "../../../actions/productActions";
 import { voucherActions } from "../../../actions/voucherActions";
-import { formatPrice,formatPriceOrContact } from "../../../helper";
+import { formatPrice, formatPriceOrContact } from "../../../helper";
 import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -52,6 +52,7 @@ export default function MainInfo(props) {
         ? 1
         : 0
   );
+  const [customClass, setCustomClass] = useState("");
   const profile = useSelector(state => state.user.profile);
   const productState = useSelector((state) => state.product);
   var settings = {
@@ -185,9 +186,13 @@ export default function MainInfo(props) {
     navigator.clipboard.writeText(code);
     dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Đã lưu mã giảm giá"));
   }
+  function togglePopup() {
+    setCustomClass(customClass ? "" : "center");
+  }
   function copySharedLink() {
     const link = `${window.location.origin}/san-pham/${id}?cowc=${profile.id}`
     navigator.clipboard.writeText(link);
+    togglePopup();
     dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Đã copy link chia sẻ"));
   }
   return (
@@ -460,7 +465,7 @@ export default function MainInfo(props) {
               <div style={{ display: "none" }}>
                 <FacebookShareButton
                   ref={myShareBtn}
-                  url={window.location.href}
+                  url={`${window.location.origin}/san-pham/${id}?cowc=${profile.id}`}
                   quote={content_for_collaborator}
                 >
                   <FacebookIcon size={40} round />
@@ -485,7 +490,7 @@ export default function MainInfo(props) {
                   <button onClick={hanldeShare} id="share-btn">
                     Đăng bài
                   </button>
-                  <button onClick={copySharedLink} id="link-btn">
+                  <button onClick={togglePopup} id="link-btn">
                     Link chia sẻ
                   </button>
                 </div>
@@ -538,6 +543,14 @@ export default function MainInfo(props) {
               </div>
             </div>
           )}
+        </div>
+      </div>
+      <div className={`modal ${customClass}`}>
+        <div className="link-popup">
+          <div>
+            {`${window.location.origin}/san-pham/${id}?cowc=${profile.id}`}
+          </div>
+          <button onClick={copySharedLink}>Copy</button>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { constants as c } from "../constants";
 import { appServices } from "../services/appServices";
 function formatPriceOrContact(p) {
   if (!p) return "Liên hệ";
-  if (p==0) return "Liên hệ";
+  if (p == 0) return "Liên hệ";
   p = Math.round(p);
   p = p.toString();
   let n = 0;
@@ -201,5 +201,5 @@ export {
   requestOtp,
   isJson,
   standardProductLink,
-  formatPriceOrContact
+  formatPriceOrContact,
 };

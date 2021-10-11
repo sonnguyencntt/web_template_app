@@ -2215,6 +2215,22 @@ body {
       margin-top: 2px;
       padding-left: 8px;
       padding-right: 8px; }
+  .product-info-page .modal .link-popup {
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: white;
+    max-width: 90%;
+    overflow: hidden; }
+    .product-info-page .modal .link-popup > div {
+      width: 100%; }
+    .product-info-page .modal .link-popup button {
+      display: block;
+      margin: auto;
+      font-size: 14px;
+      padding: 6px 8px;
+      margin-top: 8px;
+      border-radius: 4px;
+      background-color: #f0f0f0; }
 
 .products-list-page {
   padding-top: 1em;

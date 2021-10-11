@@ -145,12 +145,33 @@ function updateInfo(info) {
     return { type: c.UPDATE_INFO_COLLABORATOR_FAILURE, code, message };
   }
 }
+function regisCollaborator() {
+  return (dispatch) => {
+    s.regisCollaborator(true).then((res) => {
+      if (res.code === 200 || res.code === 201) {
+        dispatch({
+          type: c.CHANGE_POPUP,
+          popupType: c.AUTOHIDE_POPUP,
+          messageInfo:
+            "Đăng ký CTV thành công vui lòng chờ phản hồi từ cửa hàng",
+        });
+        return;
+      }
+      dispatch({
+        type: c.CHANGE_POPUP,
+        popupType: c.AUTOHIDE_POPUP,
+        messageInfo: res.msg,
+      });
+    });
+  };
+}
 export const collaboratorActions = {
   getInfo,
   updateInfo,
   getSharedOrder,
   getAccountInfo,
   requestPayment,
-  getBalanceHistory,
   getBonusHistory,
+  getBalanceHistory,
+  regisCollaborator,
 };

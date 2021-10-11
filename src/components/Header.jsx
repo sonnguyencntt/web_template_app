@@ -95,6 +95,7 @@ export default function Header() {
   }
   function handleShowCollaboratorRegisForm(e) {
     e.preventDefault();
+    dispatch(appActions.changePopup(c.COLLABORATOR_REGIS_POPUP));
   }
   return (
     <React.Fragment>
@@ -121,8 +122,8 @@ export default function Header() {
             <div
               className={
                 currentActive === "category"
-                  ? " menu dropdown active"
-                  : "menu dropdown"
+                  ? " menu dropdown active hide-scroll"
+                  : "menu dropdown hide-scroll"
               }
             >
               <h3>Danh mục sản phẩm</h3>
@@ -133,15 +134,19 @@ export default function Header() {
                     style={{ cursor: "pointer", display: "flex" }}
                     to="/danh-sach-san-pham"
                   >
-                    <img
-                      src="/img/cubes.png"
-                      alt=""
-                      style={{
-                        width: "30px",
-                        objectFir: "contain",
-                        marginRight: "8px",
-                      }}
-                    />
+                    <div className="image">
+                      <div className="img-container">
+                        <img
+                          src="/img/cubes.png"
+                          alt=""
+                          style={{
+                            width: "30px",
+                            objectFir: "contain",
+                            marginRight: "8px",
+                          }}
+                        />
+                      </div>
+                    </div>
                     <div>Tất cả sản phẩm</div>
                   </Link>
                 </li>
@@ -156,15 +161,19 @@ export default function Header() {
                         "-"
                       )}-${v.id}`}
                     >
-                      <img
-                        src={v.image_url}
-                        alt=""
-                        style={{
-                          width: "30px",
-                          objectFir: "contain",
-                          marginRight: "8px",
-                        }}
-                      />
+                      <div className="image">
+                        <div className="img-container">
+                          <img
+                            src={v.image_url}
+                            alt=""
+                            style={{
+                              width: "30px",
+                              objectFir: "contain",
+                              marginRight: "8px",
+                            }}
+                          />
+                        </div>
+                      </div>
                       <div>{v.name}</div>
                     </Link>
                   </li>
@@ -347,8 +356,7 @@ export default function Header() {
             <div className="account-info header-dropdown">
               <button
                 style={{ border: "none", padding: 0 }}
-                onClick={() => handleToggleActive("account")}
-              >
+                onClick={() => handleToggleActive("account")}>
                 Tài khoản của tôi
                 <i
                   style={{ marginLeft: "0.5em" }}
@@ -387,16 +395,20 @@ export default function Header() {
                     <img src="/img/heart.png" alt="" />
                     <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                   </li>
-                  {badges.status_collaborator === 1 ?
-                    <li>
-                      <img src="/img/handshake.png" alt="" />
-                      <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
-                    </li>
-                    :
-                    <li>
-                      <img src="/img/handshake.png" alt="" />
-                      <Link onClick={handleShowCollaboratorRegisForm} to="/cong-tac-vien">Đăng ký cộng tác viên</Link>
-                    </li>
+                  {
+                    profile.is_collaborator ?
+                      <li>
+                        <img src="/img/handshake.png" alt="" />
+                        <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                      </li>
+                      :
+                      <li>
+                        <img src="/img/handshake.png" alt="" />
+                        <Link
+                          onClick={handleShowCollaboratorRegisForm}
+                          to="/cong-tac-vien">
+                          Đăng ký cộng tác viên</Link>
+                      </li>
                   }
                   <li onClick={handleShowProfile}>
                     <img src="/img/refresh.png" alt="" />

@@ -1,6 +1,6 @@
 import { constants as c } from "../constants";
 import { appServices } from "./appServices";
-import { DeviceUUID } from  "device-uuid";
+import { DeviceUUID } from "device-uuid";
 const store_code = appServices.store_code;
 const uuid = new DeviceUUID().get();
 function accountCheck(info) {
@@ -219,7 +219,7 @@ function getUserBadges() {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
-      "device-id": store_code+"-"+uuid
+      "device-id": store_code + "-" + uuid,
     },
   };
   return fetch(`${c.API_URL}/customer/${store_code}/badges`, requestOptions)

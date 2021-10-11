@@ -163,12 +163,37 @@ function updateInfo(info) {
       return {};
     });
 }
+function regisCollaborator(is_collaborator) {
+  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "customer-token": tokenInfo ? tokenInfo.token : "",
+    },
+    body: JSON.stringify({ is_collaborator }),
+  };
+  return fetch(
+    `${c.API_URL}/customer/${store_code}/collaborator/reg`,
+    requestOptions
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
 export const collaboratorServices = {
   getInfo,
   updateInfo,
   getSharedOrder,
   getAccountInfo,
   requestPayment,
-  getBalanceHistory,
   getBonusHistory,
+  regisCollaborator,
+  getBalanceHistory,
 };

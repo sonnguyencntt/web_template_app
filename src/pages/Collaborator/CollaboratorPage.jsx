@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InfoTab from "./child/InfoTab";
 import PaymentTab from "./child/PaymentTab";
 import Header from "../../components/Header";
+import StopWorking from "./child/StopWorking";
 import StatisticTab from "./child/StatisticTab";
 import { constants as c } from "../../constants";
 import PageLoading from "../../components/PageLoading";
@@ -14,6 +15,8 @@ function CollaboratorPage(props) {
   const bonus = useSelector((state) => state.collaborator.bonus);
   const orders = useSelector((state) => state.collaborator.orders);
   const info = useSelector((state) => state.collaborator.info);
+  const profile = useSelector((state) => state.user.profile);
+  const badges = useSelector((state) => state.user.badges);
   const [currentTab, setCurrentTab] = useState("info");
   const [currentStatisticTab, setCurrentStatisticTab] = useState("receipt");
   const tabs = {
@@ -45,6 +48,7 @@ function CollaboratorPage(props) {
     setCurrentStatisticTab(va);
   }
   useEffect(() => {
+    console.log(profile, badges)
     window.scrollTo({ top: 0 });
     document.title = "Cộng tác viên";
     if (account.status === c.LOADING) {
@@ -69,36 +73,48 @@ function CollaboratorPage(props) {
   return (
     <React.Fragment>
       <Header />
-      {account.status === c.SUCCESS ? (
-        <div className="collaborator-page">
-          <div className="container">
-            <div className="row tabs">
-              <div
-                onClick={() => setCurrentTab("info")}
-                className={currentTab === "info" ? "active" : ""}
-              >
-                Thông tin ví
-              </div>
-              <div
-                onClick={() => setCurrentTab("statistic")}
-                className={currentTab === "statistic" ? "active" : ""}
-                style={{ marginLeft: "1.5em", marginRight: "1.5em" }}
-              >
-                Thống kê
-              </div>
-              <div
-                onClick={() => setCurrentTab("payment")}
-                className={currentTab === "payment" ? "active" : ""}
-              >
-                Thanh toán
-              </div>
-            </div>
-            {tabs[currentTab]}
-          </div>
-        </div>
-      ) : (
-        <PageLoading />
-      )}
+      {
+        account.status === c.SUCCESS ?
+          (
+            (profile.is_collaborator && badges.status_collaborator === 1) ?
+              (
+                <div className="collaborator-page">
+                  <div className="container">
+                    <div className="row tabs">
+                      <div
+                        onClick={() => setCurrentTab("info")}
+                        className={currentTab === "info" ? "active" : ""}
+                      >
+                        Thông tin ví
+                      </div>
+                      <div
+                        onClick={() => setCurrentTab("statistic")}
+                        className={currentTab === "statistic" ? "active" : ""}
+                        style={{ marginLeft: "1.5em", marginRight: "1.5em" }}
+                      >
+                        Thống kê
+                      </div>
+                      <div
+                        onClick={() => setCurrentTab("payment")}
+                        className={currentTab === "payment" ? "active" : ""}
+                      >
+                        Thanh toán
+                      </div>
+                    </div>
+                    {tabs[currentTab]}
+                  </div>
+                </div>
+              ) :
+              (
+                <div className="collaborator-page">
+                  <StopWorking />
+                </div>
+              )
+          ) :
+          (
+            <PageLoading />
+          )
+      }
     </React.Fragment>
   );
 }

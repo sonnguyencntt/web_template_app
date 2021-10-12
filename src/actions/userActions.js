@@ -18,7 +18,6 @@ function accountCheck(info) {
     });
   };
 }
-
 function accountLogin(info) {
   console.log(info);
   return (dispatch) => {
@@ -277,6 +276,7 @@ function getUserBadges() {
     });
   };
   function success(data) {
+    localStorage.setItem("badges", JSON.stringify(data));
     return {
       badges: data,
       type: c.GET_USER_BADGES_SUCCESS,
@@ -306,7 +306,6 @@ function getuserNotify() {
     return { type: c.GET_USER_NOTIFY_FAILURE, message, code };
   }
 }
-
 function toggleClassChat(boxChatStateIp) {
   var boxChatState = boxChatStateIp;
   boxChatState = boxChatState === "active" ? "" : "active";
@@ -316,7 +315,6 @@ function toggleClassChat(boxChatStateIp) {
     type: c.TOGGLE_BOX_CHAT,
   };
 }
-
 export const userActions = {
   accountCheck,
   accountLogin,

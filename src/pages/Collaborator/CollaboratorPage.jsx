@@ -76,7 +76,8 @@ function CollaboratorPage(props) {
       {
         account.status === c.SUCCESS ?
           (
-            (profile.is_collaborator && badges.status_collaborator === 1) ?
+            (
+              profile.is_collaborator && badges.status_collaborator === 1) ?
               (
                 <div className="collaborator-page">
                   <div className="container">

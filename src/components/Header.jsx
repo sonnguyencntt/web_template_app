@@ -5,6 +5,7 @@ import { constants as c } from "../constants";
 import { appActions } from "../actions/appActions";
 import { userActions } from "../actions/userActions";
 import { cartActions } from "../actions/cartActions";
+import { collaboratorActions } from "../actions/collaboratorActions";
 export default function Header() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
@@ -19,8 +20,9 @@ export default function Header() {
   const notify = useSelector((state) => state.user.notify);
   const badges = useSelector((state) => state.user.badges);
   useEffect(() => {
-    if (badges.status === c.LOADING) {
+    if (tokenInfo) {
       dispatch(userActions.getUserBadges());
+      dispatch(userActions.getUserProfile());
     }
     if (tokenInfo && cartInfo.status === c.LOADING) {
       dispatch(cartActions.getCartInfo());
@@ -30,9 +32,6 @@ export default function Header() {
     }
     if (provincesList.length === 0 && addressStatus === c.LOADING) {
       dispatch(appActions.getProvincesList());
-    }
-    if (tokenInfo && profile.status === c.LOADING) {
-      dispatch(userActions.getUserProfile());
     }
     window.addEventListener("click", function (e) {
       let containers = document.querySelectorAll(".header-dropdown");
@@ -396,19 +395,46 @@ export default function Header() {
                     <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                   </li>
                   {
-                    profile.is_collaborator ?
-                      <li>
-                        <img src="/img/handshake.png" alt="" />
-                        <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
-                      </li>
-                      :
-                      <li>
-                        <img src="/img/handshake.png" alt="" />
-                        <Link
-                          onClick={handleShowCollaboratorRegisForm}
-                          to="/cong-tac-vien">
-                          Đăng ký cộng tác viên</Link>
-                      </li>
+                    profile.is_collaborator
+                    && badges.status_collaborator === 1
+                    &&
+                    <li>
+                      <img src="/img/handshake.png" alt="" />
+                      <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                    </li>
+                  }
+                  {
+                    profile.is_collaborator
+                    && badges.status_collaborator === 0
+                    &&
+                    <li>
+                      <img src="/img/handshake.png" alt="" />
+                      <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                    </li>
+                  }
+                  {
+                    !profile.is_collaborator
+                    && badges.status_collaborator === 0
+                    &&
+                    <li>
+                      <img src="/img/handshake.png" alt="" />
+                      <Link
+                        onClick={handleShowCollaboratorRegisForm}
+                        to="/cong-tac-vien">
+                        Đăng ký cộng tác viên</Link>
+                    </li>
+                  }
+                  {
+                    !profile.is_collaborator
+                    && badges.status_collaborator === 1
+                    &&
+                    <li>
+                      <img src="/img/handshake.png" alt="" />
+                      <Link
+                        onClick={handleShowCollaboratorRegisForm}
+                        to="/cong-tac-vien">
+                        Đăng ký cộng tác viên</Link>
+                    </li>
                   }
                   <li onClick={handleShowProfile}>
                     <img src="/img/refresh.png" alt="" />

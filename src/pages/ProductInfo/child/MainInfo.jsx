@@ -63,6 +63,14 @@ export default function MainInfo(props) {
   useEffect(() => {
     if (vouchers.status === c.LOADING) dispatch(voucherActions.getAllVoucher());
   });
+  function modalClick(e) {
+    if (!customClass) return
+    let containers = document.querySelectorAll(".link-popup");
+    for (let i = 0; i < containers.length; i++) {
+      if (containers[i].contains(e.target)) return;
+    }
+    setCustomClass("");
+  }
   function increaseNumber() {
     if (
       selectedNumber + 1 <= currentQuantityInStock ||
@@ -480,10 +488,12 @@ export default function MainInfo(props) {
                 </button>
               ) : (
                 <button
+                  id="addcart-btn"
                   style={{
-                    marginTop: "0em"
+                    marginTop: "0em",
+                    background: "#757575"
                   }}
-                  id="soldout-btn">{currentQuantityInStock === 0 ? "Hết hàng" : "Vượt quá số lượng trong kho"}</button>
+                >{currentQuantityInStock === 0 ? "Hết hàng" : "Vượt quá số lượng trong kho"}</button>
               )}
               {badges.status_collaborator === 1 && (
                 <div className="collaborator-action">
@@ -545,7 +555,7 @@ export default function MainInfo(props) {
           )}
         </div>
       </div>
-      <div className={`modal ${customClass}`}>
+      <div className={`modal ${customClass}`} onClick={modalClick}>
         <div className="link-popup">
           <div>
             {`${window.location.origin}/san-pham/${id}?cowc=${profile.id}`}

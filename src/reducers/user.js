@@ -2,6 +2,7 @@ import { constants as c } from "../constants";
 const userInfo = localStorage.getItem("userInfo");
 const tokenInfo = localStorage.getItem("tokenInfo");
 const profile = localStorage.getItem("profile");
+const badges = localStorage.getItem("badges");
 const initialState = {
   phone: "",
   email: "",
@@ -9,7 +10,10 @@ const initialState = {
   userInfo: userInfo ? JSON.parse(userInfo) : null,
   tokenInfo: tokenInfo ? JSON.parse(tokenInfo) : null,
   profile: profile
-    ? { ...JSON.parse(profile), status: c.SUCCESS }
+    ? {
+        ...JSON.parse(profile),
+        status: c.LOADING,
+      }
     : {
         status: c.LOADING,
       },
@@ -28,13 +32,18 @@ const initialState = {
     status: c.LOADING,
     list: [],
   },
-  badges: {
-    cart_quantity: 0,
-    favorite_products: 0,
-    voucher_total: 0,
-    status_collaborator: 0,
-    status: c.LOADING,
-  },
+  badges: badges
+    ? {
+        ...JSON.parse(badges),
+        status: c.LOADING,
+      }
+    : {
+        cart_quantity: 0,
+        favorite_products: 0,
+        voucher_total: 0,
+        status_collaborator: 0,
+        status: c.LOADING,
+      },
 };
 export function user(state = initialState, action) {
   switch (action.type) {

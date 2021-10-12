@@ -1,5 +1,6 @@
 import { constants as c } from "../constants";
 import { collaboratorServices as s } from "../services/collaboratorServices";
+import { userActions } from "./userActions";
 function getAccountInfo() {
   return (dispatch) => {
     s.getAccountInfo().then((res) => {
@@ -155,6 +156,27 @@ function regisCollaborator() {
           messageInfo:
             "Đăng ký CTV thành công vui lòng chờ phản hồi từ cửa hàng",
         });
+        dispatch(userActions.getUserProfile());
+        return;
+      }
+      dispatch({
+        type: c.CHANGE_POPUP,
+        popupType: c.AUTOHIDE_POPUP,
+        messageInfo: res.msg,
+      });
+    });
+  };
+}
+function cancelCollaborator() {
+  return (dispatch) => {
+    s.regisCollaborator(false).then((res) => {
+      if (res.code === 200 || res.code === 201) {
+        dispatch({
+          type: c.CHANGE_POPUP,
+          popupType: c.AUTOHIDE_POPUP,
+          messageInfo: "Hủy CTV thành công vui lòng chờ phản hồi từ cửa hàng",
+        });
+        dispatch(userActions.getUserProfile());
         return;
       }
       dispatch({
@@ -174,4 +196,5 @@ export const collaboratorActions = {
   getBonusHistory,
   getBalanceHistory,
   regisCollaborator,
+  cancelCollaborator,
 };

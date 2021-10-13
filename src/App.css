@@ -2036,11 +2036,26 @@ body {
         border-top: 1px solid #e4e4e4;
         padding-top: 0.5em; }
         .product-info-page .main-info .product-order-info .cart-action .actions {
-          margin-top: 10px;
-          display: flex;
-          flex-wrap: wrap; }
+          margin-top: 10px; }
           .product-info-page .main-info .product-order-info .cart-action .actions .collaborator-action {
-            width: fit-content; }
+            width: fit-content;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center; }
+          .product-info-page .main-info .product-order-info .cart-action .actions .share button {
+            font-size: 16px;
+            width: 2em;
+            height: 2em;
+            color: white;
+            margin-right: 0.5em;
+            border-radius: 0.25em;
+            background-color: #0238ad; }
+          .product-info-page .main-info .product-order-info .cart-action .actions span {
+            font-size: 16px;
+            font-weight: lighter;
+            color: #757575;
+            margin-left: 0.5em;
+            margin-right: 0.5em; }
           .product-info-page .main-info .product-order-info .cart-action .actions #share-btn {
             color: white;
             font-size: 16px;
@@ -2055,11 +2070,10 @@ body {
           .product-info-page .main-info .product-order-info .cart-action .actions #link-btn {
             color: white;
             font-size: 16px;
-            padding: 10px 20px;
+            padding: 0 20px;
+            height: 2em;
             border-radius: 0.25em;
             background-color: #f57224; }
-          .product-info-page .main-info .product-order-info .cart-action .actions #link-btn {
-            margin-left: 1em; }
           .product-info-page .main-info .product-order-info .cart-action .actions #addcart-btn {
             padding: 10px 20px;
             max-width: 100%;
@@ -4266,6 +4280,7 @@ body {
           width: 100%; }
         .product-info-page .main-info.row .product-order-info .cart-action .actions {
           display: flex;
+          flex-wrap: wrap;
           justify-content: space-between; }
           .product-info-page .main-info.row .product-order-info .cart-action .actions #addcart-btn {
             width: 60%;
@@ -4273,14 +4288,12 @@ body {
             margin-top: 1em;
             padding: 10px 0; }
           .product-info-page .main-info.row .product-order-info .cart-action .actions .collaborator-action {
-            width: 100%; }
-          .product-info-page .main-info.row .product-order-info .cart-action .actions #share-btn,
-          .product-info-page .main-info.row .product-order-info .cart-action .actions #link-btn {
-            width: 40%;
-            margin: 0;
+            width: 100%;
             margin-top: 1em; }
-          .product-info-page .main-info.row .product-order-info .cart-action .actions #link-btn {
-            margin-left: 1em; }
+            .product-info-page .main-info.row .product-order-info .cart-action .actions .collaborator-action button {
+              margin-right: 0.5em; }
+          .product-info-page .main-info.row .product-order-info .cart-action .actions span {
+            display: none; }
     .product-info-page .detail-info h3 {
       padding-left: 0.5em; }
     .product-info-page .detail-info .detail .row .title {
@@ -4621,13 +4634,15 @@ body {
         .product-info-page .main-info.row .product-order-info .price-wraper .price {
           font-size: 24px; }
       .product-info-page .main-info.row .product-order-info .cart-action .actions .collaborator-action {
-        width: 100%; }
+        width: 100%;
+        flex-direction: column-reverse; }
+      .product-info-page .main-info.row .product-order-info .cart-action .actions .share {
+        margin-top: 0.5em; }
       .product-info-page .main-info.row .product-order-info .cart-action .actions #addcart-btn,
-      .product-info-page .main-info.row .product-order-info .cart-action .actions #share-btn,
       .product-info-page .main-info.row .product-order-info .cart-action .actions #link-btn {
         width: 100%;
         margin: 0;
-        margin-top: 1em; }
+        margin-top: 0.5em; }
     .product-info-page .main-info.row .product-voucher {
       display: none; }
     .product-info-page .detail-info .detail .row .title {

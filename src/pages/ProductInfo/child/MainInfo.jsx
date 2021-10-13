@@ -497,9 +497,12 @@ export default function MainInfo(props) {
               )}
               {badges.status_collaborator === 0 && (
                 <div className="collaborator-action">
-                  <button onClick={hanldeShare} id="share-btn">
-                    <i className="fab fa-facebook-f"></i>Đăng bài
-                  </button>
+                  <div className="share">
+                    <label>Đăng bài: </label>
+                    <button onClick={hanldeShare}>
+                      <i className="fab fa-facebook-f"></i>
+                    </button>
+                  </div>
                   <button onClick={togglePopup} id="link-btn">
                     Link chia sẻ
                   </button>

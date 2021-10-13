@@ -495,10 +495,10 @@ export default function MainInfo(props) {
                   }}
                 >{currentQuantityInStock === 0 ? "Hết hàng" : "Vượt quá số lượng trong kho"}</button>
               )}
-              {badges.status_collaborator === 1 && (
+              {badges.status_collaborator === 0 && (
                 <div className="collaborator-action">
                   <button onClick={hanldeShare} id="share-btn">
-                    Đăng bài
+                    <i className="fab fa-facebook-f"></i>Đăng bài
                   </button>
                   <button onClick={togglePopup} id="link-btn">
                     Link chia sẻ

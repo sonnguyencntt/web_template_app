@@ -761,13 +761,18 @@
     font-size: 24px;
     display: block;
   }
+  label {
+    cursor: pointer;
+    color: rgb(10, 144, 206);
+    font-size: 14px;
+  }
   .next-btn {
     width: 100%;
     background: $red;
     color: white;
     font-size: 20px;
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 4px;
   }
   .next-btn:hover {
@@ -831,6 +836,75 @@
     font-size: 20px;
     padding: 10px;
     margin-top: 8px;
+    border-radius: 4px;
+  }
+  .next-btn:hover {
+    background: $light-red;
+  }
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    border-radius: 100%;
+    font-size: 20px;
+    color: $sub-text-color;
+  }
+  .back-btn {
+    position: absolute;
+    left: 32px;
+    top: 20px;
+    font-size: 20px;
+    color: $sub-text-color;
+    padding-right: 1em;
+  }
+  p {
+    text-align: center;
+    color: $light-red;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+}
+.email-login-popup {
+  background: white;
+  padding: 2em;
+  border-radius: 0.5em;
+  position: relative;
+  h4 {
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  span {
+    font-weight: 500;
+  }
+  input {
+    width: 400px;
+    margin-top: 10px;
+    border: 1px solid $border-color;
+    border-radius: 0.25em;
+    padding: 10px 10px;
+    font-size: 16px;
+    display: block;
+  }
+  label {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: block;
+    cursor: pointer;
+    width: fit-content;
+  }
+  .next-btn {
+    width: 100%;
+    background: $red;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 16px;
     border-radius: 4px;
   }
   .next-btn:hover {
@@ -1363,6 +1437,7 @@
 .ratting-popup,
 .profile-popup,
 .order-popup,
+.email-login-popup,
 .collaborator-regis-popup {
   max-width: calc(100% - 1em);
 }

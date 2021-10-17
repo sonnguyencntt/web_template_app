@@ -425,7 +425,7 @@ export default function Header() {
                     </li>
                   }
                   {
-                    !profile.is_collaborator
+                    profile.is_collaborator
                     && badges.status_collaborator === 1
                     &&
                     <li>

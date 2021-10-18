@@ -131,6 +131,7 @@ function order(orderInfo) {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
+      "device-id": `${store_code}-${uuid}`,
     },
     body: JSON.stringify(orderInfo),
   };
@@ -155,6 +156,7 @@ function getOrdersList(query) {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
+      "device-id": `${store_code}-${uuid}`,
     },
   };
   return fetch(
@@ -178,6 +180,7 @@ function getOrderInfo(orderCode) {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
+      "device-id": `${store_code}-${uuid}`,
     },
   };
   return fetch(
@@ -201,6 +204,7 @@ function cancelOrder(info) {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
+      "device-id": `${store_code}-${uuid}`,
     },
     body: JSON.stringify(info),
   };
@@ -225,6 +229,7 @@ function changePaymentMethod(info) {
     headers: {
       "Content-Type": "application/json",
       "customer-token": tokenInfo ? tokenInfo.token : "",
+      "device-id": `${store_code}-${uuid}`,
     },
     body: JSON.stringify({
       payment_method_id: info.paymentMethodId,

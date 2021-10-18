@@ -104,6 +104,26 @@ function addUserAddress(addressInfo) {
       return {};
     });
 }
+function requestSendOtpEmail(email) {
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({'email':email}),
+  };
+  return fetch(`${c.API_URL}/customer/${store_code}/send_email_otp`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
 function updateUserAddress(addressInfo) {
   const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
   const requestOptions = {
@@ -292,4 +312,5 @@ export const userServices = {
   getUserReview,
   getUserBadges,
   getuserNotify,
+  requestSendOtpEmail,
 };

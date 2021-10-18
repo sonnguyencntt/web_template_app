@@ -1,41 +1,48 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { requestOtp } from "../../../helper";
+import { requestOtp, validateEmail } from "../../../helper";
 import { appActions } from "../../../actions/appActions";
 import { userActions } from "../../../actions/userActions";
 import { constants as c } from "../../../constants";
+
 export default function Login(props) {
   const dispatch = useDispatch();
-  const phone = useSelector(state => state.user.phone);
-  const message = useSelector(state => state.user.message);
-  const appTheme = useSelector(state => state.app.appTheme);
+  const phone = useSelector((state) => state.user.phone);
+  const message = useSelector((state) => state.user.message);
+  const appTheme = useSelector((state) => state.app.appTheme);
   const [timer, setTimer] = useState(0);
   const [validateMsg, setValidateMsg] = useState("");
   const [isSentRequest, setIsSentRequest] = useState(false);
+  const [typeSendPhone, changeTypeSend] = useState(!validateEmail(phone));
   const [regisInfo, setRegisInfo] = useState({
-    phone_number: phone,
-    email: "",
+    phone_number: !validateEmail(phone) ? phone : null,
+    email: validateEmail(phone) ? phone : null,
     name: "",
     otp: "",
     password: "",
-    sex: -1
+    sex: -1,
+    otp_from: typeSendPhone == false ? "email" : "phone",
   });
+  function changeTypeSendAc() {
+    changeTypeSend(!typeSendPhone);
+  }
   function handleBack() {
     dispatch(appActions.changePopup(c.PHONE_POPUP));
-  };
+  }
   function handleInputChange(e) {
     let info = { ...regisInfo };
     info[e.target.name] = e.target.value;
-    if (e.target.name === "sex")
-      info.sex = parseInt(e.target.value);
+    if (e.target.name === "sex") info.sex = parseInt(e.target.value);
     setRegisInfo(info);
   }
   function handleRegis() {
-    if (!regisInfo.email
-      || !regisInfo.password
-      || !regisInfo.sex === -1
-      || !regisInfo.otp
-      || !regisInfo.name) {
+    if (
+      !regisInfo.phone_number ||
+      !regisInfo.password ||
+      !regisInfo.sex === -1 ||
+      !regisInfo.otp ||
+      !regisInfo.name
+    ) {
       setIsSentRequest(false);
       setValidateMsg("Vui lòng điền đầy đủ thông tin !");
       return;
@@ -43,20 +50,27 @@ export default function Login(props) {
     setValidateMsg("");
     setIsSentRequest(true);
     dispatch({ type: c.CLEAR_MESSAGE });
-    dispatch(userActions.accountRegis(regisInfo));
-  };
+    let info = { ...regisInfo };
+    info.otp_from = typeSendPhone == true ? "phone" : "email";
+
+    dispatch(userActions.accountRegis(info));
+  }
   useEffect(() => {
-    if (!timer)
-      return;
+    if (!timer) return;
     let myTimer = setInterval(() => {
-      setTimer(timer - 1 >= 0 ? timer - 1 : 0)
+      setTimer(timer - 1 >= 0 ? timer - 1 : 0);
     }, 1000);
-    return () => clearInterval(myTimer)
-  })
+    return () => clearInterval(myTimer);
+  });
   function handleResendOtp() {
-    if (timer > 0)
-      return;
-    requestOtp(phone);
+    if (timer > 0) return;
+
+    if (typeSendPhone) {
+      requestOtp(phone);
+    } else {
+      dispatch(userActions.requestSendOtpEmail(regisInfo.email));
+    }
+
     setTimer(30);
   }
   return (
@@ -69,6 +83,13 @@ export default function Login(props) {
           name="name"
           placeholder="Họ tên"
           value={regisInfo.name}
+          onChange={handleInputChange}
+        />
+        <input
+          name="phone_number"
+          type="text"
+          placeholder="Số điện thoại"
+          value={regisInfo.phone_number}
           onChange={handleInputChange}
         />
         <input
@@ -89,9 +110,7 @@ export default function Login(props) {
           <label>Giới tính: </label>
           <div>
             <div className="row">
-              <label htmlFor="male">
-                Nam
-              </label>
+              <label htmlFor="male">Nam</label>
               <input
                 checked={regisInfo.sex === 1}
                 name="sex"
@@ -102,9 +121,7 @@ export default function Login(props) {
               />
             </div>
             <div className="row">
-              <label htmlFor="female">
-                Nữ
-              </label>
+              <label htmlFor="female">Nữ</label>
               <input
                 checked={regisInfo.sex === 2}
                 name="sex"
@@ -115,9 +132,7 @@ export default function Login(props) {
               />
             </div>
             <div className="row">
-              <label htmlFor="other">
-                Khác
-              </label>
+              <label htmlFor="other">Khác</label>
               <input
                 checked={regisInfo.sex === 0}
                 name="sex"
@@ -129,16 +144,25 @@ export default function Login(props) {
             </div>
           </div>
         </div>
-        <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <input
             autoComplete="off"
             name="otp"
             type="text"
-            placeholder="Mã xác nhận"
+            placeholder={
+              typeSendPhone ? "Nhập xác nhận từ SĐT" : "Nhập xác nhận từ Email"
+            }
             value={regisInfo.otp}
             style={{ width: "calc(100% - 7.5em)" }}
             onChange={handleInputChange}
           />
+
           <button
             onClick={handleResendOtp}
             style={{
@@ -148,36 +172,48 @@ export default function Login(props) {
               borderRadius: "0.25em",
               border: "1px solid #e4e4e4",
               padding: "0.75em 0em",
-              color: "#757575"
+              color: "#757575",
             }}
           >
-            {
-              timer ?
-                `Gửi lại (${timer}s)`
-                : "Gửi OTP"
-            }
+            {timer
+              ? `Gửi lại (${timer}s)`
+              : typeSendPhone
+              ? "Gửi tới SĐT"
+              : "Gửi tới email"}
           </button>
         </div>
-        {
-          validateMsg
-          &&
-          <div className="err-msg" style={{ textAlign: "center", marginTop: "0", marginBottom: "8px" }}>
+        <center
+          onClick={changeTypeSendAc}
+          style={{ color: "#3498db", fontSize: "8", cursor: "pointer" }}
+        >
+          {typeSendPhone ? "Xác thực qua Email" : "Xác thực qua SĐT"}
+        </center>
+
+        <br />
+        {validateMsg && (
+          <div
+            className="err-msg"
+            style={{ textAlign: "center", marginTop: "0", marginBottom: "8px" }}
+          >
             {validateMsg}
           </div>
-        }
-        {
-          !validateMsg
-          &&
-          isSentRequest && !message && <img src="/img/loading1.gif" alt="" />
-        }
-        {
-          isSentRequest && message && !validateMsg
-          &&
-          <div className="err-msg" style={{ textAlign: "center", marginTop: "0", marginBottom: "8px" }}>
+        )}
+        {!validateMsg && isSentRequest && !message && (
+          <img src="/img/loading1.gif" alt="" />
+        )}
+        {isSentRequest && message && !validateMsg && (
+          <div
+            className="err-msg"
+            style={{ textAlign: "center", marginTop: "0", marginBottom: "8px" }}
+          >
             {message}
           </div>
-        }
-        <button className="next-btn" onClick={handleRegis} style={{ background: appTheme.color_main_1 }}>
+        )}
+        <button
+          className="next-btn"
+          onClick={handleRegis}
+          style={{ background: appTheme.color_main_1 }}
+        >
           Xác nhận
         </button>
         <button className="close-btn" onClick={props.handleClose}>
@@ -187,6 +223,6 @@ export default function Login(props) {
           <i className="fas fa-chevron-left"></i>
         </button>
       </div>
-    </div >
-  )
+    </div>
+  );
 }

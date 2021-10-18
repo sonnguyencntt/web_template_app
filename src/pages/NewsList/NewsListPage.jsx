@@ -74,7 +74,7 @@ function NewsListPage(props) {
                       <Link
                         key={i}
                         style={{ cursor: "pointer" }}
-                        to={`/tin-tuc?danh-muc=${v.title.replace(/\s/g, "-")}-${v.id}`}>
+                        to={`/tin-tuc?danh-muc=${v.title == null ? "" : v.title.replace(/\s/g, "-")}-${v.id}`}>
                         <div className="image">
                           <div className="img-container">
                             <img
@@ -106,7 +106,7 @@ function NewsListPage(props) {
                       <Link
                         key={i}
                         className="news-category-card"
-                        to={`/tin-tuc?danh-muc=${v.title.replace(/\s/g, "-")}-${v.id}`}>
+                        to={`/tin-tuc?danh-muc=${v.title == null ? "" : v.title.replace(/\s/g, "-")}-${v.id}`}>
                         {v.title}
                       </Link>
                     )

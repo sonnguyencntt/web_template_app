@@ -59,7 +59,7 @@ function NewsPage(props) {
                         <Link
                           key={i}
                           className="news-category-card"
-                          to={`/tin-tuc?danh-muc=${v.title.replace(/\s/g, "-")}-${v.id}`}>
+                          to={`/tin-tuc?danh-muc=${v.title == null ? "" : v.title.replace(/\s/g, "-")}-${v.id}`}>
                           {v.title}
                         </Link>
                       )

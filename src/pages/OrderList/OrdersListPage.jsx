@@ -232,13 +232,14 @@ function OrdersListPage() {
                           >Thanh toán</button>
                         }
                         {
-                          v.order_status_code === "COMPLETED" &&
+                          v.order_status_code === "COMPLETED" && v.line_items_at_time.length > 0 &&
                           (
                             !v.reviewed ?
-                              <button
-                                onClick={(e) => {
-                                  handleRebuy(e, v.line_items_at_time);
-                                }}
+                            <button
+                              
+                                // onClick={(e) => {
+                                //   handleRebuy(e, v.line_items_at_time);
+                                // }}
                                 style={{
                                   padding: "6px 8px",
                                   borderRadius: "0.25em",
@@ -246,12 +247,10 @@ function OrdersListPage() {
                                   marginTop: "0.5em",
                                   background: appTheme.color_main_1
                                 }}
-                              >Mua lại</button>
+                              >Đánh giá</button>
                               :
-                              <button
-                                onClick={() => {
-                                  openPaymentDialog(v);
-                                }}
+                              <a href={`/san-pham/${v.line_items_at_time[0].id}`}>     <button
+                              
                                 style={{
                                   padding: "6px 8px",
                                   borderRadius: "0.25em",
@@ -259,7 +258,7 @@ function OrdersListPage() {
                                   marginTop: "0.5em",
                                   background: appTheme.color_main_1
                                 }}
-                              >Mua lại</button>
+                              >Mua lại</button> </a>
                           )
                         }
                       </td>

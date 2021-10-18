@@ -4,6 +4,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appActions } from "../../../actions/appActions";
 import { constants } from "../../../constants";
+import Select from "../../../components/Select";
+import { hideParentElement } from "../../../helper";
+import { appActions as a } from "../../../actions/appActions";
+
 export default function OrderInfo(props) {
   const dispatch = useDispatch();
   const {
@@ -25,9 +29,71 @@ export default function OrderInfo(props) {
   const [shipmentInfo, setShipmentInfo] = useState({ name: "", fee: 0 });
   const [paymentMethod, setPaymentMethod] = useState({ name: "" });
   const [note, setNote] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address_detail, setAddressDetail] = useState("");
+
+  const [currentProvince, setCurrentProvince] = useState(null);
+  const [currentDistrict, setCurrentDistrict] = useState(null);
+  const [currentWard, setCurrentWard] = useState(null);
+  const provinces = useSelector((state) => state.app.addressData.provinces);
+  const districts = useSelector((state) => state.app.addressData.districts);
+  const wards = useSelector((state) => state.app.addressData.wards);
+
+  function handleProvinceSelect(v, e) {
+    hideParentElement(e);
+    setCurrentProvince(v);
+    setCurrentDistrict(null);
+    setCurrentWard(null);
+    dispatch(a.getDistrictsList(v.id));
+  }
+  function handleDistrictSelect(v, e) {
+    hideParentElement(e);
+    setCurrentDistrict(v);
+    setCurrentWard(null);
+    dispatch(a.getWardsList(v.id));
+  }
+  function handleWardSelect(v, e) {
+    hideParentElement(e);
+    setCurrentWard(v);
+    console.log(v);
+  }
+
+  function showDetail(e) {
+    let currentElement = e.currentTarget;
+    let nextElement = currentElement.nextElementSibling;
+    let parentElement = currentElement.parentElement;
+    if (nextElement.style.maxHeight) {
+      nextElement.style.maxHeight = null;
+      parentElement.style.zIndex = 2;
+    } else {
+      nextElement.style.maxHeight = 120 + "px";
+      nextElement.style.overflowY = "scroll";
+      parentElement.style.zIndex = 10;
+    }
+  }
+
+  function handleChangeAddressDetail(e) {
+    setAddressDetail(e.target.value);
+  }
+
   function handleChangeNote(e) {
     setNote(e.target.value);
   }
+
+  function handleChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function handleChangeEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function handleChangePhone(e) {
+    setPhone(e.target.value);
+  }
+
   function handleShipmentFeeSelect(info) {
     setShipmentInfo(info);
   }
@@ -45,8 +111,8 @@ export default function OrderInfo(props) {
       shipper_type: shipmentInfo.ship_type,
       customer_address_id: defaultAddress.id,
       partner_shipper_id: shipmentInfo.partner_id,
-      collaborator_by_customer_id: localStorage.getItem("cowc_id") ?? profile.id,
-
+      collaborator_by_customer_id:
+        localStorage.getItem("cowc_id") ?? profile.id,
     };
     if (
       orderInfo.payment_method_id === undefined ||
@@ -65,8 +131,153 @@ export default function OrderInfo(props) {
     console.log(orderInfo);
     props.handleOrder(orderInfo);
   }
+  function handleOrderNonLogin() {
+    if (
+      !name ||
+      !phone ||
+      !email ||
+      !address_detail ||
+      !currentProvince ||
+      !currentDistrict ||
+      !currentWard
+    ) {
+      dispatch(
+        appActions.changePopup(
+          constants.AUTOHIDE_POPUP,
+          "Vui lòng cung cấp đầy đủ thông tin !"
+        )
+      );
+      return;
+    }
+
+    const orderInfo = {
+      customer_note: note,
+      payment_method_id: 0,
+      province: currentProvince.id,
+      district: currentDistrict.id,
+      wards: currentWard.id,
+      name: name,
+      email: email,
+      phone: phone,
+      address_detail: address_detail,
+      collaborator_by_customer_id:
+        localStorage.getItem("cowc_id") ?? profile.id,
+    };
+    // if (
+    //   orderInfo.payment_method_id === undefined ||
+    //   (props.shipmentFee &&
+    //     props.shipmentFee.length > 0 &&
+    //     orderInfo.shipper_type === undefined)
+    // ) {
+    //   dispatch(
+    //     appActions.changePopup(
+    //       constants.AUTOHIDE_POPUP,
+    //       "Vui lòng cung cấp đầy đủ thông tin !"
+    //     )
+    //   );
+    //   return;
+    // }
+    console.log(orderInfo);
+    props.handleOrder(orderInfo);
+  }
   return !tokenInfo ? (
     <div className="order-info">
+      <div className="voucher-input">
+        <h5>Thông tin</h5>
+        <div className="row">
+          <input
+            type="text"
+            placeholder="Họ và tên (bắt buộc)"
+            value={name}
+            onChange={handleChangeName}
+          />
+        </div>
+
+        <div className="row">
+          <input
+            type="text"
+            placeholder="Số điện thoại (bắt buộc)"
+            value={phone}
+            onChange={handleChangePhone}
+          />
+        </div>
+
+        <div className="row">
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
+        </div>
+      </div>
+
+      <div className="voucher-input">
+        <h5>Giao tới</h5>
+        <br />
+        <div style={{ width: "100%" }}>
+          <Select
+            placeholder={
+              currentProvince ? currentProvince.title : "Tỉnh/Thành phố"
+            }
+            handleSelect={handleProvinceSelect}
+            showDetail={showDetail}
+            autosize={true}
+            values={provinces.map((v) => {
+              return {
+                title: v.name,
+                id: v.id,
+              };
+            })}
+          />
+        </div>
+        <br />{" "}
+        <div style={{ width: "100%" }}>
+          <Select
+            placeholder={currentDistrict ? currentDistrict.title : "Quận/Huyện"}
+            handleSelect={handleDistrictSelect}
+            showDetail={showDetail}
+            values={districts.map((v) => {
+              return {
+                title: v.name,
+                id: v.id,
+              };
+            })}
+          />
+        </div>
+        <br />
+        <div style={{width: '100%'}}><Select
+          placeholder={currentWard ? currentWard.title : "Phường/Xã"}
+          handleSelect={handleWardSelect}
+          showDetail={showDetail}
+          values={wards.map((v) => {
+            return {
+              title: v.name,
+              id: v.id,
+            };
+          })}
+        /></div>
+        <div className="row">
+          <input
+            type="text"
+            placeholder="Địa chỉ chi tiết"
+            value={address_detail}
+            onChange={handleChangeAddressDetail}
+          />
+        </div>
+      </div>
+      <div className="voucher-input">
+        <h5>Ghi chú</h5>
+        <div className="row">
+          <input
+            type="text"
+            placeholder="Nhập ghi chú"
+            value={note}
+            onChange={handleChangeNote}
+          />
+        </div>
+      </div>
+
       <div className="payment-method">
         <div
           className="total price-info row"
@@ -79,7 +290,16 @@ export default function OrderInfo(props) {
             ₫{formatPrice(total_after_discount)}
           </span>
         </div>
+
         <button
+          id="order-btn"
+          style={{ background: appTheme.color_main_1 }}
+          onClick={handleOrderNonLogin}
+        >
+          Đặt hàng
+        </button>
+
+        {/* <button
           id="order-btn"
           style={{ background: appTheme.color_main_1 }}
           onClick={() => {
@@ -89,8 +309,8 @@ export default function OrderInfo(props) {
             }
           }}
         >
-          Tiếp tục
-        </button>
+          Đặt hàng
+        </button> */}
       </div>
     </div>
   ) : (
@@ -136,22 +356,23 @@ export default function OrderInfo(props) {
               value={props.code_voucher}
               onChange={props.handleVoucherInput}
             />
-            {
-              used_voucher ?
-                <button
-                  style={{ background: appTheme.color_main_1 }}
-                  onClick={() => props.applyDiscount("code_voucher", "")}
-                >
-                  Hủy
-                </button>
-                :
-                <button
-                  style={{ background: appTheme.color_main_1 }}
-                  onClick={() => props.applyDiscount("code_voucher", props.code_voucher)}
-                >
-                  Áp dụng
-                </button>
-            }
+            {used_voucher ? (
+              <button
+                style={{ background: appTheme.color_main_1 }}
+                onClick={() => props.applyDiscount("code_voucher", "")}
+              >
+                Hủy
+              </button>
+            ) : (
+              <button
+                style={{ background: appTheme.color_main_1 }}
+                onClick={() =>
+                  props.applyDiscount("code_voucher", props.code_voucher)
+                }
+              >
+                Áp dụng
+              </button>
+            )}
           </div>
         </div>
         <div className="voucher-input">
@@ -167,8 +388,7 @@ export default function OrderInfo(props) {
         </div>
       </div>
       <div>
-        {
-          props.paymentMethod &&
+        {props.paymentMethod && (
           <div className="payment-method">
             <h5>Phương thức thanh toán</h5>
             {props.paymentMethod.map((v, i) => (
@@ -184,7 +404,7 @@ export default function OrderInfo(props) {
               </div>
             ))}
           </div>
-        }
+        )}
         {props.shipmentFee && (
           <div className="delivery-method">
             <h5>Phí vận chuyển</h5>
@@ -243,31 +463,37 @@ export default function OrderInfo(props) {
                 ></span>
               </label>
             </div>
-            {badges.status_collaborator == 1 && balance_collaborator_can_use > 0 && (
-              <div className="row">
+            {badges.status_collaborator == 1 &&
+              balance_collaborator_can_use > 0 && (
                 <div className="row">
-                  <label>
-                    Dùng số dư CTV [
-                    <span>-₫ {formatPrice(balance_collaborator_can_use)}</span>]
+                  <div className="row">
+                    <label>
+                      Dùng số dư CTV [
+                      <span>
+                        -₫ {formatPrice(balance_collaborator_can_use)}
+                      </span>
+                      ]
+                    </label>
+                  </div>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      onChange={() =>
+                        props.handleChangeCheckBox("collaborator")
+                      }
+                      checked={props.is_use_balance_collaborator}
+                    />
+                    <span
+                      style={{
+                        background: props.is_use_balance_collaborator
+                          ? appTheme.color_main_1
+                          : "#ccc",
+                      }}
+                      className="slider round"
+                    ></span>
                   </label>
                 </div>
-                <label className="switch">
-                  <input
-                    type="checkbox"
-                    onChange={() => props.handleChangeCheckBox("collaborator")}
-                    checked={props.is_use_balance_collaborator}
-                  />
-                  <span
-                    style={{
-                      background: props.is_use_balance_collaborator
-                        ? appTheme.color_main_1
-                        : "#ccc",
-                    }}
-                    className="slider round"
-                  ></span>
-                </label>
-              </div>
-            )}
+              )}
           </div>
           <div className="total row">
             <div>Tổng cộng</div>

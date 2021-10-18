@@ -5,6 +5,8 @@ import { userActions } from "../actions/userActions";
 import { constants as c } from "../constants";
 import { validURL } from "../helper";
 import HotlineContact from "./HotlineContact/HotlineContact";
+import { ToastContainer } from "react-toastify";
+
 export default function Footer() {
   const dispatch = useDispatch();
   const [phone, setPhone] = useState("");
@@ -47,6 +49,7 @@ export default function Footer() {
   }
   return (
     <React.Fragment>
+     <ToastContainer />
       <HotlineContact />
       <div className="top-footer">
         <div className="container row">

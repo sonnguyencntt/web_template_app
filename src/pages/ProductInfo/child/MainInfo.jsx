@@ -10,7 +10,7 @@ import { productActions } from "../../../actions/productActions";
 import { voucherActions } from "../../../actions/voucherActions";
 import { formatPrice, formatPriceOrContact } from "../../../helper";
 import Slider from "react-slick";
-import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 export default function MainInfo(props) {
   let {
@@ -225,7 +225,7 @@ export default function MainInfo(props) {
               <i className="far fa-heart"></i>
             )}
           </button>
-          <ToastContainer />
+     
           <Slider {...settings}>
             {currentImages.map((v, i) => (
               <div className="image" key={i}>

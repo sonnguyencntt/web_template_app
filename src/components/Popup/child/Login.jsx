@@ -20,7 +20,7 @@ export default function Login(props) {
   }
   function handleLogin() {
     dispatch(userActions.accountLogin({
-      phone_number: phone,
+      email_or_phone_number: phone,
       password
     }))
   }
@@ -32,7 +32,7 @@ export default function Login(props) {
     <div className="modal center">
       <div className="login-popup" onKeyDown={handleEnter}>
         <h4>Nhập mật khẩu</h4>
-        <div>Vui lòng nhập mật khẩu của số điện thoại <span>{phone}</span></div>
+        <div>Vui lòng nhập mật khẩu truy cập <span>{phone}</span></div>
         <input autoFocus type="password" placeholder="Mật khẩu" value={password} onChange={handleInputChange} />
         <label
           onClick={handleForgotPass}

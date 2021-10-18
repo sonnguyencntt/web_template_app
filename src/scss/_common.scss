@@ -956,6 +956,9 @@
     border-radius: 0.25em;
     margin-bottom: 1em;
   }
+  input:disabled {
+    background: #0000001a;
+  }
   label {
     color: $sub-text-color;
   }

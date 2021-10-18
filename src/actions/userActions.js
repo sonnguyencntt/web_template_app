@@ -1,23 +1,23 @@
 import { constants as c } from "../constants";
 import { userServices as s } from "../services/userServices";
+import { appActions } from "./appActions";
+import { toast } from "react-toastify";
+
 function accountCheck(info) {
   return (dispatch) => {
     s.accountCheck(info).then((res) => {
       if (res.code === 200) {
         let result = res.data.filter((v) => v.value === true);
         if (result.length === 0) {
-          if (info.phone_number !== null) {
-            dispatch({ type: c.PHONE_NOT_REGISTERED, info });
-          }
+          dispatch({ type: c.PHONE_NOT_REGISTERED, info });
         } else {
-          if (result[0].name === "phone_number") {
-            dispatch({ type: c.PHONE_REGISTERED, info });
-          }
+          dispatch({ type: c.PHONE_REGISTERED, info });
         }
       }
     });
   };
 }
+
 function accountLogin(info) {
   console.log(info);
   return (dispatch) => {
@@ -38,6 +38,16 @@ function accountLogin(info) {
     console.log(msg);
     return { type: c.LOGIN_FAILURE, msg };
   }
+}
+function requestSendOtpEmail(email) {
+  return (dispatch) => {
+    s.requestSendOtpEmail(email).then((res) => {
+      if (res.code === 200 || res.code === 201) {
+        console.log("ok");
+      } else {
+      }
+    });
+  };
 }
 function accountRegis(info) {
   return (dispatch) => {
@@ -70,13 +80,24 @@ function resetPassword(info) {
   return (dispatch) => {
     s.resetPassword(info).then((res) => {
       if (res.code === 200 || res.code === 201) {
-        dispatch(success());
+        toast.success(" Đã khôi phục mật khẩu của bạn", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        dispatch(appActions.changePopup(c.PHONE_POPUP));
+        // dispatch(success(dispatch));
       } else {
         dispatch(failure(res.msg));
       }
     });
   };
-  function success() {
+  function success(dispatch) {
     return { type: c.RESET_PASSWORD_SUCCESS };
   }
   function failure(msg) {
@@ -198,6 +219,8 @@ function getUserProfile() {
     s.getUserProfile().then((res) => {
       if (res.code === 200) {
         dispatch(success(res.data));
+      } else if (res.code === 401) {
+        dispatch(userActions.accountLogout());
       } else {
         dispatch(failure(res.msg, res.code));
       }
@@ -332,4 +355,5 @@ export const userActions = {
   getUserBadges,
   getuserNotify,
   toggleClassChat,
+  requestSendOtpEmail,
 };

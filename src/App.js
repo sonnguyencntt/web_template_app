@@ -26,6 +26,7 @@ import { constants as c } from "./constants";
 import { appActions } from "./actions/appActions";
 import PurchasedPage from "./pages/PurchasedProduct/PurchasedPage";
 import { CollaboratorPage } from "./pages/Collaborator/CollaboratorPage";
+import { userActions } from "./actions/userActions";
 function App() {
   const dispatch = useDispatch();
   const categoryStatus = useSelector((state) => state.category.status);
@@ -54,6 +55,7 @@ function App() {
     if (infoStore.status === c.NONE) {
       dispatch(appActions.getInfoStore());
     }
+    dispatch(userActions.getUserBadges());
   }, []);
   return categoryStatus === c.SUCCESS ? (
     <React.Fragment>

@@ -1030,6 +1030,8 @@ body {
     border: 1px solid #e4e4e4;
     border-radius: 0.25em;
     margin-bottom: 1em; }
+  .regis-popup input:disabled {
+    background: #0000001a; }
   .regis-popup label {
     color: #757575; }
   .regis-popup .message {
@@ -4833,6 +4835,9 @@ body {
   .home-page .home-banner .discount-products .row,
   .home-page .home-banner .categories-column .column {
     height: calc(0.45 * 1400px - 0.45 * 440px + 194px - 45px); } }
+
+input:disabled {
+  background: #0000001a; }
 
 .breadcrumbs {
   width: 100%;

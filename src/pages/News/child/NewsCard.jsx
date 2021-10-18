@@ -9,7 +9,7 @@ export default function NewsCard(props) {
   return (
     <div className="news-card" onClick={handleClick}>
       <div style={{ display: "none" }}>
-        <Link ref={myLink} to={`/tin-tuc/${props.title.replace(/\s/g, '-')}-${props.id}`} />
+        <Link ref={myLink} to={`/tin-tuc/${props.title == null ? "" : props.title.replace(/\s/g, '-')}-${props.id}`} />
       </div>
       <div className="image">
         <div className="img-container">

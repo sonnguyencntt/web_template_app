@@ -1,8 +1,10 @@
 import { constants as c } from "../constants";
+import { toast } from "react-toastify";
 const userInfo = localStorage.getItem("userInfo");
 const tokenInfo = localStorage.getItem("tokenInfo");
 const profile = localStorage.getItem("profile");
 const badges = localStorage.getItem("badges");
+
 const initialState = {
   phone: "",
   email: "",
@@ -74,6 +76,19 @@ export function user(state = initialState, action) {
           status: c.LOADING,
         },
       };
+    case c.RESET_PASSWORD_SUCCESS:
+
+      toast.success(" Đã khôi phục mật khẩu của bạn", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      break;
+
     case c.GET_USER_ADDRESS_SUCCESS:
       return {
         ...state,

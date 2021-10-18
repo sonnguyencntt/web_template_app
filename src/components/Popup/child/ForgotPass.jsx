@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { requestOtp } from "../../../helper";
+import { requestOtp, validateEmail } from "../../../helper";
 import { constants as c } from "../../../constants";
 import { appActions } from "../../../actions/appActions";
 import { userActions } from "../../../actions/userActions";
@@ -9,10 +9,12 @@ export default function ForgotPass(props) {
   const [timer, setTimer] = useState(0);
   const phone = useSelector(state => state.user.phone);
   const message = useSelector(state => state.app.message);
+
   const [requestInfo, setRequestInfo] = useState({
-    phone_number: phone,
+    email_or_phone_number: phone,
     password: "",
-    otp: ""
+    otp: "",
+    otp_from:!validateEmail(phone) ? "phone" : "email"
   });
   const appTheme = useSelector(state => state.app.appTheme);
   function handleBack() {
@@ -29,9 +31,23 @@ export default function ForgotPass(props) {
   function handleResendOtp() {
     if (timer > 0)
       return;
-    requestOtp(phone);
+
+    if (!validateEmail(phone)) {
+      requestOtp(phone);
+    } else {
+      dispatch(userActions.requestSendOtpEmail(phone));
+    }
+
+
     setTimer(30);
   }
+  useEffect(() => {
+    if (!timer) return;
+    let myTimer = setInterval(() => {
+      setTimer(timer - 1 >= 0 ? timer - 1 : 0);
+    }, 1000);
+    return () => clearInterval(myTimer);
+  });
   return (
     <div className="modal center">
       <div className="forgot-pass-popup">
@@ -50,7 +66,7 @@ export default function ForgotPass(props) {
             autoComplete="off"
             name="otp"
             type="text"
-            placeholder="Mã xác nhận"
+            placeholder={!validateEmail(phone) ? "Nhập xác nhận từ SĐT" : "Nhập xác nhận từ Email" }
             value={requestInfo.otp}
             style={{ width: "calc(100% - 7.5em)", marginTop: 0 }}
             onChange={handleInputChange}
@@ -67,11 +83,11 @@ export default function ForgotPass(props) {
               color: "#757575"
             }}
           >
-            {
-              timer ?
-                `Gửi lại (${timer}s)`
-                : "Gửi OTP"
-            }
+            {timer
+              ? `Gửi lại (${timer}s)`
+              : !validateEmail(phone)
+              ? "Gửi tới SĐT"
+              : "Gửi tới email"}
           </button>
         </div>
         <button

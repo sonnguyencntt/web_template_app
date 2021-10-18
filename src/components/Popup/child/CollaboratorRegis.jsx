@@ -15,6 +15,11 @@ export default function CollaboratorRegis(props) {
         <h3>Đăng ký cộng tác viên</h3>
         <h4>Điều khoản</h4>
         <div className="policy">
+          <span>Chính sách giá</span>
+          <div className="info">
+            Trên DoApp, toàn bộ sản phẩm đều có thể mua với giá được chiết khấu cao khi đăng ký trở thành Người Bán. Đồng thời Người Bán có thể nhận hoa hồng khi giới thiệu thành công cho bạn bè/ bên thứ ba mua sản phẩm trên DoApp.
+            Bằng việc minh bạch thông tin sản phẩm và hướng dẫn chi tiết, DoApp giúp người dùng tìm được sản phẩm tốt nhất cho mình và với những ai đam mê kinh doanh, DoApp sẽ giúp bạn vận hành, tối ưu toàn diện công việc kinh doanh của mình.
+          </div>
         </div>
         <div className="row">
           <input id="agree" type="checkbox" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />

@@ -389,21 +389,50 @@
         padding-top: 0.5em;
         .actions {
           margin-top: 10px;
-          display: flex;
-          flex-wrap: wrap;
           .collaborator-action {
             width: fit-content;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
           }
-          #share-btn,
-          #link-btn {
+          .share {
+            button {
+              font-size: 16px;
+              width: 2em;
+              height: 2em;
+              color: white;
+              margin-right: 0.5em;
+              border-radius: 0.25em;
+              background-color: rgb(2, 56, 173);
+            }
+          }
+          span {
+            font-size: 16px;
+            font-weight: lighter;
+            color: $sub-text-color;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+          }
+          #share-btn {
             color: white;
             font-size: 16px;
             padding: 10px 20px;
+            padding-left: 0em;
             border-radius: 0.25em;
-            background-color: rgb(255, 57, 69);
+            background-color: rgb(6, 69, 207);
+            i {
+              width: 2em;
+              margin-right: 0.5em;
+              border-right: 1px solid white;
+            }
           }
           #link-btn {
-            margin-left: 1em;
+            color: white;
+            font-size: 16px;
+            padding: 0 20px;
+            height: 2em;
+            border-radius: 0.25em;
+            background-color: $price-color;
           }
           #addcart-btn {
             padding: 10px 20px;
@@ -3122,6 +3151,7 @@
         .cart-action {
           .actions {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             #addcart-btn {
               width: 60%;
@@ -3131,15 +3161,13 @@
             }
             .collaborator-action {
               width: 100%;
-            }
-            #share-btn,
-            #link-btn {
-              width: 40%;
-              margin: 0;
               margin-top: 1em;
+              button {
+                margin-right: 0.5em;
+              }
             }
-            #link-btn {
-              margin-left: 1em;
+            span {
+              display: none;
             }
           }
         }
@@ -3657,13 +3685,16 @@
           .actions {
             .collaborator-action {
               width: 100%;
+              flex-direction: column-reverse;
+            }
+            .share {
+              margin-top: 0.5em;
             }
             #addcart-btn,
-            #share-btn,
             #link-btn {
               width: 100%;
               margin: 0;
-              margin-top: 1em;
+              margin-top: 0.5em;
             }
           }
         }

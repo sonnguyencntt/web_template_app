@@ -396,25 +396,15 @@ export default function Header() {
                   </li>
                   {
                     profile.is_collaborator
-                    && badges.status_collaborator === 1
                     &&
                     <li>
                       <img src="/img/handshake.png" alt="" />
                       <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
                     </li>
                   }
-                  {
-                    profile.is_collaborator
-                    && badges.status_collaborator === 0
-                    &&
-                    <li>
-                      <img src="/img/handshake.png" alt="" />
-                      <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
-                    </li>
-                  }
+
                   {
                     !profile.is_collaborator
-                    && badges.status_collaborator === 0
                     &&
                     <li>
                       <img src="/img/handshake.png" alt="" />
@@ -424,18 +414,7 @@ export default function Header() {
                         Đăng ký cộng tác viên</Link>
                     </li>
                   }
-                  {
-                    profile.is_collaborator
-                    && badges.status_collaborator === 1
-                    &&
-                    <li>
-                      <img src="/img/handshake.png" alt="" />
-                      <Link
-                        onClick={handleShowCollaboratorRegisForm}
-                        to="/cong-tac-vien">
-                        Đăng ký cộng tác viên</Link>
-                    </li>
-                  }
+
                   <li onClick={handleShowProfile}>
                     <img src="/img/refresh.png" alt="" />
                     Cập nhật thông tin

@@ -1,4 +1,4 @@
-import { formatPrice } from "../../../helper";
+import { formatPrice, validateEmail, validateNumberPhone } from "../../../helper";
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,6 +41,9 @@ export default function OrderInfo(props) {
   const districts = useSelector((state) => state.app.addressData.districts);
   const wards = useSelector((state) => state.app.addressData.wards);
 
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPhoneNumer, setErrorPhoneNumer] = useState("");
+
   function handleProvinceSelect(v, e) {
     hideParentElement(e);
     setCurrentProvince(v);
@@ -68,7 +71,7 @@ export default function OrderInfo(props) {
       nextElement.style.maxHeight = null;
       parentElement.style.zIndex = 2;
     } else {
-      nextElement.style.maxHeight = 120 + "px";
+      nextElement.style.maxHeight = 230 + "px";
       nextElement.style.overflowY = "scroll";
       parentElement.style.zIndex = 10;
     }
@@ -132,10 +135,26 @@ export default function OrderInfo(props) {
     props.handleOrder(orderInfo);
   }
   function handleOrderNonLogin() {
+    setErrorEmail("");
+    setErrorPhoneNumer("");
+
+    if (email != "") {
+      if (!validateEmail(email)) {
+        setErrorEmail("Email không hợp lệ");
+        return;
+      }
+    }
+
+    if (phone != "") {
+      if (!validateNumberPhone(phone)) {
+        setErrorPhoneNumer("Số điện thoại không hợp lệ");
+        return;
+      }
+    }
+
     if (
       !name ||
       !phone ||
-      !email ||
       !address_detail ||
       !currentProvince ||
       !currentDistrict ||
@@ -201,6 +220,11 @@ export default function OrderInfo(props) {
             onChange={handleChangePhone}
           />
         </div>
+        {errorPhoneNumer!= "" && (
+          <span class="error_input" id="errorname">
+            {errorPhoneNumer}
+          </span>
+        )}
 
         <div className="row">
           <input
@@ -210,6 +234,11 @@ export default function OrderInfo(props) {
             onChange={handleChangeEmail}
           />
         </div>
+        {errorEmail != "" && (
+          <span class="error_input" id="errorname">
+            {errorEmail}
+          </span>
+        )}
       </div>
 
       <div className="voucher-input">
@@ -232,7 +261,7 @@ export default function OrderInfo(props) {
           />
         </div>
         <br />{" "}
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", width: "max-content" }}>
           <Select
             placeholder={currentDistrict ? currentDistrict.title : "Quận/Huyện"}
             handleSelect={handleDistrictSelect}
@@ -246,17 +275,19 @@ export default function OrderInfo(props) {
           />
         </div>
         <br />
-        <div style={{width: '100%'}}><Select
-          placeholder={currentWard ? currentWard.title : "Phường/Xã"}
-          handleSelect={handleWardSelect}
-          showDetail={showDetail}
-          values={wards.map((v) => {
-            return {
-              title: v.name,
-              id: v.id,
-            };
-          })}
-        /></div>
+        <div style={{ width: "100%" }}>
+          <Select
+            placeholder={currentWard ? currentWard.title : "Phường/Xã"}
+            handleSelect={handleWardSelect}
+            showDetail={showDetail}
+            values={wards.map((v) => {
+              return {
+                title: v.name,
+                id: v.id,
+              };
+            })}
+          />
+        </div>
         <div className="row">
           <input
             type="text"

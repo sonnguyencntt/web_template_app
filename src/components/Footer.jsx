@@ -247,7 +247,7 @@ export default function Footer() {
         paddingBottom: "10px",
         fontSize: "13px",
       }} >
-        Design by <a href="https://doapp.vn" style={{ color: "#f2f3f8", }}>DoApp.vn</a>
+        Design by <a href="https://doapp.vn" style={{ color: "#f2f3f8", }}>DOAPP.VN</a>
       </div>
     </React.Fragment>
   )

@@ -151,7 +151,7 @@ export default function MainInfo(props) {
         p = min_price;
         q = quantity_in_stock_with_distribute;
       }
-      setCurrentPrice(p ? p : currentPrice);
+      setCurrentPrice(p);
       setCurrentQuantityInStock(q);
       return;
     }
@@ -338,8 +338,7 @@ export default function MainInfo(props) {
                       Hoa hồng: ₫
                       {formatPrice(
                         min_price *
-                        (percent_collaborator * 0.01) *
-                        (discount_percent * 0.01)
+                        (percent_collaborator * 0.01) 
                       )}
                     </div>
                   ) : (
@@ -495,7 +494,7 @@ export default function MainInfo(props) {
                   }}
                 >{currentQuantityInStock === 0 ? "Hết hàng" : "Vượt quá số lượng trong kho"}</button>
               )}
-              {badges.status_collaborator === 0 && (
+              {badges.status_collaborator === 1 && (
                 <div className="collaborator-action">
                   <div className="share">
                     <label>Đăng bài: </label>

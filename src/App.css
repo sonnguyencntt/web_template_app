@@ -4933,6 +4933,21 @@ body {
   .home-page .home-banner .categories-column .column {
     height: calc(0.45 * 1400px - 0.45 * 440px + 194px - 45px); } }
 
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
+
+.error_input {
+  font-size: 13px;
+  color: red;
+  margin-top: 2px;
+  margin-left: 2px; }
+
 input:disabled {
   background: #0000001a; }
 

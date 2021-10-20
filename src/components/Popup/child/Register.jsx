@@ -106,6 +106,13 @@ export default function Login(props) {
           value={regisInfo.password}
           onChange={handleInputChange}
         />
+        <input
+          name="referral_phone_number"
+          type="text"
+          placeholder="Số điện thoại người giới thiệu"
+          value={regisInfo.referral_phone_number}
+          onChange={handleInputChange}
+        />
         <div className="row">
           <label>Giới tính: </label>
           <div>

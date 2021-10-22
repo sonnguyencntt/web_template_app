@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import { handleImgErr } from "../helper";
+import { handleImgErr } from "../../../helper";
 export default function BlogCard(props) {
+  const date = props.date ? props.date.split(" ")[0] : "";
   const myLink = useRef(null);
   function handleClick() {
     myLink.current.click();
@@ -21,7 +22,11 @@ export default function BlogCard(props) {
           {props.title}
         </div>
         <div className="date">
-          {props.date ? props.date.split(" ")[0] : ""}
+          <span>
+            {date ? date.split("-")[2] : ""}
+          </span>
+          <br />
+          {date ? `Th${date.split("-")[1]}` : ""}
         </div>
         <div className="line"></div>
         <div className="blog-quote" dangerouslySetInnerHTML={{ __html: props.quote }}>

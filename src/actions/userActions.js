@@ -88,6 +88,7 @@ function accountLogout() {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("cartInfo");
   localStorage.removeItem("profile");
+  localStorage.removeItem("badges");
   return (dispatch) => {
     dispatch({ type: c.LOGOUT });
     window.location.reload();

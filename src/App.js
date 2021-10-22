@@ -31,19 +31,12 @@ function App() {
   const categoryStatus = useSelector((state) => state.category.status);
   const appTheme = useSelector((state) => state.app.appTheme);
   const infoStore = useSelector((state) => state.app.infoStore);
-
   const urlSearchParams = new URLSearchParams(window.location.search);
-
   //collaborator_by_customer_id
-  const cowc_id = Object.fromEntries(
-    urlSearchParams.entries()
-  ).cowc_id;
-
+  const cowc_id = Object.fromEntries(urlSearchParams.entries()).cowc_id;
   if (cowc_id != null) {
     localStorage.setItem("cowc_id", cowc_id);
   }
-
-
   useEffect(() => {
     if (categoryStatus === c.LOADING) {
       dispatch(categoryActions.getCategories());
@@ -87,5 +80,4 @@ function App() {
     categoryStatus === c.FAILURE && <ErrorPage location="/" />
   );
 }
-
 export default App;

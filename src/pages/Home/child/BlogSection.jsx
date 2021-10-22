@@ -2,14 +2,15 @@ import BlogCard from "../../../components/BlogCard";
 import Slider from "react-slick";
 export default function BlogSection(props) {
   var settings = {
-    infinite: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
+    infinite: props.posts.length > 3,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     responsive: [
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
+          infinite: props.posts.length > 2,
           slidesToScroll: 1,
         }
       },
@@ -23,7 +24,7 @@ export default function BlogSection(props) {
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         }
       },
@@ -41,6 +42,7 @@ export default function BlogSection(props) {
               <BlogCard
                 key={i}
                 id={v.id}
+                date={v.updated_at}
                 title={v.title}
                 img={v.image_url}
                 quote={v.content}

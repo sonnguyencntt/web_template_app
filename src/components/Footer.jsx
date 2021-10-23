@@ -54,8 +54,8 @@ export default function Footer() {
       <HotlineContact />
       <MessengerCustomerChat
     pageId="633385377094079"
-    appId="doapp.vn"
-    htmlRef="<REF_STRING>"
+    appId="394449898190174"
+  //  htmlRef="<REF_STRING>"
   />
       <div className="top-footer">
         <div className="container row">

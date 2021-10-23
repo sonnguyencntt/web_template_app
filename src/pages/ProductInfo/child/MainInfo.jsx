@@ -202,9 +202,9 @@ export default function MainInfo(props) {
   }
   function copySharedLink() {
     const link = `${window.location.origin}/san-pham/${id}?cowc=${profile.id}`
-    navigator.clipboard.writeText(link);
+   // navigator.clipboard.writeText(link);
     togglePopup();
-    dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Đã copy link chia sẻ"));
+  //  dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, ""));
   }
   return (
     <div>
@@ -565,7 +565,7 @@ export default function MainInfo(props) {
           <div>
             {`${window.location.origin}/san-pham/${id}?cowc=${profile.id}`}
           </div>
-          <button onClick={copySharedLink}>Copy</button>
+          <button onClick={copySharedLink}>Đóng</button>
         </div>
       </div>
     </div>

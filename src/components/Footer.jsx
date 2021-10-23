@@ -6,6 +6,7 @@ import { constants as c } from "../constants";
 import { validURL } from "../helper";
 import HotlineContact from "./HotlineContact/HotlineContact";
 import { ToastContainer } from "react-toastify";
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 export default function Footer() {
   const dispatch = useDispatch();
@@ -51,6 +52,11 @@ export default function Footer() {
     <React.Fragment>
      <ToastContainer />
       <HotlineContact />
+      <MessengerCustomerChat
+    pageId="633385377094079"
+    appId="doapp.vn"
+    htmlRef="<REF_STRING>"
+  />
       <div className="top-footer">
         <div className="container row">
           <div className="policy-card"

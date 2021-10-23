@@ -97,8 +97,9 @@ export default function HotlineContact(props) {
               </a>
             </li>
           )}
-          {appTheme.id_facebook == null ||
+          {/* {appTheme.id_facebook == null ||
           appTheme.id_facebook === "" ||
+          tokenInfo == null ||
           appTheme.is_show_icon_facebook === false ? (
             ""
           ) : (
@@ -113,7 +114,7 @@ export default function HotlineContact(props) {
                 <span>Facebook</span>
               </a>
             </li>
-          )}
+          )} */}
         </ul>
       </div>
     </div>

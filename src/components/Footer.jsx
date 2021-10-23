@@ -8,8 +8,10 @@ import HotlineContact from "./HotlineContact/HotlineContact";
 import { ToastContainer } from "react-toastify";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
+
 export default function Footer() {
   const dispatch = useDispatch();
+
   const [phone, setPhone] = useState("");
   const tokenInfo = useSelector(state => state.user.tokenInfo);
   const cartInfo = useSelector(state => state.cart.cartInfo);
@@ -52,11 +54,11 @@ export default function Footer() {
     <React.Fragment>
      <ToastContainer />
       <HotlineContact />
-      <MessengerCustomerChat
-    pageId="633385377094079"
+    {  tokenInfo != null ? "" : <MessengerCustomerChat
+    pageId={appTheme.id_facebook ?? "633385377094079"}
     appId="394449898190174"
   //  htmlRef="<REF_STRING>"
-  />
+  /> }
       <div className="top-footer">
         <div className="container row">
           <div className="policy-card"

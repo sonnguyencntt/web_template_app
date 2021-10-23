@@ -18,7 +18,7 @@ img {
 .hotline-phone-ring-wrap {
     position: fixed !important;
     bottom: 0;
-    left: 0;
+
     z-index: 1111111;
     margin-bottom: 45px;
 }
@@ -45,7 +45,7 @@ img {
     width: 40px;
     position: fixed;
     bottom: 150px;
-    left: 33px;
+    /* left: 33px; */
     z-index: 999999;
 }
 	

@@ -47,17 +47,18 @@ function HomePage(props) {
                 categories={info.categories}
                 discountProducts={info.sale_products}
               />
-              {
-                info.hot_products.length > 0 &&
-                <ProductSection title="Sản phẩm nổi bật" products={info.hot_products} />
+               {
+                info.sale_products.length > 0 &&
+                <ProductSection title="Sản phẩm giảm giá" products={info.sale_products} />
               }
               {
                 info.new_products.length > 0 &&
                 <ProductSection title="Sản phẩm mới" products={info.new_products} />
               }
+             
               {
-                info.sale_products.length > 0 &&
-                <ProductSection title="Sản phẩm giảm giá" products={info.sale_products} />
+                info.hot_products.length > 0 &&
+                <ProductSection title="Sản phẩm nổi bật" products={info.hot_products} />
               }
               {
                 info.new_posts.length > 0 &&

@@ -43,8 +43,10 @@ function getSimilarProducts(id) {
     });
 }
 function getAllProducts(queryString) {
+  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
   const requestOptions = {
     method: "GET",
+    "customer-token": tokenInfo ? tokenInfo.token : "",
   };
   return fetch(
     `${c.API_URL}/customer/${store_code}/products${queryString}`,

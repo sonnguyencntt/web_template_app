@@ -190,8 +190,11 @@ export default function MainInfo(props) {
       setCurrentQuantityInStock(q);
     }
   }
+  const textAreaRef = useRef(null);
   function copyVoucherCode(code) {
     navigator.clipboard.writeText(code);
+    textAreaRef.current.select();
+    document.execCommand('copy');
     dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Đã lưu mã giảm giá"));
   }
   function togglePopup() {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header_1 from "./Header/Header_1";
-import Header_2 from "./Header/Header_2";
-import { constants as c } from "../constants";
-import { appActions } from "../actions/appActions";
+import Header_1 from "./Header_1";
+import Header_2 from "./Header_2";
+import { constants as c } from "../../constants";
+import { appActions } from "../../actions/appActions";
 
 export default function Header() {
   const dispatch = useDispatch();

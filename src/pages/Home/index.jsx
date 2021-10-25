@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header_1 from "./Header/Header_1";
-import Header_2 from "./Header/Header_2";
-import { constants as c } from "../constants";
-import { appActions } from "../actions/appActions";
+import HomePage_1 from "./HomePage_1"
+import HomePage_2 from "./HomePage_2"
 
-export default function Header() {
+
+export default function Footer() {
   const dispatch = useDispatch();
   const appTheme = useSelector((state) => state.app.appTheme.home_page_type);
   console.log(appTheme)
   return <React.Fragment>
     {
-      appTheme == 1 ? <Header_1/> : appTheme == 2 ? <Header_2/> : <Header_1/>
+      appTheme == 1 ? <HomePage_1/> : appTheme == 2 ? <HomePage_2/> : <HomePage_1/>
     }
 
   </React.Fragment>;

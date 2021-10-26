@@ -109,6 +109,7 @@ function accountLogout() {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("cartInfo");
   localStorage.removeItem("profile");
+  localStorage.removeItem("badges");
   return (dispatch) => {
     dispatch({ type: c.LOGOUT });
     window.location.reload();
@@ -288,6 +289,26 @@ function getUserReview() {
     return { type: c.GET_USER_REVIEW_FAILURE, message, code };
   }
 }
+function getUserAwaitReview() {
+  return (dispatch) => {
+    s.getUserAwaitReview().then((res) => {
+      if (res.code === 200) {
+        dispatch(success(res.data));
+      } else {
+        dispatch(failure(res.msg, res.code));
+      }
+    });
+  };
+  function success(data) {
+    return {
+      ...data,
+      type: c.GET_USER_AWAIT_REVIEW_SUCCESS,
+    };
+  }
+  function failure(message, code) {
+    return { type: c.GET_USER_AWAIT_REVIEW_FAILURE, message, code };
+  }
+}
 function getUserBadges() {
   return (dispatch) => {
     s.getUserBadges().then((res) => {
@@ -352,6 +373,7 @@ export const userActions = {
   setAddressDefault,
   updateUserProfile,
   getUserReview,
+  getUserAwaitReview,
   getUserBadges,
   getuserNotify,
   toggleClassChat,

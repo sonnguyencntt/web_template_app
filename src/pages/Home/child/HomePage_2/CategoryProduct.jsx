@@ -9,6 +9,14 @@ export default function HomeBanner(props) {
   function handleCateClick(id) {
     window.location.href = `/danh-sach-san-pham?danh-muc-ids=${id}`;
   }
+
+  var bannerSettings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    dotsClass: "slick-dots slick-thumb",
+  };
   return (
     <section className="awe-section-1" id="awe-section-1">
       <div className="section_category_slider">
@@ -17,21 +25,20 @@ export default function HomeBanner(props) {
           <div className="row">
             <div className="col-md-9 col-md-push-3 px-md-4 px-0 mt-md-5 mb-5">
               <div className="home-slider owl-carousel">
-                {banners.length > 0 ? (
-                  <img src={banners[0].image_url} alt="alt banner demo" />
-                ) : //  banners.map((v, i) => (
-                //     <div className="item">
-                //       <a href="#" className="clearfix">
-                //         <img
-                //           src={v.image_url}
-                //           alt="alt banner demo"
-                //         />
-                //       </a>
-                //     </div>
-                // ))
-                null}
+              <Slider {...bannerSettings}>
+
+                {banners.length > 0
+                  ? banners.map((v, i) => (
+                      <div className="item">
+                        <a href="#" className="clearfix">
+                          <img src={v.image_url} alt="alt banner demo" />
+                        </a>
+                      </div>
+                    ))
+                  : null}
+                            </Slider >
+
               </div>
-              {/* /.products */}
             </div>
             <div className="col-md-3 col-md-pull-9 mt-5 hidden-xs aside-vetical-menu">
               <aside className="blog-aside aside-item sidebar-category">

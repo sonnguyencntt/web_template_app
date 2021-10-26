@@ -232,6 +232,26 @@ function getUserReview() {
       return {};
     });
 }
+function getUserAwaitReview() {
+  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "customer-token": tokenInfo ? tokenInfo.token : "",
+    },
+  };
+  return fetch(`${c.API_URL}/customer/${store_code}/reviews/not_rated`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
 function getUserBadges() {
   const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
   const requestOptions = {
@@ -312,5 +332,6 @@ export const userServices = {
   getUserReview,
   getUserBadges,
   getuserNotify,
+  getUserAwaitReview,
   requestSendOtpEmail,
 };

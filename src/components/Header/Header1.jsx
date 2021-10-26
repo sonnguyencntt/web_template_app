@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { constants as c } from "../constants";
-import { appActions } from "../actions/appActions";
-import { userActions } from "../actions/userActions";
-import { cartActions } from "../actions/cartActions";
-import { collaboratorActions } from "../actions/collaboratorActions";
-export default function Header() {
+import { constants as c } from "../../constants";
+import { appActions } from "../../actions/appActions";
+import { userActions } from "../../actions/userActions";
+import { cartActions } from "../../actions/cartActions";
+import { collaboratorActions } from "../../actions/collaboratorActions";
+export default function Header_1() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const [currentActive, setCurrentActive] = useState("");
@@ -288,7 +288,10 @@ export default function Header() {
         </div>
       </div>
       <div className="nav">
-        <div className="container">
+        <div className="container" 
+        style={{ background: appTheme.headerBackgroudColor }}
+
+        >
           <div className="row">
             <div className="dropdown-container" style={{ width: "110px" }}>
               <Link

@@ -5,7 +5,7 @@ import Slider from "react-slick";
 export default function Blog(props) {
   var settings = {
     infinite: false,
-    slidesToShow: 5,
+    slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
       {
@@ -36,10 +36,7 @@ export default function Blog(props) {
   function showBlog(){
       var array = []
       for (let [i, v] of Object.entries(props.posts)) {
-          if(i>2)
-          {
-              break;
-          }
+     
           console.log(i)
           array.push(
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -55,7 +52,6 @@ export default function Blog(props) {
                             }`
                           : `/tin-tuc/${v.id}`
                       }
-                      title="Những loại trái cây Nhật đắt như vàng ròng đổ bộ về Việt Nam"
                     >
                       <img
                         style={{
@@ -64,13 +60,11 @@ export default function Blog(props) {
                           "border-radius": "10px",
                         }}
                         src={v.image_url}
-                        alt="Những loại trái cây Nhật đắt như vàng ròng đổ bộ về Việt Nam"
                       />
                     </Link>
                   </div>
                   <div className="blog-item-info m-4">
                     <h3
-                      title="Những loại trái cây Nhật đắt như vàng ròng đổ bộ về Việt Nam"
                       className="blog-item-name"
                     >
                       <a href="#">{v.title}</a>
@@ -96,7 +90,6 @@ export default function Blog(props) {
                             }`
                           : `/tin-tuc/${v.id}`
                       }
-                      title="Những loại trái cây Nhật đắt như vàng ròng đổ bộ về Việt Nam"
                       className="btn"
                     >
                       Chi tiết
@@ -119,9 +112,9 @@ export default function Blog(props) {
         <div className="container">
           <div className="section-title a-center">
             <h2>
-              <a title="Tin cập nhật" href="tin-tuc.html">
+              <Link title="Tin cập nhật" to="/tin-tuc">
                 Tin cập nhật
-              </a>
+              </Link>
             </h2>
             <p>
               Tin tức vệ sinh an toàn thực phẩm cập nhật mới nhất
@@ -137,10 +130,14 @@ export default function Blog(props) {
               data-xs-items={2}
               data-nav="true"
             >
+                    <Slider {...settings}>
+
                 
                 {
                     showBlog()
                 }
+                      </Slider>
+
             </div>
           </div>
         </div>

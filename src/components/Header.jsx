@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header_1 from "./Header/Header_1";
-import Header_2 from "./Header/Header_2";
+import Header_1 from "./Header/Header1";
+import Header_2 from "./Header/Header2";
 import { constants as c } from "../constants";
 import { appActions } from "../actions/appActions";
 

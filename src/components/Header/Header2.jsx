@@ -6,7 +6,7 @@ import { appActions } from "../../actions/appActions";
 import { userActions } from "../../actions/userActions";
 import { cartActions } from "../../actions/cartActions";
 import { collaboratorActions } from "../../actions/collaboratorActions";
-export default function Header() {
+export default function Header_2() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const [currentActive, setCurrentActive] = useState("");
@@ -98,16 +98,20 @@ export default function Header() {
   }
   return (
     <React.Fragment>
-      <header className="header" id="template-1">
-        <div className="topbar-mobile hidden-lg hidden-md text-center text-md-left">
-          <div className="container">
+      <header className="header" id="template-1"
+      >
+        <div className="topbar-mobile hidden-lg hidden-md text-center text-md-left" style={{ background: appTheme.headerBackgroudColor }}
+
+        >
+          <div className="container container-template-2">
             Hotline:
             <span>
               <a href="tel:0912117494">{appTheme.phone_number_hotline}</a>
             </span>
           </div>
         </div>
-        <div className="topbar hidden-sm hidden-xs">
+        <div className="topbar hidden-sm hidden-xs" style={{ background: appTheme.headerBackgroudColor }}
+        >
           <div className="container">
             <div>
               <div className="row">
@@ -141,7 +145,7 @@ export default function Header() {
                         <div className="content a-center">
                           <div className="header_search search_form">
                             <form className="input-group search-bar search_form" action="https://dualeo-x.mysapo.net/search" method="get" role="search">
-                              <input type="search" name="query"  placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text" autoComplete="off" />
+                              <input type="search" name="query" placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text" autoComplete="off" />
                               <span className="input-group-btn">
                                 <button className="btn icon-fallback-text">
                                   <i className="fa fa-search" />
@@ -234,8 +238,10 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <nav>
-          <div className="container">
+        <nav style={{ background: appTheme.headerBackgroudColor }}
+        >
+          <div className="container"
+          >
             <div className="hidden-sm hidden-xs">
               <ul className="nav nav-left">
                 <li className="nav-item"><Link to={{
@@ -247,174 +253,57 @@ export default function Header() {
                   <Link to={{
                     pathname: "/danh-sach-san-pham",
                     state: { prevPath: window.location.pathname },
-                  }}  className="nav-link">Sản phẩm </Link>
+                  }} className="nav-link">Sản phẩm </Link>
 
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link  to={{
+                  <Link to={{
                     pathname: "/tin-tuc",
                     state: { prevPath: window.location.pathname },
                   }} className="nav-link">Tin tức     </Link>
 
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link  to={{
-                  pathname: "/ma-giam-gia",
-                  state: { prevPath: window.location.pathname },
+                  <Link to={{
+                    pathname: "/ma-giam-gia",
+                    state: { prevPath: window.location.pathname },
                   }} className="nav-link">Voucher     </Link>
 
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link  to={{
-                  pathname: "/combo-giam-gia",
-                  state: { prevPath: window.location.pathname },
+                  <Link to={{
+                    pathname: "/combo-giam-gia",
+                    state: { prevPath: window.location.pathname },
                   }} className="nav-link">Combo Giảm giá     </Link>
 
                 </li>
               </ul>
               <div className="menu-search f-right bbbbb">
                 <div className="header_search search_form">
-                  <form className="input-group search-bar search_form" method="get" role="search">
-                    <input type="search" name="query"  placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text auto-search" autoComplete="off" />
+                  <div className="input-group search-bar search_form"  onKeyDown={handleEnter}>
+                    <input type="search" name="query"
+                      value={searchValue}
+                      onChange={handleInputChange}
+
+                      placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text auto-search" autoComplete="off" />
                     <span className="input-group-btn">
-                      <button className="btn icon-fallback-text">
+                      <button className="btn icon-fallback-text" onClick={handleSearch}
+                      >
                         <i className="fa fa-search" />
                       </button>
                     </span>
-                  </form>
+                  </div>
                   <div id="search_suggestion">
                     <div id="search_top">
                       <div id="product_results" />
                       <div id="article_results" />
                     </div>
-                    <div id="search_bottom">
-                      <a className="show_more" href="#">Hiển thị tất cả kết quả cho "<span />"</a>
-                    </div>
+
                   </div>
                 </div>
               </div>
             </div>
-            <div className="hidden-lg hidden-md menu-offcanvas">
-              <div className="head-menu clearfix">
-                <ul className="list-inline">
-                  <li>
-                    <a href="account/login.html"><i className="fa fa-user" /> Đăng nhập</a>
-                  </li>
-                  <li><span>hoặc</span></li>
-                  <li><a href="account/register.html">Đăng ký</a>
-                  </li>
-                  <li className="li-search">
-                    <div className="header_search search_form">
-                      <form className="input-group search-bar search_form"  method="get" role="search">
-                        <input type="search" name="query"  placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text" autoComplete="off" />
-                        <span className="input-group-btn">
-                          <button className="btn icon-fallback-text">
-                            <i className="fa fa-search" />
-                          </button>
-                        </span>
-                      </form>
-                    </div>
-                  </li>
-                </ul>
-                <div className="menuclose"><i className="fa fa-times" /></div>
-              </div>
-              <ul id="nav-mobile" className="nav hidden-md hidden-lg">
-                <li className="h3">
-                  MENU
-                </li>
-                <li className="nav-item active"><a className="nav-link" href="index.html">Trang chủ</a></li>
-                <li className="nav-item ">
-                  <a href="collections/all.html" className="nav-link">Sản phẩm <i className="fa faa fa-angle-right" /></a>
-                  <ul className="dropdown-menu">
-                    <li className="dropdown-submenu nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Rau củ <i className="fa faa fa-angle-right" /></a>
-                      <ul className="dropdown-menu">
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Rau tươi</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Rau vườn</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Rau sạch</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Củ nhập khẩu</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="dropdown-submenu nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Hoa quả <i className="fa faa fa-angle-right" /></a>
-                      <ul className="dropdown-menu">
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Trái cây tươi</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Hoa quả sạch</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Hoa quả nhập khẩu</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="index.html">Hoa quả tươi</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="dropdown-submenu nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Thịt <i className="fa faa fa-angle-right" /></a>
-                      <ul className="dropdown-menu">
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Thị gà</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Thịt lượn</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Thịt bò</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Thịt vịt</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="dropdown-submenu nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Hải sản <i className="fa faa fa-angle-right" /></a>
-                      <ul className="dropdown-menu">
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Ngao</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Sò huyết</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Cua</a>
-                        </li>
-                        <li className="nav-item-lv3">
-                          <a className="nav-link" href="collections/all.html">Tôm</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nav-item "><a className="nav-link" href="gioi-thieu.html">Giới thiệu</a></li>
-                <li className="nav-item ">
-                  <a href="tin-tuc.html" className="nav-link">Tin tức <i className="fa faa fa-angle-right" /></a>
-                  <ul className="dropdown-menu">
-                    <li className="nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Tin mới</a>
-                    </li>
-                    <li className="nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Tin quốc tế</a>
-                    </li>
-                    <li className="nav-item-lv2">
-                      <a className="nav-link" href="collections/all.html">Tin trong nước</a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nav-item "><a className="nav-link" href="lien-he.html">Liên hệ</a></li>
-                <li className="nav-item "><a className="nav-link" href="chi-duong.html">Chỉ đường</a></li>
-              </ul>
-            </div>
+
           </div>
         </nav>
       </header>

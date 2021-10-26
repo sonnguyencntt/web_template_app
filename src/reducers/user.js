@@ -34,6 +34,10 @@ const initialState = {
     status: c.LOADING,
     list: [],
   },
+  awaitReview: {
+    status: c.LOADING,
+    list: [],
+  },
   badges: badges
     ? {
         ...JSON.parse(badges),
@@ -77,7 +81,6 @@ export function user(state = initialState, action) {
         },
       };
     case c.RESET_PASSWORD_SUCCESS:
-
       toast.success(" Đã khôi phục mật khẩu của bạn", {
         position: "top-right",
         autoClose: 1500,
@@ -136,6 +139,22 @@ export function user(state = initialState, action) {
           status: c.SUCCESS,
           current_page: action.current_page,
           list: action.data,
+        },
+      };
+    case c.GET_USER_AWAIT_REVIEW_SUCCESS:
+      return {
+        ...state,
+        awaitReview: {
+          status: c.SUCCESS,
+          current_page: action.current_page,
+          list: action.data,
+        },
+      };
+    case c.GET_USER_AWAIT_REVIEW_FAILURE:
+      return {
+        ...state,
+        awaitReview: {
+          status: c.FAILURE,
         },
       };
     case c.GET_USER_REVIEW_FAILURE:

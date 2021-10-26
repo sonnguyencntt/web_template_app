@@ -4,10 +4,10 @@ import { appActions } from "../../actions/appActions";
 import { userActions } from "../../actions/userActions";
 import { constants as c } from "../../constants";
 import { validURL } from "../../helper";
-// import HotlineContact from "./HotlineContact/HotlineContact";
+import HotlineContact from "../HotlineContact/HotlineContact_2";
 // import { ToastContainer } from "react-toastify";
 
-export default function Footer() {
+export default function Footer_2() {
   const dispatch = useDispatch();
   const [phone, setPhone] = useState("");
   const tokenInfo = useSelector(state => state.user.tokenInfo);
@@ -49,6 +49,8 @@ export default function Footer() {
   }
   return (
     <React.Fragment>
+            <HotlineContact />
+
       <footer className="footer">
         <div className="content">
           <div className="site-footer">

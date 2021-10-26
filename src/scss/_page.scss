@@ -12,18 +12,29 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
       .image {
-        width: 30px;
+        width: 35px !important;
         margin-right: 8px;
+        border-radius: 4px;
+        overflow: hidden;
         .img-container {
           width: 100%;
           padding-top: 100%;
         }
       }
       > a {
-        padding: 0.75em;
+        padding: 0.5em 0.75em;
         padding-left: 1em;
         display: flex;
         align-items: center;
+        div:last-of-type {
+          width: calc(100% - 55px);
+          max-height: 38px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       > a:hover {
         box-shadow: 0 0 4px 0 rgb(206, 206, 206);
@@ -41,6 +52,7 @@
     width: 100%;
     justify-content: space-between;
     height: min-content;
+    margin-bottom: 1em;
     h3 {
       font-size: 16px;
       line-height: 20px;
@@ -179,14 +191,14 @@
         .category-card {
           background: white;
           text-align: center;
-          padding-top: 0.5em;
           padding-bottom: 0.5em;
           width: 100%;
           border-radius: 0.25em;
+          overflow: hidden;
           .image {
             display: block;
             margin: auto;
-            width: calc(100% - 3em);
+            width: 100%;
             .img-container {
               width: 100%;
               padding-top: 100%;
@@ -195,13 +207,19 @@
           .title {
             margin-top: 0.5em;
             font-size: 15px;
-            line-height: 18px;
             height: 36px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            div {
+              width: 100%;
+              line-height: 18px;
+              max-height: 36px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
         }
         .category-card:hover {
@@ -216,18 +234,20 @@
   }
   .product-section,
   .blog-section {
-    padding: 1em;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-    background-color: white;
-    margin-top: 1em;
+    overflow-x: hidden;
     border-radius: 0.25em;
     h3 {
       color: $heading-color;
       font-size: 22px;
       font-weight: 400;
-      padding-left: 8px;
       padding-bottom: 16px;
+    }
+    .slick-slider {
+      overflow-x: hidden;
+    }
+    .slick-list {
+      padding: 0;
+      margin: 0 -8px;
     }
     .card-container {
       width: 20%;
@@ -246,34 +266,43 @@
       top: calc(50% - 20px);
     }
     .slick-next {
-      right: -8px;
+      right: 0;
     }
     .slick-prev {
-      left: -8px;
+      left: 0;
     }
   }
   .product-section {
+    padding-bottom: 0;
     .product-card {
       width: 100%;
       border: 1px solid $border-color;
     }
+    .card-container {
+      margin-bottom: 1em;
+    }
   }
   .blog-section {
+    background-color: transparent;
+    padding: 0;
+    h3 {
+      padding-left: 0;
+    }
     .blog-card {
       margin-bottom: 0.5em;
-      padding: 0.5em;
       min-height: 100%;
       width: 100%;
       border: 1px solid $border-color;
+      .content {
+        padding: 10px;
+      }
     }
   }
 }
 .breadcrumbs {
   width: 100%;
   padding: 15px 200px 15px 0;
-  margin: 0 0 30px;
   color: #6c6e79;
-  border-bottom: 1px solid #e2e5ef;
   font-size: 14px;
   font-weight: 400;
   display: flex;
@@ -1010,6 +1039,15 @@
         }
       }
     }
+    .data-loading {
+      border-radius: 0.25em;
+      overflow: hidden;
+      height: calc(100vh - 8.5em);
+      width: calc(100% - 250px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 .purchased-product-page {
@@ -1639,7 +1677,7 @@
         flex-wrap: wrap;
       }
       .card-container {
-        width: 25%;
+        width: 33.333%;
         padding-left: 4px;
         padding-right: 4px;
         min-height: 100%;
@@ -1648,11 +1686,27 @@
       }
       .blog-card {
         width: 100%;
-        padding: 0.5em;
         min-height: 100%;
         border: 1px solid $border-color;
         border-radius: 0.25em;
         overflow: hidden;
+        position: relative;
+        .content {
+          padding: 10px;
+        }
+        .date {
+          position: absolute;
+          top: 1em;
+          left: 0;
+          padding: 3px 6px;
+          background-color: #1e73be;
+          color: white;
+          text-align: center;
+          span {
+            font-family: "Merriweather", sans-serif;
+            font-size: 18px;
+          }
+        }
       }
     }
     .categories-column {
@@ -1686,6 +1740,15 @@
           font-size: 18px;
         }
       }
+    }
+    .data-loading {
+      border-radius: 0.25em;
+      overflow: hidden;
+      height: calc(100vh - 8.5em);
+      width: calc(100% - 256px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -4176,7 +4239,7 @@
     .home-banner {
       .discount-products .row,
       .categories-column .column {
-        height: calc(0.45 * 1140px - 0.45 * 440px + 140px - 45px);
+        height: calc(0.45 * 1140px - 0.45 * 440px + 185px - 45px);
       }
     }
   }

@@ -7,7 +7,7 @@ import Chat from "./components/Chat";
 import Footer from "./components/Footer";
 import Popup from "./components/Popup/Popup";
 import CartPage from "./pages/Cart/CartPage";
-import HomePage from "./pages/Home/HomePage";
+import HomePage from "./pages/Home/index.jsx";
 import NewsPage from "./pages/News/NewsPage";
 import ErrorPage from "./pages/Error/ErrorPage";
 import ReviewPage from "./pages/Review/ReviewPage";

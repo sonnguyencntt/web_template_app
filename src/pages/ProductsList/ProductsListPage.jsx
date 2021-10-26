@@ -12,6 +12,7 @@ import { productActions as a } from "../../actions/productActions";
 function ProductsListPage(props) {
   const dispatch = useDispatch();
   let query = queryString.parse(props.location.search);
+
   const pageInfo = useSelector(state => state.product.list);
   const [prevLocation, setPrevLocation] = useState(props.location.state);
   const [currentQuery, setCurrentQuery] = useState(createQueryString(query));
@@ -23,9 +24,7 @@ function ProductsListPage(props) {
           let arr = option[keys[i]].split("-");
           let id = arr[arr.length - 1];
           query["category_ids"] = id;
-        }
-        else
-          query[keys[i]] = option[keys[i]];
+        } else query[keys[i]] = option[keys[i]];
       }
     }
     let queryKeys = [...Object.keys(query)];
@@ -45,20 +44,24 @@ function ProductsListPage(props) {
   useEffect(() => {
     document.title = "Danh sách sản phẩm";
     let queryStr = createQueryString(query);
-    if ((queryStr !== currentQuery || prevLocation !== window.location.pathname)) {
+    if (
+      queryStr !== currentQuery ||
+      prevLocation !== window.location.pathname
+    ) {
       dispatch({ type: c.RESET_PRODUCTS_LIST_STATUS });
       setCurrentQuery(queryStr);
       setPrevLocation(window.location.pathname);
-    } else
-      if (pageInfo.status === c.LOADING) {
-        dispatch(a.getAllProducts(queryStr));
-      }
+    } else if (pageInfo.status === c.LOADING) {
+      dispatch(a.getAllProducts(queryStr));
+    }
   }, [props.location.search, pageInfo]);
+
   return (
     <React.Fragment>
       <Header />
       <div className="products-list-page container">
         <div className="mobile-tool mobile">
+
           <span>
             Có {pageInfo.total} sản phẩm
           </span>
@@ -70,17 +73,20 @@ function ProductsListPage(props) {
               {
                 title: "Giá tiền: Tăng dần",
                 sort_by: "price",
+
                 descending: "false"
               },
               {
                 title: "Giá tiền: Giảm dần",
                 sort_by: "price",
+
                 descending: "true"
               }
             ]}
           />
         </div>
         <div className="row">
+
           <CategoryColumn />
           {
             pageInfo.status === c.SUCCESS
@@ -93,4 +99,4 @@ function ProductsListPage(props) {
     </React.Fragment>
   )
 }
-export default ProductsListPage
+export default ProductsListPage;

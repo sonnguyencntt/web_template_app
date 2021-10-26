@@ -7,7 +7,7 @@ import { constants } from "../../../constants";
 import Select from "../../../components/Select";
 import { hideParentElement } from "../../../helper";
 import { appActions as a } from "../../../actions/appActions";
-
+import { Link } from "react-router-dom";
 export default function OrderInfo(props) {
   const dispatch = useDispatch();
   const {
@@ -368,7 +368,14 @@ export default function OrderInfo(props) {
               </label>
             </>
           ) : (
-            <a href="/dia-chi">Thêm địa chỉ</a>
+
+            <Link to="dia-chi" to={{pathname:"dia-chi",fromCart: true }}>   <span
+                style={{ color: "blue", cursor: "pointer", fontSize:14 }}
+            >
+
+                Thêm địa chỉ
+              </span></Link>
+           
           )}
         </div>
         <div className="voucher-input" style={{ position: "relative" }}>

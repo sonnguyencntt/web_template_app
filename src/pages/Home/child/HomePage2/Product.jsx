@@ -57,8 +57,8 @@ export default function HomeBanner(props) {
                     <div className="row row-noGutter">
                       <div className="col-sm-12">
                         <div className="content">
-                          <div className="section-title">
-                            <h2>{props.title}</h2>
+                          <div className="section-title" >
+                            <h2 style={{backgroundColor:appTheme.color_main_1}}>{props.title}</h2>
                           </div>
                           <div>
                             <div className="">

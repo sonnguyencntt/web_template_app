@@ -100,7 +100,7 @@ export default function Header_2() {
     <React.Fragment>
       <header className="header" id="template-1"
       >
-        <div className="topbar-mobile hidden-lg hidden-md text-center text-md-left" style={{ background: appTheme.headerBackgroudColor }}
+        <div className="topbar-mobile hidden-lg hidden-md text-center text-md-left" style={{ background: appTheme.color_main_1 }}
 
         >
           <div className="container container-template-2">
@@ -110,7 +110,7 @@ export default function Header_2() {
             </span>
           </div>
         </div>
-        <div className="topbar hidden-sm hidden-xs" style={{ background: appTheme.headerBackgroudColor }}
+        <div className="topbar hidden-sm hidden-xs" style={{ background: appTheme.color_main_1 }}
         >
           <div className="container">
             <div>
@@ -238,7 +238,7 @@ export default function Header_2() {
             </div>
           </div>
         </div>
-        <nav style={{ background: appTheme.headerBackgroudColor }}
+        <nav style={{ background: appTheme.color_main_1 }}
         >
           <div className="container"
           >

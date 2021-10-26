@@ -1,8 +1,10 @@
 // import BlogCard from "../../../components/BlogCard";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Slider from "react-slick";
 export default function Blog(props) {
+  const appTheme = useSelector((state) => state.app.appTheme);
   var settings = {
     infinite: false,
     slidesToShow: 3,
@@ -110,9 +112,9 @@ export default function Blog(props) {
     <section className="awe-section-8" id="awe-section-8">
       <div className="section section_blog">
         <div className="container">
-          <div className="section-title a-center">
-            <h2>
-              <Link title="Tin cập nhật" to="/tin-tuc">
+          <div className="section-title a-center" >
+            <h2 >
+              <Link title="Tin cập nhật" to="/tin-tuc" style={{backgroundColor:appTheme.color_main_1}}>
                 Tin cập nhật
               </Link>
             </h2>

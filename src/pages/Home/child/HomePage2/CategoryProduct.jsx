@@ -42,8 +42,8 @@ export default function HomeBanner(props) {
             </div>
             <div className="col-md-3 col-md-pull-9 mt-5 hidden-xs aside-vetical-menu">
               <aside className="blog-aside aside-item sidebar-category">
-                <div className="aside-title text-center text-xl-left">
-                  <h2 className="title-head">
+                <div className="aside-title text-center text-xl-left" style={{backgroundColor:appTheme.color_main_1}}>
+                  <h2 className="title-head" >
                     <span>Danh mục</span>
                   </h2>
                 </div>

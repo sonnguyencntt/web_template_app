@@ -24,9 +24,18 @@ export default function BlogCard(props) {
           {props.date ? props.date.split(" ")[0] : ""}
         </div>
         <div className="line"></div>
-        <div className="blog-quote" dangerouslySetInnerHTML={{ __html: props.quote }}>
+       {/* {extractContent(props.quote)} */}
+        <div className="blog-quote"
+      
+         dangerouslySetInnerHTML={{ __html: extractContent(props.quote) }}>
         </div>
       </div>
     </div>
   )
+
+  function extractContent(s) {
+    var span = document.createElement('span');
+    span.innerHTML = s;
+    return span.textContent || span.innerText;
+  };
 }

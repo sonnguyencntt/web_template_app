@@ -1183,10 +1183,8 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #646464;
-    font-family: "Merriweather", sans-serif !important; }
-    .blog-card .blog-quote p {
-      font-family: "Merriweather", sans-serif !important; }
+    color: #646464; }
+    .blog-card .blog-quote p {}
 
 .blog-card:hover {
   box-shadow: 0 0 6px 0 #afafaf;

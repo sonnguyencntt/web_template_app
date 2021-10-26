@@ -1,5 +1,7 @@
 import AddressCard from "./AddressCard";
+import { Link } from "react-router-dom";
 export default function AddressPopup(props) {
+
   return (
     <div className="address-popup">
       <button onClick={props.handleClosePopup}>
@@ -23,6 +25,13 @@ export default function AddressPopup(props) {
           )
         }
       </div>
+        <br />
+        <Link to="dia-chi" to={{pathname:"dia-chi",fromCart: true }}>   <span
+                style={{ color: "blue", cursor: "pointer" }}
+            >
+
+                Thêm địa chỉ
+              </span></Link>
     </div>
   )
 }

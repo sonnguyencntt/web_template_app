@@ -4,6 +4,7 @@ import { appActions as a } from "../../../actions/appActions";
 import { constants as c } from "../../../constants";
 import { useState } from "react";
 import { useEffect } from "react";
+
 export default function AddressForm(props) {
   const { customClass, currentAddress } = props;
   const dispatch = useDispatch();

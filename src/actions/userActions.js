@@ -143,8 +143,10 @@ function addUserAddress(addressInfo) {
     });
   };
   function success() {
+  
     return {
       type: c.ADD_USER_ADDRESS_SUCCESS,
+      fromCart:addressInfo.fromCart,
       message: "Thêm địa chỉ giao hàng thành công",
     };
   }

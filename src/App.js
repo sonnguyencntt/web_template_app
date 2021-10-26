@@ -62,7 +62,7 @@ function App() {
           <Route path="/gio-hang" component={CartPage} />
           <Route path="/tin-tuc/:id" component={NewsPage} />
           <Route path="/tin-tuc" component={NewsListPage} />
-          <Route path="/dia-chi" component={AddressPage} />
+          <Route path="/dia-chi" name="dia-chi" component={AddressPage} handler={AddressPage}/>
           <Route path="/tai-khoan" component={AccountPage} />
           <Route path="/danh-muc" component={CategoriesPage} />
           <Route path="/don-hang/:id" component={OrderInfoPage} />

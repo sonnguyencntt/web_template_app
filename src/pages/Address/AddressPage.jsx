@@ -7,17 +7,25 @@ import { constants as c } from "../../constants";
 import { appActions } from "../../actions/appActions";
 import PageLoading from "../../components/PageLoading";
 import { userActions } from "../../actions/userActions";
-function AddressPage() {
+function AddressPage(props) {
   const myForm = useRef(null);
   const dispatch = useDispatch();
   const [formClass, setFormClass] = useState("");
   const [currentAddress, setCurrentAddress] = useState(null);
-  const userAddress = useSelector(state => state.user.address);
+  const userAddress = useSelector((state) => state.user.address);
+  const [initShowed, setInitShowed] = useState(false);
+
   useEffect(() => {
     document.title = "Địa chỉ nhận hàng";
+
+    if (initShowed == false && props.location.fromCart) {
+      setInitShowed(true);
+      handleShowForm(null);
+    }
+
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
     if (userAddress.status === c.LOADING) {
       dispatch(userActions.getUserAddress());
@@ -35,13 +43,13 @@ function AddressPage() {
       setCurrentAddress(null);
     }
     setFormClass("active");
-  };
+  }
   function handleCloseForm() {
     setFormClass("");
   }
   function handleAddAddress(info) {
     console.log(info);
-    dispatch(userActions.addUserAddress(info));
+    dispatch(userActions.addUserAddress({...info, fromCart:props.location.fromCart}));
   }
   function handleUpdateAddress(info) {
     console.log(info);
@@ -52,60 +60,61 @@ function AddressPage() {
     dispatch(userActions.deleteUserAddress(id));
   }
   function setDefault(index) {
-    dispatch(userActions.setAddressDefault({
-      ...userAddress.list[index],
-      is_default: true
-    }));
+    dispatch(
+      userActions.setAddressDefault({
+        ...userAddress.list[index],
+        is_default: true,
+      })
+    );
   }
   return (
     <React.Fragment>
       <Header />
-      {
-        userAddress.status === c.SUCCESS ?
-          <div className="address-page container">
-            {
-              userAddress.list.map((v, i) =>
-                <AddressCard
-                  key={i}
-                  id={v.id}
-                  name={v.name}
-                  email={v.email}
-                  detail={v.address_detail}
-                  handleEdit={handleShowForm}
-                  isDefault={v.is_default}
-                  province={v.province}
-                  provinceName={v.province_name}
-                  district={v.district}
-                  districtName={v.district_name}
-                  ward={v.wards}
-                  wardName={v.wards_name}
-                  phone={v.phone}
-                  handleDelete={handleDeleteAddress}
-                  setDefault={() => setDefault(i)}
-                />
-              )
-            }
-            <div style={{ fontSize: "14px" }}>
-              Giao đến địa chỉ khác ?
-              <span
-                style={{ color: "blue", cursor: "pointer" }}
-                onClick={() => handleShowForm(null)}>
-                Thêm địa chỉ
-              </span>
-            </div>
-            <div ref={myForm}>
-              <AddressForm
-                currentAddress={currentAddress}
-                customClass={formClass}
-                handleClose={handleCloseForm}
-                handleAddAddress={handleAddAddress}
-                handleUpdateAddress={handleUpdateAddress}
-              />
-            </div>
+      {userAddress.status === c.SUCCESS ? (
+        <div className="address-page container">
+          {userAddress.list.map((v, i) => (
+            <AddressCard
+              key={i}
+              id={v.id}
+              name={v.name}
+              email={v.email}
+              detail={v.address_detail}
+              handleEdit={handleShowForm}
+              isDefault={v.is_default}
+              province={v.province}
+              provinceName={v.province_name}
+              district={v.district}
+              districtName={v.district_name}
+              ward={v.wards}
+              wardName={v.wards_name}
+              phone={v.phone}
+              handleDelete={handleDeleteAddress}
+              setDefault={() => setDefault(i)}
+            />
+          ))}
+          <div style={{ fontSize: "14px" }}>
+            Giao đến địa chỉ khác ?
+            <span
+              style={{ color: "blue", cursor: "pointer" }}
+              onClick={() => handleShowForm(null)}
+            >
+              Thêm địa chỉ
+            </span>
           </div>
-          : <PageLoading />
-      }
+          <div ref={myForm}>
+            <AddressForm
+              currentAddress={currentAddress}
+              customClass={formClass}
+              handleClose={handleCloseForm}
+              handleAddAddress={handleAddAddress}
+              handleUpdateAddress={handleUpdateAddress}
+            />
+          </div>
+        </div>
+      ) : (
+        <PageLoading />
+      )}
     </React.Fragment>
-  )
+  );
 }
-export default AddressPage
+export default AddressPage;

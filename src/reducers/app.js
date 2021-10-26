@@ -160,6 +160,7 @@ export function app(state = initialState, action) {
         ...state,
         messagePopup: {
           message: action.message,
+          fromCart:action.fromCart,
           status: c.SUCCESS,
           willReload: true,
         },

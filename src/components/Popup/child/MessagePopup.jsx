@@ -7,6 +7,11 @@ export default function MessagePopup() {
   const appTheme = useSelector(state => state.app.appTheme);
   const dispatch = useDispatch();
   function handleConfirm() {
+    if (messagePopup.fromCart) {
+      window.location.href = "/gio-hang";
+
+      return;
+    }
     if (messagePopup.willReload) {
       window.location.reload();
       return;

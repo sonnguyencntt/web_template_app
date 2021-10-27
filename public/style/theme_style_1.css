@@ -487,13 +487,19 @@
 }
 
 .footer-mobile {
-  position: sticky;
-  left: 0;
-  bottom: 0;
-  background: white;
-  z-index: 4;
-  height: 3em;
-}
+  display: flex;
+  align-items: center;
+  justify-content: space-around; }
+.chat {
+  bottom: 3em;
+  right: 0; } 
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+.footer .container {
+  flex-direction: column; }
+  .footer .container > div:last-of-type {
+    width: 100%;
+    justify-content: space-between; } }
 
 .footer-mobile .footer-icon {
   width: 80px;

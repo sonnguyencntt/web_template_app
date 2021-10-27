@@ -20,9 +20,15 @@ export default function NewsCard(props) {
         <div className="title">
           {props.title}
         </div>
-        <div className="quote" dangerouslySetInnerHTML={{ __html: props.content }}>
+        <div className="quote" dangerouslySetInnerHTML={{ __html: extractContent(props.content) }}>
         </div>
       </div>
     </div>
   )
+
+  function extractContent(s) {
+    var span = document.createElement('span');
+    span.innerHTML = s;
+    return span.textContent || span.innerText;
+  };
 }

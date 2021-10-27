@@ -5,8 +5,7 @@ import { userActions } from "../../actions/userActions";
 import { constants as c } from "../../constants";
 import { validURL } from "../../helper";
 import HotlineContact from "../HotlineContact/HotlineContact";
-import { ToastContainer } from "react-toastify";
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 
 
 export default function Footer1() {
@@ -51,17 +50,9 @@ export default function Footer1() {
   }
   return (
     <React.Fragment>
-      <ToastContainer />
+     
       <HotlineContact />
-      {tokenInfo != null ? (
-        ""
-      ) : (
-        <MessengerCustomerChat
-          pageId={appTheme.id_facebook ?? "633385377094079"}
-          appId="394449898190174"
-          //  htmlRef="<REF_STRING>"
-        />
-      )}
+   
       <div className="top-footer">
         <div className="container row">
           <div

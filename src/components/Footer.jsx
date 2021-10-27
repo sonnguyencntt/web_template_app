@@ -14,7 +14,7 @@ export default function Footer() {
         ""
       ) : (
         <MessengerCustomerChat
-          pageId={appTheme.id_facebook ?? "633385377094079"}
+          pageId={appTheme != null && appTheme.id_facebook != null ? appTheme.id_facebook : "633385377094079"}
           appId="394449898190174"
           //  htmlRef="<REF_STRING>"
         />

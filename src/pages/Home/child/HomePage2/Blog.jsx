@@ -49,7 +49,7 @@ export default function Blog(props) {
                     <Link
                       to={
                         v.title
-                          ? `/tin-tuc/${v.title.replace(/\s/g, "-")}-${
+                          ? `/tin-tuc/${v.title.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "-")}-${
                               v.id
                             }`
                           : `/tin-tuc/${v.id}`
@@ -87,7 +87,7 @@ export default function Blog(props) {
                     }}
                       to={
                         v.title
-                          ? `/tin-tuc/${v.title.replace(/\s/g, "-")}-${
+                          ? `/tin-tuc/${v.title.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "-")}-${
                               v.id
                             }`
                           : `/tin-tuc/${v.id}`

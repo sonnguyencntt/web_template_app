@@ -9,7 +9,7 @@ export default function BlogCard(props) {
   return (
     <div className="blog-card" onClick={handleClick}>
       <div style={{ display: "none" }}>
-        <Link ref={myLink} to={props.title ? `/tin-tuc/${props.title.replace(/\s/g, '-')}-${props.id}` : `/tin-tuc/${props.id}`} />
+        <Link ref={myLink} to={props.title ? `/tin-tuc/${props.title.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, '-')}-${props.id}` : `/tin-tuc/${props.id}`} />
       </div>
       <div className="image">
         <div className="img-container">

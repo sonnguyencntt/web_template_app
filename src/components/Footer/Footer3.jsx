@@ -4,7 +4,7 @@ import { appActions } from "../../actions/appActions";
 import { userActions } from "../../actions/userActions";
 import { constants as c } from "../../constants";
 import { validURL } from "../../helper";
-import HotlineContact from "../HotlineContact/HotlineContact2";
+import HotlineContact from "../HotlineContact/HotlineContact3";
 // import { ToastContainer } from "react-toastify";
 
 export default function Footer2() {
@@ -49,49 +49,52 @@ export default function Footer2() {
   return (
     <React.Fragment>
       <HotlineContact />
+      <div className="footer">
+        <div className="first-footer d-flex">
+          <div className="container ">
+            <div className="row">
+            <div className="col-lg-4 col-md-6 col-12 mr-991 col-contact-footer">
+                <h4 className="title-menu">
+                  <span>
+                    Liên hệ với chúng tôi{" "}
+                    <i className="fa fa-plus hidden" aria-hidden="true" />
+                  </span>
+                </h4>
+                <ul>
+                  <li>
+                    <strong>Địa chỉ:</strong> {appTheme.contact_address}
+                  </li>
+                  <li>
+                    <strong>Điện thoại:</strong>{" "}
+                    <a className="fone" href={appTheme.phone_number_hotline}>
+                      {appTheme.phone_number_hotline}
+                    </a>
+                  </li>
+                  <li>
+                    <strong>Email:</strong>{" "}
+                    <a
+                      href={`mailto:${appTheme.contact_email}
+`}
+                    >
+                      {" "}
+                      {appTheme.contact_email}
+                    </a>
+                  </li>
+                  <li>
+                    <strong>Thời gian làm việc:</strong>{" "}
+                    <a>{appTheme.contact_time_work} </a>
+                  </li>
+                </ul>
+              </div>
 
-      <footer className="footer">
-        <div className="content">
-          <div className="site-footer">
-            <div className="footer-inner padding-top-35 pb-lg-5">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6 col-lg-4">
-                    <div className="footer-widget">
-                      <h3 className="hastog">
-                        <span>Liên hệ</span>
-                      </h3>
-                      <ul className="list-menu list-showroom">
-                        <li className="clearfix">
-                          <i className="block_icon fa fa-map-marker" />
-                          <p>{appTheme.contact_address}</p>
-                        </li>
-                        <li className="clearfix">
-                          <i className="block_icon fa fa-phone" />
-                          <a href="tel:0912117494">
-                            {" "}
-                            {appTheme.phone_number_hotline}
-                          </a>
-                          <p>Thứ 2 - Chủ nhật: 9:00 - 18:00</p>
-                        </li>
-                        <li className="clearfix">
-                          <i className="block_icon fa fa-envelope" />
-                          <a
-                            title="Dualeotheme@gmail.com"
-                            href="mailto:Dualeotheme@gmail.com"
-                          >
-                            {appTheme.contact_email}
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-6 col-lg-4">
-                    <div className="footer-widget">
-                      <h3 className="hastog">
-                        <span>Về chúng tôi</span>
-                      </h3>
-                      <ul className="list-menu list-blogs">
+              <div className="col-lg-4 col-md-6 col-12 mr-991 col-contact-footer">
+                <h4 className="title-menu">
+                  <span>
+                    Vè chúng tôi {" "}
+                    <i className="fa fa-plus hidden" aria-hidden="true" />
+                  </span>
+                </h4>
+                <ul className="list-menu list-blogs">
                         <li>
                           {" "}
                           <a
@@ -137,14 +140,15 @@ export default function Footer2() {
                           Tham gia
                         </li>
                       </ul>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-6 col-lg-4">
-                    <div className="footer-widget">
-                      <h3 className="hastog">
-                        <span> Tài khoản của tôi</span>
-                      </h3>
-                      <ul className="list-menu list-blogs">
+              </div>
+              <div className="col-lg-4 col-md-6 col-12 mr-991 col-contact-footer">
+                <h4 className="title-menu">
+                  <span>
+                   Tài khoản của tôi
+                    <i className="fa fa-plus hidden" aria-hidden="true" />
+                  </span>
+                </h4>
+                <ul className="list-menu list-blogs">
                         {tokenInfo ? (
                           <li>
                             <a onClick={handleLogout}>Thoát tài khoản</a>
@@ -167,14 +171,25 @@ export default function Footer2() {
                           </a>
                         </li>
                       </ul>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
-      </footer>
+        <div
+        className="text-center"
+        style={{
+          textAlign: "center",
+          color: "#f2f3f8",
+          paddingBottom: "10px",
+          fontSize: "13px",
+        }}
+      >
+        Design by{" "}
+        <a href="https://doapp.vn" style={{ color: "#f2f3f8" }}>
+          DOAPP.VN
+        </a>
+      </div>
+      </div>
     </React.Fragment>
   );
 }

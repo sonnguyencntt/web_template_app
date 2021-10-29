@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";

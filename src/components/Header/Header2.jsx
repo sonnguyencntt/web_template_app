@@ -103,12 +103,20 @@ export default function Header_2() {
         <div className="topbar-mobile hidden-lg hidden-md text-center text-md-left" style={{ background: appTheme.color_main_1 }}
 
         >
+                  {appTheme == null ||
+        appTheme.phone_number_hotline == null ||
+        appTheme.phone_number_hotline === "" ||
+        appTheme.is_show_icon_hotline === false ? (
+          ""
+        ) : (
           <div className="container container-template-2">
-            Hotline:
-            <span>
-              <a href="tel:0912117494">{appTheme.phone_number_hotline}</a>
-            </span>
-          </div>
+          Hotline:
+          <span>
+            <a href="tel:0912117494">{appTheme.phone_number_hotline }</a>
+          </span>
+        </div>
+        )}
+      
         </div>
         <div className="topbar hidden-sm hidden-xs" style={{ background: appTheme.color_main_1 }}
         >
@@ -193,7 +201,15 @@ export default function Header_2() {
                     </a>
                     <div className="info a-left">
                       <a title="Hỗ trợ 24/7" href="#">Hỗ trợ 24/7</a>
-                      <p>Hotline: <a href="callto:19001009"> {appTheme.phone_number_hotline}</a></p>
+                      {appTheme == null ||
+        appTheme.phone_number_hotline == null ||
+        appTheme.phone_number_hotline === "" ||
+        appTheme.is_show_icon_hotline === false ? (
+          ""
+        ) : (
+          <p>Hotline: <a href="callto:19001009"> {appTheme.phone_number_hotline}</a></p>
+
+        )}
                     </div>
                   </div>
                   <div className="item-policy d-flex align-items-center">

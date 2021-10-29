@@ -8,14 +8,20 @@ import ListProduct from "./child/ListProducts";
 import { showNextElement } from "../../helper";
 import { constants as c } from "../../constants";
 import CategoryColumn from "./child/CategoryColumn";
+import CategoryColumn2 from "./child/CategoryColumn2";
+
 import { productActions as a } from "../../actions/productActions";
 function ProductsListPage(props) {
+
+  const appTheme = useSelector((state) => state.app.appTheme.home_page_type);
+
   const dispatch = useDispatch();
   let query = queryString.parse(props.location.search);
 
   const pageInfo = useSelector(state => state.product.list);
   const [prevLocation, setPrevLocation] = useState(props.location.state);
   const [currentQuery, setCurrentQuery] = useState(createQueryString(query));
+  
   function createQueryString(option) {
     let keys = [...Object.keys(option)];
     for (let i = 0; i < keys.length; i++) {
@@ -87,8 +93,8 @@ function ProductsListPage(props) {
         </div>
         <div className="row">
 
-          <CategoryColumn />
-          {
+        {       appTheme == 1 || appTheme == null ? <CategoryColumn/> : appTheme == 2 ? <CategoryColumn2/> : <CategoryColumn/>
+}          {
             pageInfo.status === c.SUCCESS
               ?
               <ListProduct location={props.location} />

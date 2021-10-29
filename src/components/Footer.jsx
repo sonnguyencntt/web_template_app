@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer1 from "./Footer/Footer1";
 import Footer2 from "./Footer/Footer2";
+import Footer3 from "./Footer/Footer3";
+
 import { ToastContainer } from "react-toastify";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 export default function Footer() {
@@ -19,7 +21,8 @@ export default function Footer() {
           //  htmlRef="<REF_STRING>"
         />
       )}
-      {appTheme == 1 ? <Footer1 /> : appTheme == 2 ? <Footer2 /> : <Footer1 />}
+      {       appTheme == 1 || appTheme == null ? <Footer1/> : appTheme == 2 ? <Footer2/> : <Footer3/>
+}
     </React.Fragment>
   );
 }

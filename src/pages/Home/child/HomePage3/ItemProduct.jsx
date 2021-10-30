@@ -81,14 +81,14 @@ export default function ItemProduct(props) {
                             </span>
 
                             <span
-                              class={`"old-price ${
+                              class={`old-price ${
                                 product_discount == null ||
                                 product_discount == 0
                                   ? "hide"
-                                  : "show"
+                                  : ""
                               }`}
                             >
-                              ₫{formatPriceOrContact(discount)}
+                              {"  "}₫{formatPriceOrContact(discount)}
                             </span>
                           </div>
                         </div>

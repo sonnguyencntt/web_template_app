@@ -628,7 +628,13 @@ progress {
     flex: 0 0 auto;
     width: 100%
 }
-
+.product-block-item .product-info .product__price .old-price {
+    text-decoration: line-through;
+    font-size: 13px;
+    color: #999;
+    margin-left: 5px;
+    font-weight: normal;
+}
 .row-cols-2>* {
     flex: 0 0 auto;
     width: 50%

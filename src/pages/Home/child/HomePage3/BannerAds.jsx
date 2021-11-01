@@ -7,7 +7,7 @@ export default function HomeBanner(props) {
   const { banners, discountProducts } = props;
   var bannerSettings = {
     infinite: false,
-    slidesToShow: 2,
+    slidesToShow: banners.length > 3 ? 3 : banners.length  ,
     slidesToScroll: 1,
 
   };
@@ -24,10 +24,10 @@ export default function HomeBanner(props) {
         <div className="banner-swiper swiper-container">
           <Slider {...bannerSettings}>
               {banners.map((v, i) => (
-                  <div className="swiper-slide">
-                  <a href="#" className="clearfix" title="ND Fresh">
+                  <div className="swiper-slide banner-slide">
+                  <a href = {v.link_to == null ? "#" : v.link_to }  className="clearfix" title="ND Fresh">
                       <img
-                      style = {{width : "100%" ,height : "200px" , objectFit : "cover"}}
+                      style = {{width : "100%" ,height : "150px" , objectFit : "cover"}}
                       src={v.image_url}
                       alt="ND Fresh"
                         className="img-responsive center-block d-block mx-auto"

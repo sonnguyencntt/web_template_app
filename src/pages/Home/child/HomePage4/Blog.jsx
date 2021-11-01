@@ -14,10 +14,10 @@ export default function Blog(props) {
   };
 
   function extractContent(s) {
-    var span = document.createElement('span');
+    var span = document.createElement("span");
     span.innerHTML = s;
     return span.textContent || span.innerText;
-  };
+  }
 
   function showBlog() {
     var array = [];
@@ -35,7 +35,11 @@ export default function Blog(props) {
                 }
               >
                 <img
-                  style={{ maxHeight: "190px" , width : "100%" , objectFit : "cover" }}
+                  style={{
+                    maxHeight: "190px",
+                    width: "100%",
+                    objectFit: "cover",
+                  }}
                   src={v.image_url}
                   className="lazyload img-responsive"
                 />
@@ -43,11 +47,11 @@ export default function Blog(props) {
               <div className="content_blog clearfix">
                 <div className="toparticle">
                   <span>{v.created_at ? v.created_at.split(" ")[0] : ""}</span>
-                  &nbsp;-&nbsp;
+                  &nbsp;&nbsp;
                 </div>
                 <h3>
                   <Link
-                  className = "a-title"
+                    className="a-title"
                     to={
                       v.title
                         ? `/tin-tuc/${v.title.replace(/\s/g, "-")}-${v.id}`
@@ -59,6 +63,13 @@ export default function Blog(props) {
                 </h3>
                 <div
                   className="blog-quote"
+                  style={{
+                    display: "-webkit-box",
+                    "-webkit-line-clamp": "3",
+
+                    overflow: "hidden",
+                    "-webkit-box-orient": "vertical",
+                  }}
                   dangerouslySetInnerHTML={{
                     __html: extractContent(v.content),
                   }}
@@ -95,43 +106,63 @@ export default function Blog(props) {
                   }
                 >
                   <img
-                    style={{ width: "610px" , height : "458px" , objectFit : "cover" }}
+                    style={{
+                      width: "610px",
+                      height: "458px",
+                      objectFit: "cover",
+                    }}
                     src={posts.image_url}
                     className="lazyload img-responsive"
                   />
                 </Link>
                 <div className="content_blog clearfix">
                   <div className="toparticle">
-                    <span>{posts.created_at ? posts.created_at.split(" ")[0] : ""}</span>
-                    &nbsp;-&nbsp;<span></span>
+                    <span>
+                      {posts.created_at ? posts.created_at.split(" ")[0] : ""}
+                    </span>
+                    &nbsp;&nbsp;<span></span>
                   </div>
                   <h3>
                     <Link
-                                     className = "a-title"
-                                     to={
-                                      posts.title
-                                        ? `/tin-tuc/${posts.title.replace(/\s/g, "-")}-${posts.id}`
-                                        : `/tin-tuc/${posts.id}`
-                                    }
-
+                      className="a-title"
+                      to={
+                        posts.title
+                          ? `/tin-tuc/${posts.title.replace(/\s/g, "-")}-${
+                              posts.id
+                            }`
+                          : `/tin-tuc/${posts.id}`
+                      }
                     >
                       {posts.title}
                     </Link>
                   </h3>
                   <div
-                  className="blog-quote"
-                  dangerouslySetInnerHTML={{
-                    __html: extractContent(posts.content),
-                  }}
-                ></div>                </div>
+                    className="blog-quote"
+                    style = {{
+                      display: "-webkit-box",
+                      "-webkit-line-clamp": "2",
+  
+                      overflow: "hidden",
+                      "-webkit-box-orient": "vertical",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: extractContent(posts.content),
+                    }}
+                  ></div>{" "}
+                </div>
               </div>
             </div>
             <div className="col-lg-6 col-12">
-              <div className="wraplog" style ={{
-                    "max-height": "550px",
-    
-                        overflow: "auto"
-              }}>{showBlog()}</div>
+              <div
+                className="wraplog"
+                style={{
+                  "max-height": "550px",
+
+                  overflow: "auto",
+                }}
+              >
+                {showBlog()}
+              </div>
             </div>
           </div>
         </div>

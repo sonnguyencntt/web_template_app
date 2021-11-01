@@ -56,8 +56,7 @@ export default function Blog(props) {
 
                       overflow: "hidden",
                       "-webkit-box-orient": "vertical",
-                      height: "80px"
-
+                      height: "80px",
                     }}
                     dangerouslySetInnerHTML={{ __html: v.content }}
                   ></div>

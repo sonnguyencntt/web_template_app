@@ -42,7 +42,9 @@
         align-items: center;
         flex-direction: column;
 }
-
+.banner-slide{
+    padding : 0px 6px
+}
 html {
     font-family: sans-serif;
     line-height: 1.15;

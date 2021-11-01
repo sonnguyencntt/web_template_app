@@ -1,4 +1,3 @@
-import "./contact.css";
 import React from "react";
 import { useSelector } from "react-redux";
 export default function HotlineContact(props) {
@@ -6,19 +5,17 @@ export default function HotlineContact(props) {
 
   return (
     <div className="addThis_listSharing addThis_listing is-show">
-
-
-{appTheme == null ||
-        appTheme.phone_number_hotline == null ||
-        appTheme.phone_number_hotline === "" ||
-        appTheme.is_show_icon_hotline === false ? (
-          ""
-        ) : (
-          <div className="addThis_item">
+      {appTheme == null ||
+      appTheme.phone_number_hotline == null ||
+      appTheme.phone_number_hotline === "" ||
+      appTheme.is_show_icon_hotline === false ? (
+        ""
+      ) : (
+        <div className="addThis_item">
           <a
             className="addThis_item-icon"
             href={"tel:" + appTheme.phone_number_hotline}
-                       rel="nofollow"
+            rel="nofollow"
             aria-label="phone"
             title="Gọi ngay cho chúng tôi"
           >
@@ -53,17 +50,15 @@ export default function HotlineContact(props) {
             <span className="tooltip-text">Gọi ngay cho chúng tôi</span>
           </a>
         </div>
-        )}
+      )}
 
-
-        
-{appTheme == null ||
-        appTheme.id_zalo == null ||
-        appTheme.id_zalo === "" ||
-        appTheme.is_show_icon_zalo === false ? (
-          ""
-        ) : (
-          <div className="addThis_item">
+      {appTheme == null ||
+      appTheme.id_zalo == null ||
+      appTheme.id_zalo === "" ||
+      appTheme.is_show_icon_zalo === false ? (
+        ""
+      ) : (
+        <div className="addThis_item">
           <a
             className="addThis_item-icon"
             href={"https://zalo.me/" + appTheme.id_zalo}
@@ -125,24 +120,24 @@ export default function HotlineContact(props) {
             <span className="tooltip-text">Chat với chúng tôi qua Zalo</span>
           </a>
         </div>
-        )}
+      )}
 
-   
-  
-    <div className="addThis_item">
-      <a
-        className="addThis_item-icon"
-        href="mailto:support@sapo.vn"
-        aria-label="email"
-        title="Gửi Tin nhắn cho chúng tôi"
-      >
+      <div className="addThis_item">
+        <a
+          className="addThis_item-icon"
+          href="mailto:support@sapo.vn"
+          aria-label="email"
+          title="Gửi Tin nhắn cho chúng tôi"
+        >
+          <img
+            src="https://icon-library.com/images/mess-icon/mess-icon-3.jpg"
+            class="img-responsive"
+            alt="Image"
+          />
 
-<img src="https://icon-library.com/images/mess-icon/mess-icon-3.jpg" class="img-responsive" alt="Image"/>
-
-        <span className="tooltip-text">Gửi Tin nhắn cho chúng tôi</span>
-      </a>
+          <span className="tooltip-text">Gửi Tin nhắn cho chúng tôi</span>
+        </a>
+      </div>
     </div>
- 
-  </div>
   );
 }

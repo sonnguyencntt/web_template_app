@@ -628,6 +628,9 @@ progress {
     flex: 0 0 auto;
     width: 100%
 }
+.banner-slide{
+    padding : 0px 6px
+}
 .product-block-item .product-info .product__price .old-price {
     text-decoration: line-through;
     font-size: 13px;
@@ -14684,7 +14687,7 @@ height: 72px;
 }
 
 .section_banner {
-    margin-bottom: 50px
+    margin-bottom: 25px
 }
 
 @media (max-width: 767px) {

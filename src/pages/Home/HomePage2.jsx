@@ -6,6 +6,7 @@ import { constants as c } from "../../constants";
 import CategoryProduct from "./child/HomePage2/CategoryProduct";
 import Banner from "./child/HomePage2/Banner";
 import Product from "./child/HomePage2/Product";
+import BannerAds from "./child/HomePage2/BannerAds";
 
 import { appActions } from "../../actions/appActions";
 import PageLoading from "../../components/PageLoading";
@@ -47,7 +48,7 @@ function HomePage(props) {
       dispatch(appActions.getHomeInfo());
     }
   });
-  console.log(info);
+  console.log(homeInfo);
   return (
     <React.Fragment>
       <Header />
@@ -65,27 +66,30 @@ function HomePage(props) {
                 />
 
                 {<Banner banners={info.banners} />}
-          
               </React.Fragment>
             }
+            {homeInfo.banner_ads.type_0.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_0} />}
+            {homeInfo.banner_ads.type_1.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_1} />}
 
-{
-                info.hot_products.length > 0 &&
-                <Product title="Sản phẩm nổi bật" products={info.hot_products} />
-              }
-              {
-                info.new_products.length > 0 &&
-                <Product title="Sản phẩm mới" products={info.new_products} />
-              }
-              {
-                info.sale_products.length > 0 &&
-                <Product title="Sản phẩm giảm giá" products={info.sale_products} />
-              }
+            {info.hot_products.length > 0 && (
+              <Product title="Sản phẩm nổi bật" products={info.hot_products} />
+            )}
+            {homeInfo.banner_ads.type_2.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_2} />}
 
+            {info.new_products.length > 0 && (
+              <Product title="Sản phẩm mới" products={info.new_products} />
+            )}
+                        {homeInfo.banner_ads.type_3.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_3} />}
+
+            {info.sale_products.length > 0 && (
+              <Product
+                title="Sản phẩm giảm giá"
+                products={info.sale_products}
+              />
+            )}
+            {homeInfo.banner_ads.type_4.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_4} />}
             {info.new_posts.length > 0 && <Blog posts={info.new_posts} />}
-
-
-          
+            {homeInfo.banner_ads.type_5.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_5} />}
 
           </React.Fragment>
         )}

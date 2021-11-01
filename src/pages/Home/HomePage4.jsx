@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import HomeBanner from "./child/HomeBanner";
+import BannerAds from "./child/HomePage3/BannerAds";
 import Header from "../../components/Header";
 import Blog from "./child/HomePage4/Blog";
 import { constants as c } from "../../constants";
@@ -11,18 +11,28 @@ import BannerMain from "./child/HomePage4/BannerMain";
 
 function HomePage(props) {
   const dispatch = useDispatch();
-  const homeInfo = useSelector(state => state.app.home);
-  const appTheme = useSelector(state => state.app.appTheme);
+  const homeInfo = useSelector((state) => state.app.home);
+  const appTheme = useSelector((state) => state.app.appTheme);
   const info = useMemo(() => {
     if (homeInfo.status === c.SUCCESS) {
       return {
         banners: homeInfo.banner.list,
-        categories: homeInfo.layouts.filter((v) => v.type_layout === "CATEGORY")[0].list,
-        new_products: homeInfo.layouts.filter((v) => v.type_layout === "PRODUCTS_NEW")[0].list,
-        hot_products: homeInfo.layouts.filter((v) => v.type_layout === "PRODUCTS_TOP_SALES")[0].list,
-        sale_products: homeInfo.layouts.filter((v) => v.type_layout === "PRODUCTS_DISCOUNT")[0].list,
-        new_posts: homeInfo.layouts.filter((v) => v.type_layout === "POSTS_NEW")[0].list,
-      }
+        categories: homeInfo.layouts.filter(
+          (v) => v.type_layout === "CATEGORY"
+        )[0].list,
+        new_products: homeInfo.layouts.filter(
+          (v) => v.type_layout === "PRODUCTS_NEW"
+        )[0].list,
+        hot_products: homeInfo.layouts.filter(
+          (v) => v.type_layout === "PRODUCTS_TOP_SALES"
+        )[0].list,
+        sale_products: homeInfo.layouts.filter(
+          (v) => v.type_layout === "PRODUCTS_DISCOUNT"
+        )[0].list,
+        new_posts: homeInfo.layouts.filter(
+          (v) => v.type_layout === "POSTS_NEW"
+        )[0].list,
+      };
     } else {
       return {};
     }
@@ -31,62 +41,68 @@ function HomePage(props) {
     document.title = appTheme.home_title;
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
     if (homeInfo.status === c.LOADING) {
       dispatch(appActions.getHomeInfo());
     }
   });
-  console.log(info)
   return (
     <React.Fragment>
-      <Header categories = {info.categories} />
+      <Header categories={info.categories} />
       <div className="main-index">
-   
-      {
-          homeInfo.status === c.LOADING ? <PageLoading /> :
-            <React.Fragment>
-              <BannerMain
-                banners={info.banners}
+        {homeInfo.status === c.LOADING ? (
+          <PageLoading />
+        ) : (
+          <React.Fragment>
+            <BannerMain banners={info.banners} />
+            <div style = {{marginTop : "100px"}}></div>
+            {homeInfo.banner_ads.type_0.length > 0 && (
+              <BannerAds banners={homeInfo.banner_ads.type_0} />
+            )}
+            {homeInfo.banner_ads.type_1.length > 0 && (
+              <BannerAds banners={homeInfo.banner_ads.type_1} />
+            )}
+
+            {info.hot_products.length > 0 && (
+              <ProductSection
+                title="Sản phẩm nổi bật"
+                products={info.hot_products}
               />
-              {
-                info.hot_products.length > 0 &&
-                <ProductSection style = {true}  title="Sản phẩm nổi bật" products={info.hot_products} />
-              }
-              {
-                info.new_products.length > 0 &&
-                <ProductSection title="Sản phẩm mới" products={info.new_products} />
-              }
-              {
-                info.sale_products.length > 0 &&
-                <ProductSection title="Sản phẩm giảm giá" products={info.sale_products} />
-              }
+            )}
+            {homeInfo.banner_ads.type_2.length > 0 && (
+              <BannerAds banners={homeInfo.banner_ads.type_2} />
+            )}
 
-<section className="awe-section-8">
-            <div className="delivery_express">
-              <div className="container">
-                <div
-                  className="bg-banner"
-                  style={{
-                    background: `url("https://bizweb.dktcdn.net/100/431/449/themes/834425/assets/bg_delivery_express2.jpg?1634023014212")`,
-                  }}
-                >
-                  <h2>Giao hàng miễn phí tận nhà trong vòng 24h</h2>
-                  <a href="#" title="Tìm hiểu thêm">
-                    Tìm hiểu thêm
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
-             {info.new_posts.length > 0 && <Blog posts={info.new_posts} />}
+            {info.new_products.length > 0 && (
+              <ProductSection
+                title="Sản phẩm mới"
+                products={info.new_products}
+              />
+            )}
+            {homeInfo.banner_ads.type_3.length > 0 && (
+              <BannerAds banners={homeInfo.banner_ads.type_3} />
+            )}
 
-            </React.Fragment>
-        }
-  
-      \
+            {info.sale_products.length > 0 && (
+              <ProductSection
+                title="Sản phẩm giảm giá"
+                products={info.sale_products}
+              />
+            )}
 
-                {/* <div className="section_blog">
+            {homeInfo.banner_ads.type_4.length > 0 && (
+              <BannerAds banners={homeInfo.banner_ads.type_4} />
+            )}
+
+            {info.new_posts.length > 0 && <Blog posts={info.new_posts} />}
+            {homeInfo.banner_ads.type_5.length > 0 && (
+              <BannerAds banners={homeInfo.banner_ads.type_5} />
+            )}
+          </React.Fragment>
+        )}
+        \
+        {/* <div className="section_blog">
     <div className="container">
       <div className="swap">
         <h2 className="title-block upscape">
@@ -179,9 +195,8 @@ function HomePage(props) {
       </div>
     </div>
   </div> */}
-       
-        </div>
-          </React.Fragment>
-  )
+      </div>
+    </React.Fragment>
+  );
 }
-export default HomePage
+export default HomePage;

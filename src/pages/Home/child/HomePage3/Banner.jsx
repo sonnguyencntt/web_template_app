@@ -23,7 +23,7 @@ export default function HomeBanner(props) {
           <div className="">
           <Slider {...bannerSettings}>
               {banners.map((v, i) => (
-                  <div className="swiper-slide">
+                  <div className="swiper-slide" >
                   <a href="#" className="clearfix" title="ND Fresh">
                       <img
                       style = {{width:"100%" , height : "497px" , objectFit : "cover"}}

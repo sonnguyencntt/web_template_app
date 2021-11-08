@@ -104,9 +104,9 @@ export default function Header_2() {
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-xl-3 col-md-3 col-6 col-logo">
-              <a href="index.html" className="logo">
+            <Link to="/" className="logo">
                 <img width={170} height={58} src={appTheme.logo_url} />
-              </a>
+              </Link>
             </div>
             <div className="d-md-none d-block col-2 order-3">
               <div className="category-action">
@@ -259,7 +259,86 @@ export default function Header_2() {
             </div>
             <div className="col-lg-3 col-xl-3 col-md-3 col-6 col-account order-2 order-md-3">
               <ul className="group-account">
+ 
                 <li className="account d-none d-lg-inline-block">
+                {tokenInfo? (
+                    <div className="account-info header-dropdown">
+                      <button
+                        style={{ border: "none", padding: 0 , color : "black" }}
+                        onClick={() => handleToggleActive("account")}
+                      >
+                        Tài khoản của tôi
+                        <i
+                          style={{ marginLeft: "0.5em" }}
+                          className="fas fa-caret-down"
+                        ></i>
+                      </button>
+                      <div
+                        className={
+                          currentActive === "account"
+                            ? " menu-dropdown dropdown active"
+                            : "menu-dropdown dropdown"
+                        }
+                      >
+                        <h5 style = {{color : "#3d3b3b" , textAlign : "center"}}>
+                          {profile.name} <br />
+                          <span>{profile.phone_number}</span>
+                        </h5>
+                        <ul>
+                          <li>
+                            <img src="/img/check-list.png" alt="" />
+                            <Link to="/don-hang">Đơn hàng của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/home.png" alt="" />
+                            <Link to="/dia-chi">Địa chỉ nhận hàng</Link>
+                          </li>
+                          <li>
+                            <img src="/img/star.png" alt="" />
+                            <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
+                          </li>
+                          <li>
+                            <img src="/img/check-mark.png" alt="" />
+                            <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/heart.png" alt="" />
+                            <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
+                          </li>
+                          {profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                            </li>
+                          )}
+
+                          {!profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link
+                                onClick={handleShowCollaboratorRegisForm}
+                                to="/cong-tac-vien"
+                              >
+                                Đăng ký cộng tác viên
+                              </Link>
+                            </li>
+                          )}
+
+                          <li onClick={handleShowProfile}>
+                            <img src="/img/refresh.png" alt="" />
+
+                            <a> Cập nhật thông tin</a>
+                          </li>
+                          <li onClick={handleLogout}>
+                            <img src="/img/log-out.png" alt="" />
+                            <a> Thoát tài khoản</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  ) : (
+                    <React.Fragment>
+                       <li className="account d-none d-lg-inline-block" style = {{marginRight : "10px"}}>
                   <div className="icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -286,7 +365,7 @@ export default function Header_2() {
                     <a onClick={handleShowPhonePopup}>Đăng nhập</a>
                   </div>
                 </li>
-                <li className="account d-none d-lg-inline-block">
+                       <li className="account d-none d-lg-inline-block">
                   <div className="icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -313,6 +392,13 @@ export default function Header_2() {
                     <a onClick={handleShowPhonePopup}>Đăng kí</a>
                   </div>
                 </li>
+                
+                    </React.Fragment>
+                  )}
+      
+                </li>
+ 
+               
                 <li className="cart-drop">
                   <div className="icon">
                     <svg
@@ -370,13 +456,13 @@ export default function Header_2() {
                       </Link>
                     </li>
                     <li className="nav-item  ">
-                      <a
+                      <Link
                         className="a-img caret-down"
-                        href="collections/all.html"
+                        to="/danh-sach-san-pham"
                         title="Sản phẩm"
                       >
                         Sản phẩm
-                      </a>
+                      </Link>
                       <ul className="item_small child">
                         {categories.length > 0
                           ? categories.map((v, i) => (

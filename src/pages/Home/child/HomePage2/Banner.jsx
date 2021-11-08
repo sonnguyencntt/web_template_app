@@ -6,34 +6,12 @@ export default function HomeBanner(props) {
   const appTheme = useSelector((state) => state.app.appTheme);
   const { banners, discountProducts } = props;
   var bannerSettings = {
-    infinite: false,
-    slidesToShow: 3,
+    infinite: true,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        }
-      },
-    ]
+    dots: true,
+    dotsClass: "slick-dots slick-thumb",
   };
-
   function handleCateClick(id) {
     window.location.href = `/danh-sach-san-pham?danh-muc-ids=${id}`;
   }

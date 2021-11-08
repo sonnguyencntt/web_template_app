@@ -1,11 +1,12 @@
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import BannerVertical from "../../../../components/BannerVertical";
+import BannerVertical from "../../../components/BannerVertical";
+import { constants as c } from "../../../constants";
 import { useSelector } from "react-redux";
-import { constants as c } from "../../../../constants";
-
 export default function HomeBanner(props) {
-  const { banners, categories, discountProducts , homeInfo } = props;
+  const { homeInfo } = props;
+
+  const categories = useSelector((state) => state.category.categories);
   const appTheme = useSelector((state) => state.app.appTheme);
 
   function handleCateClick(id) {
@@ -20,8 +21,7 @@ export default function HomeBanner(props) {
     dotsClass: "slick-dots slick-thumb",
   };
   return (
-    <section className="awe-section-5 hidden-xs ">
-      <div className="section_product product_1" id="product_1">
+      <div className="section_product aside_category product_1 categories-column-1" id="product_1">
         <div
           className="block-product site_category"
           style={{
@@ -36,7 +36,7 @@ export default function HomeBanner(props) {
                 "border-radius": "6px",
             padding : "7px"
           }}>
-                <Link to="/danh-sach-san-pham" title="Trái cây" style={{padding : "16px" , color :appTheme.color_main_1 == null ? "black" : "white" }}>
+                <Link to="/danh-sach-san-pham" title="Trái cây" style={{padding : "16px" , color :appTheme.color_main_1 == null ? "black" : "white"}}>
                   Danh mục
                 </Link>
               </h3>
@@ -83,12 +83,11 @@ export default function HomeBanner(props) {
           </div>
 
         </div>
-      </div>
-      {homeInfo.status === c.SUCCESS
+        {homeInfo.status === c.SUCCESS
           ? homeInfo.banner_ads.type_6.length > 0 && (
               <BannerVertical banners={homeInfo.banner_ads.type_6} />
             )
           : null}
-    </section>
+      </div>
   );
 }

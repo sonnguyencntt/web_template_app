@@ -42,8 +42,95 @@
         align-items: center;
         flex-direction: column;
 }
+@media only screen and (max-width: 730px) {
+    .img-banner
+    {
+      max-height: 310px !important;
+    }
+  }
 .banner-slide{
     padding : 0px 6px
+}
+.new-tag {
+    position: absolute;
+    font-size: 1em;
+    color: #FFF;
+    font-weight: 400;
+   
+    line-height: 25px;
+    text-align: center;
+    top: 5px;
+    right: 0px;
+    z-index: 10;
+    background-color: #fe9705;
+    padding: 0 10px;
+  }
+.menu-dropdown li img {
+    width: 20px;
+    object-fit: contain;
+    opacity: 0.5;
+    transition: 0.3s;
+    margin-right: 0.5em;
+  }
+  
+  
+  .menu-dropdown li a {
+    color : #3d3b3b !important
+  }
+
+  .menu-dropdown {
+    position: absolute;
+    top: 5em;
+    right: 0;
+    padding: 10px 0px;
+    width: 265px;
+  }
+  
+  
+  .menu-dropdown li {
+    list-style: none;
+    line-height: 2.5em;
+    padding: 0 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-dropdown:before {
+    box-shadow: 0 0 8px 0 #e4e4e4;
+    content: "";
+    width: 14px;
+    height: 14px;
+    background-color: white;
+    position: absolute;
+    right: 50%;
+    top: -7px;
+    transform: rotate(
+  45deg);
+  }
+
+.product-card .name {
+
+ 
+    height: 42px
+
+}
+.row-blog{
+
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+.categories-column{
+    background: none !important;
+}
+.categories-column>.column {
+    min-height: initial !important;
+    background: white;
+}
+.categories-column>.main-title
+{
+    background: white;
 }
 html {
     font-family: sans-serif;
@@ -58,11 +145,12 @@ html {
     width: device-width
 }
 
-article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, dialog, figcaption, figure, header, hgroup, main, nav, section {
     display: block
 }
 
 body {
+
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1rem;
@@ -562,7 +650,7 @@ pre code {
     margin-left: auto
 }
 
-.row {
+/* .row {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -570,7 +658,7 @@ pre code {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px
-}
+} */
 
 .no-gutters {
     margin-right: 0;
@@ -2965,7 +3053,7 @@ tbody.collapse.show {
 }
 
 .dropdown, .dropup {
-    position: relative
+    /* position: relative */
 }
 
 .dropdown-toggle::after {
@@ -3492,7 +3580,7 @@ tbody.collapse.show {
     background-color: rgba(0, 123, 255, .5)
 }
 
-.custom-select {
+/* .custom-select {
     display: inline-block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -3507,7 +3595,7 @@ tbody.collapse.show {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none
-}
+} */
 
 .custom-select:focus {
     border-color: #80bdff;
@@ -8978,10 +9066,10 @@ button.swiper-pagination-bullet {
     max-width: unset !important
 }
 
-.row {
+/* .row {
     margin-right: -10px;
     margin-left: -10px
-}
+} */
 
 @media (max-width: 480px) {
     .row {
@@ -9250,7 +9338,7 @@ html, body {
     margin: 0
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+article, aside, details, figcaption, figure, header, hgroup, main, nav, section, summary {
     display: block
 }
 
@@ -9267,13 +9355,13 @@ input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webki
     -webkit-appearance: none
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+/* input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
     border: 1px solid #e9e9e9;
     color: #1c1c1c;
     margin: 0 0 19px;
     min-height: 40px;
     padding: 0 20px
-}
+} */
 
 a {
     color: #323c42
@@ -9302,7 +9390,7 @@ a:hover {
 }
 
 body, input, textarea, button, select {
-    line-height: 1.7;
+    /* line-height: 1.7; */
     font-family: "Roboto", sans-serif;
     color: #323c42;
     -webkit-font-smoothing: antialiased;
@@ -9317,7 +9405,8 @@ body:focus, input:focus, textarea:focus, button:focus, select:focus {
 body {
     font-size: 14px;
     color: #323c42;
-    overflow-x: hidden
+    /* overflow-x: hidden; */
+    background: #eff0f3;
 }
 
 header nav {
@@ -9499,13 +9588,13 @@ button, input[type="submit"] {
     cursor: pointer
 }
 
-input[type="text"], input[type="search"], input[type="password"], input[type="email"], input[type="file"], input[type="number"], input[type="tel"], textarea, select {
+/* input[type="text"], input[type="search"], input[type="password"], input[type="email"], input[type="file"], input[type="number"], input[type="tel"], textarea, select {
     border: 1px solid #ebebeb;
     padding: 0 110px 0 20px;
     width: 100%;
     max-width: 100%;
     display: block
-}
+} */
 
 input[type="text"][disabled], input[type="text"].disabled, input[type="search"][disabled], input[type="search"].disabled, input[type="password"][disabled], input[type="password"].disabled, input[type="email"][disabled], input[type="email"].disabled, input[type="file"][disabled], input[type="file"].disabled, input[type="number"][disabled], input[type="number"].disabled, input[type="tel"][disabled], input[type="tel"].disabled, textarea[disabled], textarea.disabled, select[disabled], select.disabled {
     cursor: default
@@ -9603,7 +9692,7 @@ label.error {
 }
 
 label {
-    display: inline-block !important
+    /* display: inline-block !important */
 }
 
 .input-group {
@@ -9861,24 +9950,24 @@ ul.tabs li.current {
 
 .footer {
     background: #24272e;
-    padding: 45px 0 0
+    /* padding: 45px 0 0 */
 }
 
 @media (max-width: 991px) {
-    .footer {
+    /* .footer {
         padding-bottom: 80px
-    }
+    } */
 }
 
-.footer .first-footer {
+/* .footer .first-footer {
     padding-bottom: 20px;
     margin-bottom: 0
-}
-
+} */
+/* 
 .footer .first-footer hr {
     border-color: #373a43
-}
-
+} */
+/* 
 .footer h4 {
     font-size: 14px;
     font-weight: bold;
@@ -10064,7 +10153,7 @@ ul.tabs li.current {
 
 .mail_footer .mailchimp-alerts .mailchimp-error a:hover, .mail_footer .mailchimp-alerts .mailchimp-error a:focus, .mail_footer .mailchimp-alerts .mailchimp-success a:hover, .mail_footer .mailchimp-alerts .mailchimp-success a:focus, .mail_footer .mailchimp-alerts .mailchimp-submitting a:hover, .mail_footer .mailchimp-alerts .mailchimp-submitting a:focus {
     text-decoration: underline
-}
+} */
 
 @media (max-width: 991px) {
     .social {
@@ -10494,7 +10583,8 @@ ul.tabs li.current {
 
 .item_product_main {
     position: relative;
-    padding: 0px
+    padding: 0px;
+    background: white;
 }
 
 .item_product_main .image_thumb {
@@ -10780,10 +10870,21 @@ ul.tabs li.current {
 
 .item_product_main .product-info .bottom-action {
     position: relative;
-    height: 37px;
+    /* height: 37px; */
     overflow: hidden
 }
-
+.top-sale-tag {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 2;
+    padding: 4px;
+    font-size: 10px;
+    color: white;
+    background-color: #333;
+    opacity: 0.7;
+    border-radius: 2px;
+  }
 .item_product_main .product-info .price-box {
     color: #eb3e32;
     line-height: 1.3;
@@ -10793,7 +10894,7 @@ ul.tabs li.current {
     margin-right: 10px;
     margin-bottom: 0;
     padding-right: 0px;
-    height: 37px;
+    height: 24px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -11698,7 +11799,7 @@ ul.tabs li.current {
     text-align: right
 }
 
-.header .group-account li {
+.header .group-account>li {
     display: inline-block;
     margin-left: 20px
 }
@@ -11916,7 +12017,7 @@ ul.tabs li.current {
 }
 
 .theme-search-smart {
-    width: 425px;
+    width: 380px;
     height: 42px;
     margin-top: 8px;
     display: inline-block
@@ -11927,7 +12028,11 @@ ul.tabs li.current {
         max-width: 290px
     }
 }
-
+@media (max-width: 988px) {
+    .blogs_mobile_base .wraplog{
+        position: initial !important;
+        max-height: 550px !important    }
+}
 @media (max-width: 991px) {
     .theme-search-smart {
         width: 100%
@@ -13558,7 +13663,7 @@ ul.tabs li.current {
 
 @media (min-width: 1300px) and (max-width: 1600px) {
     .section_slider {
-        height: 405px;
+        /* height: 405px; */
         background-color: #ebebeb
     }
 }

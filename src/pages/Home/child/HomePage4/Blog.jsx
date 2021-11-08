@@ -25,7 +25,7 @@ export default function Blog(props) {
       if (i > 0) {
         array.push(
           <div className="w-100 b-list">
-            <div className="item_blog_base">
+            <div className="item_blog_base" style ={{background : "white"}}>
               <Link
                 className="thumb"
                 to={
@@ -44,7 +44,7 @@ export default function Blog(props) {
                   className="lazyload img-responsive"
                 />
               </Link>
-              <div className="content_blog clearfix">
+              <div className="content_blog clearfix" style = {{padding : "10px"}}>
                 <div className="toparticle">
                   <span>{v.created_at ? v.created_at.split(" ")[0] : ""}</span>
                   &nbsp;&nbsp;
@@ -93,9 +93,9 @@ export default function Blog(props) {
               Tin tức mới nhất
             </a>
           </h2>
-          <div className="row blogs_mobile_base">
+          <div className="row-blog blogs_mobile_base">
             <div className="col-lg-6 col-12">
-              <div className="item_blog_base">
+              <div className="item_blog_base" style ={{background : "white"}}>
                 <Link
                   to={
                     posts.title
@@ -115,7 +115,7 @@ export default function Blog(props) {
                     className="lazyload img-responsive"
                   />
                 </Link>
-                <div className="content_blog clearfix">
+                <div className="content_blog clearfix" style = {{padding : "10px"}}>
                   <div className="toparticle">
                     <span>
                       {posts.created_at ? posts.created_at.split(" ")[0] : ""}
@@ -156,8 +156,8 @@ export default function Blog(props) {
               <div
                 className="wraplog"
                 style={{
-                  "max-height": "550px",
-
+                  "max-height": "100%",
+                  position : "absolute",
                   overflow: "auto",
                 }}
               >

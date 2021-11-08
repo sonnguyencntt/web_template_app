@@ -14,7 +14,7 @@ export default function HomeBanner(props) {
   return (
     <div className="section_slider container">
       <div className="swiper-container slide-container">
-        <div className="swiper-main">
+        <div className="">
             <Slider {...bannerSettings}>
               {banners.map((v, i) => (
                 <div className="swiper-slide">
@@ -22,12 +22,12 @@ export default function HomeBanner(props) {
                     <img
                       style={{
                         width: "100%",
-                        height: "475px",
+                        maxHeight: "475px",
                         objectFit: "cover",
                       }}
                       src={v.image_url}
                       alt="ND Fresh"
-                      className="img-responsive center-block d-block mx-auto"
+                      className="img-responsive center-block d-block mx-auto img-banner"
                     />
                   </a>
                 </div>

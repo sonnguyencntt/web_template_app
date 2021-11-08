@@ -20,6 +20,10 @@ export default function ItemProduct(props) {
     images,
     name,
     id,
+    view,
+    is_favorite,
+    is_new,
+    is_top_sale,
   } = props.product;
   let pastPrice = min_price;
   let discount = 0;
@@ -38,69 +42,132 @@ export default function ItemProduct(props) {
   return (
     <div className="section_product product_1" id="product_1">
       <div className="container">
-      
-            <div className="block-product">
-                <div className="swiper-wrapper">
-                  <div className="swiper-slide">
-                    <div className=" item_product_main">
-                      <div className="product-block-item">
-                        <div
-                          class={`sale-label sale-top-right ${
-                            product_discount == null || product_discount == 0
-                              ? "hide"
-                              : "show"
-                          }`}
-                        >
-                          <span>- {discount_percent}%</span>
-                        </div>
-                        <div className="product-transition">
-                          <Link
-                            className="product-thumb"
-                            to={`/san-pham/${standardProductLink(name)}-${id}`}
-                            href="oi-le-ruot-do.html"
-                          >
-                            <img
-                              className="product-thumbnail lazy"
-                              src={avt}
-                              alt="Ổi lê ruột đỏ"
-                            />
-                          </Link>
-                        </div>
-                        <div className="product-info">
-                          <a
-                            href="dao-do-my.html"
-                            title="Đào đỏ Mỹ"
-                            className="item-product-name"
-                          >
-                            {name}
-                          </a>
-                          <div className="product__price">
-                            <span className="price">
-                              {" "}
-                              ₫{formatPriceOrContact(price)}
-                            </span>
+        <div className="block-product">
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className=" item_product_main">
+                <div className="product-block-item">
+                  <div
+                    class={`sale-label sale-top-right ${
+                      product_discount == null || product_discount == 0
+                        ? "hide"
+                        : "show"
+                    }`}
+                  >
+                    <span>- {discount_percent}%</span>
+                  </div>
+                  <div className="product-transition">
+                    {is_new && <div className="new-tag">Mới</div>}
+                    {is_favorite && (
+                      <div
+                        className="favorite-tag"
+                        style={{ bottom: is_top_sale ? "23px" : "0" }}
+                      >
+                        Yêu thích
+                      </div>
+                    )}
+                    {is_top_sale && (
+                      <div className="top-sale-tag">Bán chạy</div>
+                    )}{" "}
+                    <Link to={`/san-pham/${standardProductLink(name)}-${id}`}>
+                      <img
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          "object-fit": "cover",
+                        }}
+                        src={avt}
+                        alt="Quả Kiwi xanh"
+                      />
+                    </Link>
+                    <div
+                      class={`sale-flash ${
+                        product_discount == null || product_discount == 0
+                          ? "hide"
+                          : "show"
+                      }`}
+                    >
+                      <div class="before"></div>- {discount_percent}%
+                    </div>
+                    <Link
+                      className="product-thumb"
+                      to={`/san-pham/${standardProductLink(name)}-${id}`}
+                    >
+                      <img
+                        className="product-thumbnail lazy"
+                        src={avt}
+                        alt="Ổi lê ruột đỏ"
+                      />
+                    </Link>
+                  </div>
+                  <div className="product-info">
+                    <Link
+                      to={`/san-pham/${standardProductLink(name)}-${id}`}
+                      title="Đào đỏ Mỹ"
+                      className="item-product-name"
+                    >
+                      {name}
+                    </Link>
+                    <div className="product__price">
+                      <span
+                        className="price"
+                        style={{
+                          color: "rgb(126, 13, 13)",
+                          "font-size": "18px",
+                          "font-weight": "500",
+                        }}
+                      >
+                        {" "}
+                        {"  "}₫{formatPriceOrContact(price - discount)}
+                      </span>
 
-                            <span
-                              class={`old-price ${
-                                product_discount == null ||
-                                product_discount == 0
-                                  ? "hide"
-                                  : ""
-                              }`}
-                            >
-                              {"  "}₫{formatPriceOrContact(discount)}
-                            </span>
+                      <span
+                        class={`old-price ${
+                          product_discount == null ||
+                          product_discount == 0 ||
+                          formatPriceOrContact(discount) == "Liên hệ"
+                            ? "hide"
+                            : ""
+                        }`}
+                      >
+                        ₫{formatPriceOrContact(price)}
+                      </span>
+                    </div>
+                   
+                      <div className="special-price">
+                        <div
+                          className="price"
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div>
+                            {badges.status_collaborator === 1 && (
+                              <div className="coll-price">
+                                <span className="price product-price" style ={{color: "#999" , fontSize : "13px"}}>
+                                  Hoa hồng:{" "}
+                                </span>
+                                <label style={{ color: "deeppink" }}>
+                                  {` ₫${formatPrice(
+                                    (min_price * percent_collaborator) / 100
+                                  )}`}
+                                </label>
+                              </div>
+                            )}
                           </div>
+                          &nbsp;
+                          <span style={{ color: "#999" , fontSize : "13px" }}>Đã mua:{view} </span>
                         </div>
                       </div>
-                    </div>
+                    
                   </div>
                 </div>
+              </div>
             </div>
-          
+          </div>
+        </div>
       </div>
     </div>
-
-
   );
 }

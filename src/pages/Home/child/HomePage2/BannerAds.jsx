@@ -13,21 +13,21 @@ export default function HomeBanner(props) {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         }
       },
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         }
       },
@@ -50,7 +50,7 @@ export default function HomeBanner(props) {
                     <img
                       style={{
                         height: "156px",
-                        width: "360px",
+                        width: "100%",
                         borderRadius: "20px",
                         objectFit  : "cover"
                       }}

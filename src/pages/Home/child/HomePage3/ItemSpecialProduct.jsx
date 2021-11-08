@@ -20,6 +20,10 @@ export default function ItemProduct(props) {
     images,
     name,
     id,
+    view,
+    is_favorite,
+    is_new,
+    is_top_sale,
   } = props.product;
   let pastPrice = min_price;
   let discount = 0;
@@ -56,10 +60,21 @@ export default function ItemProduct(props) {
                           <span>- {discount_percent}%</span>
                         </div>
                         <div className="product-transition">
+                          {is_new && <div className="new-tag">Mới</div>}
+                          {is_favorite && (
+                            <div
+                              className="favorite-tag"
+                              style={{ bottom: is_top_sale ? "23px" : "0" }}
+                            >
+                              Yêu thích
+                            </div>
+                          )}
+                          {is_top_sale && (
+                            <div className="top-sale-tag">Bán chạy</div>
+                          )}{" "}
                           <Link
                             className="product-thumb"
                             to={`/san-pham/${standardProductLink(name)}-${id}`}
-                            href="oi-le-ruot-do.html"
                           >
                             <img
                               className="product-thumbnail lazy"
@@ -69,30 +84,63 @@ export default function ItemProduct(props) {
                           </Link>
                         </div>
                         <div className="product-info">
-                          <a
-                            href="dao-do-my.html"
+                          <Link
+                            to={`/san-pham/${standardProductLink(name)}-${id}`}
                             title="Đào đỏ Mỹ"
                             className="item-product-name"
                           >
                             {name}
-                          </a>
+                          </Link>
                           <div className="product__price">
-                            <span className="price">
+                            <span className="price"
+                                  style={{
+                                    color: "rgb(126, 13, 13)",
+                                    "font-size": "18px",
+                                    "font-weight": "500",
+                                  }}
+                            >
                               {" "}
-                              ₫{formatPriceOrContact(price)}
+                              {"  "}₫{formatPriceOrContact(price - discount)}
                             </span>
 
                             <span
                               class={`old-price ${
                                 product_discount == null ||
-                                product_discount == 0
+                                product_discount == 0 ||
+                                formatPriceOrContact(discount) == "Liên hệ"
                                   ? "hide"
                                   : ""
                               }`}
                             >
-                              {"  "}₫{formatPriceOrContact(discount)}
+                              ₫{formatPriceOrContact(price)}
                             </span>
                           </div>
+                          <div className="special-price">
+                          <div
+                            className="price"
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <div>
+                              {badges.status_collaborator === 1 && (
+                                <div className="coll-price">
+                                  <span className="price product-price" style ={{color: "#999" , fontSize : "13px"}}>
+                                    Hoa hồng:{" "}
+                                  </span>
+                                  <label style={{ color: "deeppink" }}>
+                                    {` ₫${formatPrice(
+                                      (min_price * percent_collaborator) / 100
+                                    )}`}
+                                  </label>
+                                </div>
+                              )}
+                            </div>
+                            &nbsp;
+                            <span style={{ color: "#999" , fontSize : "13px" }}>Đã mua:{view} </span>
+                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>

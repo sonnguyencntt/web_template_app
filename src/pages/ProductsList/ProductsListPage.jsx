@@ -9,11 +9,14 @@ import { showNextElement } from "../../helper";
 import { constants as c } from "../../constants";
 import CategoryColumn from "./child/CategoryColumn";
 import CategoryColumn2 from "./child/CategoryColumn2";
+import CategoryColumn3 from "./child/CategoryColumn3";
+import { appActions } from "../../actions/appActions";
 
 import { productActions as a } from "../../actions/productActions";
 function ProductsListPage(props) {
 
   const appTheme = useSelector((state) => state.app.appTheme.home_page_type);
+  const homeInfo = useSelector((state) => state.app.home);
 
   const dispatch = useDispatch();
   let query = queryString.parse(props.location.search);
@@ -47,9 +50,16 @@ function ProductsListPage(props) {
     let queryStr = queryKeys.reduce((rs, v) => `${rs}${v}=${query[v]}&`, "?");
     window.location.href = window.location.origin + window.location.pathname + queryStr
   }
+
+
+
+
   useEffect(() => {
     document.title = "Danh sách sản phẩm";
     let queryStr = createQueryString(query);
+    if (homeInfo.status === c.LOADING) {
+      dispatch(appActions.getHomeInfo());
+    }
     if (
       queryStr !== currentQuery ||
       prevLocation !== window.location.pathname
@@ -93,7 +103,7 @@ function ProductsListPage(props) {
         </div>
         <div className="row">
 
-        {       appTheme == 1 || appTheme == null ? <CategoryColumn/> : appTheme == 2 ? <CategoryColumn2/> : <CategoryColumn/>
+        {       appTheme == 1 || appTheme == null ? <CategoryColumn homeInfo={homeInfo}/> : appTheme == 2 ? <CategoryColumn2 homeInfo={homeInfo}/> : appTheme == 3 ? <CategoryColumn3  homeInfo={homeInfo}/> : <CategoryColumn homeInfo={homeInfo}/>
 }          {
             pageInfo.status === c.SUCCESS
               ?

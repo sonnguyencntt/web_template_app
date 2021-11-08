@@ -21,6 +21,9 @@ export default function ItemProduct(props) {
     name,
     id,
     view,
+    is_favorite,
+    is_new,
+    is_top_sale,
   } = props.product;
   let pastPrice = min_price;
   let discount = 0;
@@ -38,9 +41,11 @@ export default function ItemProduct(props) {
   }
   console.log(discount_percent);
   return (
-    <div style = {{
-      padding : "0 6px"
-    }}>
+    <div
+      style={{
+        padding: "0 6px",
+      }}
+    >
       <div className="swiper-slide" style={{ border: "1px solid  #dad3d3" }}>
         <div className="item_product_main">
           <form
@@ -54,6 +59,16 @@ export default function ItemProduct(props) {
               }`}
               data-sale={`Giảm ${discount_percent}%`}
             >
+              {is_new && <div className="new-tag">Mới</div>}
+              {is_favorite && (
+                <div
+                  className="favorite-tag"
+                  style={{ bottom: is_top_sale ? "23px" : "0" }}
+                >
+                  Yêu thích
+                </div>
+              )}
+              {is_top_sale && <div className="top-sale-tag">Bán chạy</div>}{" "}
               <Link
                 className="image_thumb"
                 to={`/san-pham/${standardProductLink(name)}-${id}`}
@@ -67,20 +82,68 @@ export default function ItemProduct(props) {
                 </div>
               </Link>{" "}
             </div>
-            <div className="product-info" style = {{padding : "0 8px"}}>
-              <span className="brand">Lượt xem : {view}</span>
+            <div className="product-info" style={{ padding: "0 8px" }}>
               <h3 className="product-name">
                 <Link to={`/san-pham/${standardProductLink(name)}-${id}`}>
                   {name}
                 </Link>
               </h3>
+
               <div class="bottom-action">
                 <div class="price-box">
-                  <span class="price"> ₫{formatPriceOrContact(price)}</span>
-                  <span class="compare-price">
-                    {" "}
-                    {"  "}₫{formatPriceOrContact(discount)}
+                  <span
+                    class="price"
+                    style={{
+                      color: "rgb(126, 13, 13)",
+                      "font-size": "18px",
+                      "font-weight": "500",
+                    }}
+                  >
+                    {"  "}₫{formatPriceOrContact(price - discount)}
                   </span>
+
+                  <span
+                    class={`compare-price ${
+                      product_discount == null ||
+                      product_discount == 0 ||
+                      formatPriceOrContact(discount) == "Liên hệ"
+                        ? "hide"
+                        : ""
+                    }`}
+                  >
+                    {" "}
+                    ₫{formatPriceOrContact(price)}{" "}
+                  </span>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  paddingBottom: "10px",
+                }}
+              >
+                              <div>
+
+                {badges.status_collaborator === 1 && (
+                  <div className="coll-price">
+                    <span
+                      className="price product-price"
+                      style={{ color: "#9e9e9e" }}
+                    >
+                      Hoa hồng:{" "}
+                    </span>
+                    <label style={{ color: "deeppink" }}>
+                      {` ₫${formatPrice(
+                        (min_price * percent_collaborator) / 100
+                      )}`}
+                    </label>
+                  </div>
+                )}
+                                  </div>
+
+                <div style={{ color: "#9e9e9e" }} className="view-count">
+                  Đã mua: {view}
                 </div>
               </div>
             </div>

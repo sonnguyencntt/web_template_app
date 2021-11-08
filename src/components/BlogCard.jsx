@@ -8,15 +8,15 @@ export default function BlogCard(props) {
   }
   return (
     <div className="blog-card" onClick={handleClick}>
-      <div style={{ display: "none" }}>
+      {/* <div style={{ display: "none" }}>
         <Link ref={myLink} to={props.title ? `/tin-tuc/${props.title.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, '-')}-${props.id}` : `/tin-tuc/${props.id}`} />
-      </div>
+      </div> */}
       <div className="image">
         <div className="img-container">
           <img src={props.img} alt="" onError={handleImgErr} />
         </div>
       </div>
-      <div className="content">
+      <div style = {{padding : "10px"}}>
         <div className="blog-title">
           {props.title}
         </div>
@@ -24,10 +24,16 @@ export default function BlogCard(props) {
           {props.date ? props.date.split(" ")[0] : ""}
         </div>
         <div className="line"></div>
-       {/* {extractContent(props.quote)} */}
-        <div className="blog-quote"
-      
-         dangerouslySetInnerHTML={{ __html: extractContent(props.quote) }}>
+        <div className=""
+         style={{
+          display: "-webkit-box",
+          "-webkit-line-clamp": "2",
+          "-webkit-box-orient": "vertical",
+          overflow: "hidden",
+          height: "40px"
+        }}
+        dangerouslySetInnerHTML={{ __html: props.quote }}
+         >
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ export default function Footer() {
           //  htmlRef="<REF_STRING>"
         />
       )}
-      {       appTheme == 1 || appTheme == null ? <Footer1/> : appTheme == 2 ? <Footer2/> :appTheme == 3 ?  <Footer3/> : <Footer4/>
+      {       appTheme == 1 || appTheme == null ? <Footer1/> : appTheme == 2 ? <Footer1/> :appTheme == 3 ?  <Footer1/> : <Footer1/>
 }
     </React.Fragment>
   );

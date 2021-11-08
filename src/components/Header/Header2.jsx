@@ -98,27 +98,28 @@ export default function Header_2() {
   }
   return (
     <React.Fragment>
-      <header className="header" id="template-1"
-      >
-        <div className="topbar-mobile hidden-lg hidden-md text-center text-md-left" style={{ background: appTheme.color_main_1 }}
-
+      <header className="header" id="template-1">
+        <div
+          className="topbar-mobile hidden-lg hidden-md text-center text-md-left"
+          style={{ background: appTheme.color_main_1 }}
         >
-                  {appTheme == null ||
-        appTheme.phone_number_hotline == null ||
-        appTheme.phone_number_hotline === "" ||
-        appTheme.is_show_icon_hotline === false ? (
-          ""
-        ) : (
-          <div className="container container-template-2">
-          Hotline:
-          <span>
-            <a href="tel:0912117494">{appTheme.phone_number_hotline }</a>
-          </span>
+          {appTheme == null ||
+          appTheme.phone_number_hotline == null ||
+          appTheme.phone_number_hotline === "" ||
+          appTheme.is_show_icon_hotline === false ? (
+            ""
+          ) : (
+            <div className="container container-template-2">
+              Hotline:
+              <span>
+                <a href="tel:0912117494">{appTheme.phone_number_hotline}</a>
+              </span>
+            </div>
+          )}
         </div>
-        )}
-      
-        </div>
-        <div className="topbar hidden-sm hidden-xs" style={{ background: appTheme.color_main_1 }}
+        <div
+          className="topbar hidden-sm hidden-xs"
+          style={{ background: appTheme.color_main_1 }}
         >
           <div className="container">
             <div>
@@ -128,7 +129,9 @@ export default function Header_2() {
                     <li>
                       Hotline:
                       <span>
-                        <a href="tel:0912117494">{appTheme.phone_number_hotline}</a>
+                        <a href="tel:0912117494">
+                          {appTheme.phone_number_hotline}
+                        </a>
                       </span>
                     </li>
                     {/* <li className="margin-left-20">
@@ -140,20 +143,115 @@ export default function Header_2() {
                   </ul>
                 </div>
                 <div className="col-sm-6 col-md-3">
-                  <ul className="list-inline f-right">
+                  {tokenInfo ? (
+                    <div className="account-info header-dropdown">
+                      <button
+                        style={{ border: "none", padding: 0 , color : "white" }}
+                        onClick={() => handleToggleActive("account")}
+                      >
+                        Tài khoản của tôi
+                        <i
+                          style={{ marginLeft: "0.5em" }}
+                          className="fas fa-caret-down"
+                        ></i>
+                      </button>
+                      <div
+                        className={
+                          currentActive === "account"
+                            ? " menu-dropdown dropdown active"
+                            : "menu-dropdown dropdown"
+                        }
+                      >
+                        <h4 style = {{color : "#3d3b3b"}}>
+                          {profile.name} <br />
+                          <span>{profile.phone_number}</span>
+                        </h4>
+                        <ul>
+                          <li>
+                            <img src="/img/check-list.png" alt="" />
+                            <Link to="/don-hang">Đơn hàng của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/home.png" alt="" />
+                            <Link to="/dia-chi">Địa chỉ nhận hàng</Link>
+                          </li>
+                          <li>
+                            <img src="/img/star.png" alt="" />
+                            <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
+                          </li>
+                          <li>
+                            <img src="/img/check-mark.png" alt="" />
+                            <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/heart.png" alt="" />
+                            <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
+                          </li>
+                          {profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                            </li>
+                          )}
+
+                          {!profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link
+                                onClick={handleShowCollaboratorRegisForm}
+                                to="/cong-tac-vien"
+                              >
+                                Đăng ký cộng tác viên
+                              </Link>
+                            </li>
+                          )}
+
+                          <li onClick={handleShowProfile}>
+                            <img src="/img/refresh.png" alt="" />
+
+                            <a> Cập nhật thông tin</a>
+                          </li>
+                          <li onClick={handleLogout}>
+                            <img src="/img/log-out.png" alt="" />
+                            <a> Thoát tài khoản</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  ) : (
+                    <React.Fragment>
+                      <ul className="list-inline f-right">
                     <li>
-                      <a onClick={handleShowPhonePopup}><i className="fa fa-user" /> Đăng nhập</a>
+                      <a onClick={handleShowPhonePopup}>
+                        <i className="fa fa-user" /> Đăng nhập
+                      </a>
                     </li>
-                    <li><span>hoặc</span></li>
-                    <li><a onClick={handleShowPhonePopup}>Đăng ký</a>
+                    <li>
+                      <span>hoặc</span>
                     </li>
-                    <li className="li-search hidden"><a href="javscrript:;">
-                      <i className="fa fa-search" /></a>
+                    <li>
+                      <a onClick={handleShowPhonePopup}>Đăng ký</a>
+                    </li>
+                    <li className="li-search hidden">
+                      <a href="javscrript:;">
+                        <i className="fa fa-search" />
+                      </a>
                       <div className="dropdown topbar-dropdown hidden-md hidden-sm hidden-xs">
                         <div className="content a-center">
                           <div className="header_search search_form">
-                            <form className="input-group search-bar search_form" action="https://dualeo-x.mysapo.net/search" method="get" role="search">
-                              <input type="search" name="query" placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text" autoComplete="off" />
+                            <form
+                              className="input-group search-bar search_form"
+                              action="https://dualeo-x.mysapo.net/search"
+                              method="get"
+                              role="search"
+                            >
+                              <input
+                                type="search"
+                                name="query"
+                                placeholder="Tìm sản phẩm"
+                                className="input-group-field st-default-search-input search-text"
+                                autoComplete="off"
+                              />
                               <span className="input-group-btn">
                                 <button className="btn icon-fallback-text">
                                   <i className="fa fa-search" />
@@ -165,6 +263,51 @@ export default function Header_2() {
                       </div>
                     </li>
                   </ul>
+                    </React.Fragment>
+                  )}
+                  {/* <ul className="list-inline f-right">
+                    <li>
+                      <a onClick={handleShowPhonePopup}>
+                        <i className="fa fa-user" /> Đăng nhập
+                      </a>
+                    </li>
+                    <li>
+                      <span>hoặc</span>
+                    </li>
+                    <li>
+                      <a onClick={handleShowPhonePopup}>Đăng ký</a>
+                    </li>
+                    <li className="li-search hidden">
+                      <a href="javscrript:;">
+                        <i className="fa fa-search" />
+                      </a>
+                      <div className="dropdown topbar-dropdown hidden-md hidden-sm hidden-xs">
+                        <div className="content a-center">
+                          <div className="header_search search_form">
+                            <form
+                              className="input-group search-bar search_form"
+                              action="https://dualeo-x.mysapo.net/search"
+                              method="get"
+                              role="search"
+                            >
+                              <input
+                                type="search"
+                                name="query"
+                                placeholder="Tìm sản phẩm"
+                                className="input-group-field st-default-search-input search-text"
+                                autoComplete="off"
+                              />
+                              <span className="input-group-btn">
+                                <button className="btn icon-fallback-text">
+                                  <i className="fa fa-search" />
+                                </button>
+                              </span>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul> */}
                 </div>
               </div>
             </div>
@@ -175,50 +318,60 @@ export default function Header_2() {
             <div className="row">
               <div className="col-xs-12 col-md-3 text-lg-left">
                 <div className="logo inline-block">
-                  <a href="index.html" className="logo-wrapper ">
-                    <img style={{
-                      width: "220px",
-                      height: "2em",
-                      "object-fit": "contain"
-                    }} src={appTheme.logo_url} alt="logo " />
-                  </a>
+                  <Link to="/" className="logo-wrapper ">
+                    <img
+                      style={{
+                        width: "220px",
+                        height: "2em",
+                        "object-fit": "contain",
+                      }}
+                      src={appTheme.logo_url}
+                      alt="logo "
+                    />
+                  </Link>
                 </div>
               </div>
               <div className="col-xs-12 col-md-8 col-lg-7 hidden-xs">
                 <div className="policy d-flex justify-content-around">
                   <div className="item-policy d-flex align-items-center">
-                    <a title="policy1_title" href="#">
-                      <img src="https://bizweb.dktcdn.net/thumb/medium/100/308/325/themes/801947/assets/policy1.png?1623316806453" alt="DuaLeo-X" />
-                    </a>
-                    <div className="info a-left">
-                      <a title="Miễn phí vận chuyển" href="#">Miễn phí vận chuyển</a>
-                      <p>Bán kính 100 km</p>
-                    </div>
-                  </div>
-                  <div className="item-policy d-flex align-items-center">
                     <a title="policy2_title" href="#">
-                      <img src="https://bizweb.dktcdn.net/thumb/medium/100/308/325/themes/801947/assets/policy2.png?1623316806453" alt="DuaLeo-X" />
+                      <img
+                        src="https://bizweb.dktcdn.net/thumb/medium/100/308/325/themes/801947/assets/policy2.png?1623316806453"
+                        alt="DuaLeo-X"
+                      />
                     </a>
                     <div className="info a-left">
-                      <a title="Hỗ trợ 24/7" href="#">Hỗ trợ 24/7</a>
+                      <a title="Hỗ trợ 24/7" href="#">
+                        Hỗ trợ 24/7
+                      </a>
                       {appTheme == null ||
-        appTheme.phone_number_hotline == null ||
-        appTheme.phone_number_hotline === "" ||
-        appTheme.is_show_icon_hotline === false ? (
-          ""
-        ) : (
-          <p>Hotline: <a href="callto:19001009"> {appTheme.phone_number_hotline}</a></p>
-
-        )}
+                      appTheme.phone_number_hotline == null ||
+                      appTheme.phone_number_hotline === "" ||
+                      appTheme.is_show_icon_hotline === false ? (
+                        ""
+                      ) : (
+                        <p>
+                          Hotline:{" "}
+                          <a href="callto:19001009">
+                            {" "}
+                            {appTheme.phone_number_hotline}
+                          </a>
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="item-policy d-flex align-items-center">
                     <a title="policy3_title" href="#">
-                      <img src="https://bizweb.dktcdn.net/thumb/medium/100/308/325/themes/801947/assets/policy3.png?1623316806453" alt="DuaLeo-X" />
+                      <img
+                        src="https://bizweb.dktcdn.net/thumb/medium/100/308/325/themes/801947/assets/policy3.png?1623316806453"
+                        alt="DuaLeo-X"
+                      />
                     </a>
                     <div className="info a-left">
-                      <a title="Giờ làm việc" href="#">Giờ làm việc</a>
-                      <p>T2 - T7 Giờ hành chính</p>
+                      <a title="Giờ làm việc" href="#">
+                        Giờ làm việc
+                      </a>
+                      <p>{appTheme.contact_time_work}</p>
                     </div>
                   </div>
                 </div>
@@ -230,80 +383,123 @@ export default function Header_2() {
                       <Link to="/gio-hang" className="header-btn row">
                         <div className="icon f-left relative">
                           <i className="fa fa-shopping-bag" />
-                          <span className="cartCount count_item_pr hidden-lg" id="cart-total">{badges.cart_quantity}</span>
+                          <span
+                            className="cartCount count_item_pr hidden-lg"
+                            id="cart-total"
+                          >
+                            {badges.cart_quantity}
+                          </span>
                         </div>
                         <div className="right-content hidden-md">
-                          <span className="label">Giỏ hàng</span>
-                          (<span className="cartCount2">{badges.cart_quantity}</span>)
+                          <span className="label">Giỏ hàng</span>(
+                          <span className="cartCount2">
+                            {badges.cart_quantity}
+                          </span>
+                          )
                         </div>
                       </Link>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="menu-bar hidden-md hidden-lg">
-            <img src="../bizweb.dktcdn.net/100/308/325/themes/801947/assets/menu-barca33.png?1623316806453" alt="menu bar" />
-          </div>
-          <div className="icon-cart-mobile hidden-md hidden-lg f-left absolute" onclick="window.location.href='cart.html'">
+          {/* <div className="menu-bar hidden-md hidden-lg">
+            <img
+              src="../bizweb.dktcdn.net/100/308/325/themes/801947/assets/menu-barca33.png?1623316806453"
+              alt="menu bar"
+            />
+          </div> */}
+          <div
+            className="icon-cart-mobile hidden-md hidden-lg f-left absolute"
+            onclick="window.location.href='cart.html'"
+          >
             <div className="icon relative">
               <i className="fa fa-shopping-bag" />
               <span className="cartCount count_item_pr">0</span>
             </div>
           </div>
         </div>
-        <nav style={{ background: appTheme.color_main_1 }}
-        >
-          <div className="container"
-          >
+        <nav style={{ background: appTheme.color_main_1 }}>
+          <div className="container">
             <div className="hidden-sm hidden-xs">
               <ul className="nav nav-left">
-                <li className="nav-item"><Link to={{
-                  pathname: "/",
-                  state: { prevPath: window.location.pathname },
-                }} title="Trang chủ" className="nav-link" >Trang chủ              </Link>
+                <li className="nav-item">
+                  <Link
+                    to={{
+                      pathname: "/",
+                      state: { prevPath: window.location.pathname },
+                    }}
+                    title="Trang chủ"
+                    className="nav-link"
+                  >
+                    Trang chủ{" "}
+                  </Link>
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link to={{
-                    pathname: "/danh-sach-san-pham",
-                    state: { prevPath: window.location.pathname },
-                  }} className="nav-link">Sản phẩm </Link>
-
+                  <Link
+                    to={{
+                      pathname: "/danh-sach-san-pham",
+                      state: { prevPath: window.location.pathname },
+                    }}
+                    className="nav-link"
+                  >
+                    Sản phẩm{" "}
+                  </Link>
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link to={{
-                    pathname: "/tin-tuc",
-                    state: { prevPath: window.location.pathname },
-                  }} className="nav-link">Tin tức     </Link>
-
+                  <Link
+                    to={{
+                      pathname: "/tin-tuc",
+                      state: { prevPath: window.location.pathname },
+                    }}
+                    className="nav-link"
+                  >
+                    Tin tức{" "}
+                  </Link>
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link to={{
-                    pathname: "/ma-giam-gia",
-                    state: { prevPath: window.location.pathname },
-                  }} className="nav-link">Voucher     </Link>
-
+                  <Link
+                    to={{
+                      pathname: "/ma-giam-gia",
+                      state: { prevPath: window.location.pathname },
+                    }}
+                    className="nav-link"
+                  >
+                    Voucher{" "}
+                  </Link>
                 </li>
                 <li className="nav-item  has-mega">
-                  <Link to={{
-                    pathname: "/combo-giam-gia",
-                    state: { prevPath: window.location.pathname },
-                  }} className="nav-link">Combo Giảm giá     </Link>
-
+                  <Link
+                    to={{
+                      pathname: "/combo-giam-gia",
+                      state: { prevPath: window.location.pathname },
+                    }}
+                    className="nav-link"
+                  >
+                    Combo Giảm giá{" "}
+                  </Link>
                 </li>
               </ul>
               <div className="menu-search f-right bbbbb">
                 <div className="header_search search_form">
-                  <div className="input-group search-bar search_form"  onKeyDown={handleEnter}>
-                    <input type="search" name="query"
+                  <div
+                    className="input-group search-bar search_form"
+                    onKeyDown={handleEnter}
+                  >
+                    <input
+                      type="search"
+                      name="query"
                       value={searchValue}
                       onChange={handleInputChange}
-
-                      placeholder="Tìm sản phẩm" className="input-group-field st-default-search-input search-text auto-search" autoComplete="off" />
+                      placeholder="Tìm sản phẩm"
+                      className="input-group-field st-default-search-input search-text auto-search"
+                      autoComplete="off"
+                    />
                     <span className="input-group-btn">
-                      <button className="btn icon-fallback-text" onClick={handleSearch}
+                      <button
+                        className="btn icon-fallback-text"
+                        onClick={handleSearch}
                       >
                         <i className="fa fa-search" />
                       </button>
@@ -314,16 +510,13 @@ export default function Header_2() {
                       <div id="product_results" />
                       <div id="article_results" />
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </nav>
       </header>
-
     </React.Fragment>
   );
 }

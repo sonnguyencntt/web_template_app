@@ -1,4 +1,4 @@
-import queryString from "query-string"
+import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListNews from "./child/ListNews";
@@ -6,12 +6,19 @@ import Header from "../../components/Header";
 import DataLoading from "./child/DataLoading";
 import { constants as c } from "../../constants";
 import CategoryColumn from "./child/CategoryColumn";
-import PageLoading from "../../components/PageLoading"
+import CategoryColumn2 from "./child/CategoryColumn2";
+import CategoryColumn3 from "./child/CategoryColumn3";
+import { appActions } from "../../actions/appActions";
+
+import PageLoading from "../../components/PageLoading";
 import { newsActions as a } from "../../actions/newsActions";
 function NewsListPage(props) {
   let query = queryString.parse(props.location.search);
-  const pageInfo = useSelector(state => state.news.list);
-  const categories = useSelector(state => state.news.categories);
+  const pageInfo = useSelector((state) => state.news.list);
+  const appTheme = useSelector((state) => state.app.appTheme.home_page_type);
+  const homeInfo = useSelector((state) => state.app.home);
+
+  const categories = useSelector((state) => state.news.categories);
   const dispatch = useDispatch();
   const [prevLocation, setPrevLocation] = useState(props.location.state);
   const [currentQuery, setCurrentQuery] = useState(createQueryString(query));
@@ -23,9 +30,7 @@ function NewsListPage(props) {
           let arr = option[keys[i]].split("-");
           let id = arr[arr.length - 1];
           query["category_ids"] = id;
-        }
-        else
-          query[keys[i]] = option[keys[i]];
+        } else query[keys[i]] = option[keys[i]];
       }
     }
     let queryKeys = [...Object.keys(query)];
@@ -35,40 +40,52 @@ function NewsListPage(props) {
   useEffect(() => {
     document.title = "Danh sách bài viết";
     let queryStr = createQueryString(query);
-    if ((queryStr !== currentQuery || prevLocation !== window.location.pathname)) {
+    if (homeInfo.status === c.LOADING) {
+      dispatch(appActions.getHomeInfo());
+    }
+    if (
+      queryStr !== currentQuery ||
+      prevLocation !== window.location.pathname
+    ) {
       dispatch({ type: c.RESET_NEWS_LIST_STATUS });
       setCurrentQuery(queryStr);
       setPrevLocation(window.location.pathname);
-    } else
-      if (pageInfo.status === c.LOADING) {
-        let queryStr = createQueryString(query);
-        dispatch(a.getAllNews(queryStr));
-      } else {
-        if (categories.status === c.LOADING) {
-          dispatch(a.getNewsCategory());
-        }
+    } else if (pageInfo.status === c.LOADING) {
+      let queryStr = createQueryString(query);
+      dispatch(a.getAllNews(queryStr));
+    } else {
+      if (categories.status === c.LOADING) {
+        dispatch(a.getNewsCategory());
       }
+    }
   }, [props.location.search, pageInfo]);
   return (
     <React.Fragment>
       <Header />
-      {
-        categories.status === c.SUCCESS ?
-          <div className="news-list-page container">
-            <div className="row">
-              <CategoryColumn />
-              {
-                pageInfo.status === c.SUCCESS
-                  ?
-                  <ListNews location={props.location} />
-                  :
-                  <DataLoading />
-              }
-            </div>
+      {categories.status === c.SUCCESS ? (
+        <div className="news-list-page container">
+          <div className="row">
+            {appTheme == 1 || appTheme == null ? (
+              <CategoryColumn homeInfo={homeInfo} />
+            ) : appTheme == 2 ? (
+              <CategoryColumn2 homeInfo={homeInfo} />
+            ) : appTheme == 3 ? (
+              <CategoryColumn3 homeInfo={homeInfo} />
+            ) : (
+              <CategoryColumn homeInfo={homeInfo} />
+            )}
+
+            {pageInfo.status === c.SUCCESS ? (
+              <ListNews location={props.location} />
+            ) : (
+              <DataLoading />
+            )}
           </div>
-          : <PageLoading />
-      }
+        </div>
+      ) : (
+        <PageLoading />
+      )}
     </React.Fragment>
-  )
+  );
 }
-export default NewsListPage
+export default NewsListPage;

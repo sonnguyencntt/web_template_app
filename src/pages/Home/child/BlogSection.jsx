@@ -9,7 +9,7 @@ export default function BlogSection(props) {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           infinite: props.posts.length > 2,
           slidesToScroll: 1,
         }
@@ -17,7 +17,7 @@ export default function BlogSection(props) {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         }
       },

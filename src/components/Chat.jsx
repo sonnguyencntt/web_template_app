@@ -191,6 +191,9 @@ export default function Chat(props) {
               justifyContent: "space-between"
             }}>
             <div style={{ display: "flex", alignItems: "center", }}>
+            <i class="far fa-comment-dots"></i>
+            &nbsp;&nbsp;
+
               Hỗ trợ khách hàng&nbsp;
               {
                 newMessage > 0 &&

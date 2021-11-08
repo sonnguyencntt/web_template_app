@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import ItemProduct from "./ItemProduct"
+import ItemProduct from "./ItemProduct";
 export default function HomeBanner(props) {
   const { banners, categories, discountProducts } = props;
   const appTheme = useSelector((state) => state.app.appTheme);
@@ -15,28 +15,28 @@ export default function HomeBanner(props) {
       {
         breakpoint: 600,
         settings: {
-          infinite: props.products.length > 1,
+          infinite: props.products.length > 2,
           slidesToShow: 2,
           slidesToScroll: 1,
-        },
+        }
       },
       {
         breakpoint: 768,
         settings: {
-          infinite: props.products.length > 2,
-          slidesToShow: 3,
+          infinite: props.products.length > 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
-        },
+        }
       },
       {
         breakpoint: 992,
         settings: {
-          infinite: props.products.length > 3,
-          slidesToShow: 4,
+          infinite: props.products.length > 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
-        },
+        }
       },
-    ],
+    ]
   };
   function handleCateClick(id) {
     window.location.href = `/danh-sach-san-pham?danh-muc-ids=${id}`;
@@ -47,32 +47,24 @@ export default function HomeBanner(props) {
         <div className="container">
           <div className="collection-border">
             <div className="collection-main">
-              <div className="row ">
-                <div className="col-lg-12 col-sm-12">
-                  <div
-                    className="e-tabs not-dqtab ajax-tab-1"
-                    data-section="ajax-tab-1"
-                    data-view="car-1"
-                  >
-                    <div className="row row-noGutter">
-                      <div className="col-sm-12">
-                        <div className="content">
-                          <div className="section-title" >
-                            <h2 style={{backgroundColor:appTheme.color_main_1}}>{props.title}</h2>
-                          </div>
-                          <div>
-                            <div className="">
-                                <Slider {...settings}>
-                                  {props.products.map((v, i) => (
-                                   
-                                      <ItemProduct key={i} product={v} />
-                                  ))}
-                                </Slider>
-                                
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+              <div
+                className="e-tabs not-dqtab ajax-tab-1"
+                data-section="ajax-tab-1"
+                data-view="car-1"
+              >
+                <div className="content">
+                  <div className="section-title">
+                    <h2 style={{ backgroundColor: appTheme.color_main_1 }}>
+                      {props.title}
+                    </h2>
+                  </div>
+                  <div>
+                    <div className="">
+                      <Slider {...settings}>
+                        {props.products.map((v, i) => (
+                          <ItemProduct key={i} product={v} />
+                        ))}
+                      </Slider>
                     </div>
                   </div>
                 </div>

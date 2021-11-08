@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { handleImgErr } from "../../../helper";
-export default function CategoryColumn() {
+import BannerVertical from "../../../components/BannerVertical";
+import { constants as c } from "../../../constants";
+export default function CategoryColumn(props) {
+  const { homeInfo } = props;
+
   const categories = useSelector(state => state.news.categories);
+
   return (
     <div className="categories-column">
       <div className="main-title">
@@ -37,6 +42,11 @@ export default function CategoryColumn() {
           )
         }
       </div>
+      {homeInfo.status === c.SUCCESS
+          ? homeInfo.banner_ads.type_7.length > 0 && (
+              <BannerVertical banners={homeInfo.banner_ads.type_7} />
+            )
+          : null}
     </div>
   )
 }

@@ -9,7 +9,7 @@ export default function HomeBanner(props) {
   const appTheme = useSelector((state) => state.app.appTheme);
 
   var settings = {
-    infinite: props.products.length > 3,
+    infinite: props.products.length > 4,
     slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
@@ -17,7 +17,7 @@ export default function HomeBanner(props) {
         breakpoint: 600,
         settings: {
           infinite: props.products.length > 1,
-          slidesToShow: 4,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -33,7 +33,7 @@ export default function HomeBanner(props) {
         breakpoint: 992,
         settings: {
           infinite: props.products.length > 3,
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },

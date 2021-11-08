@@ -100,10 +100,11 @@ export default function Header_2() {
   }
   return (
     <React.Fragment>
-      <div className="header" style={{ background: appTheme.color_main_1 }}>
-        <div className="middle-header">
+      <div className="header" >
+        <div className="middle-header"           style={{ background: appTheme.color_main_1 }}
+>
           <div className="container">
-            <div className="row align-items-center">
+            <div className="row align-items-center row-item">
               <div className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 header-left">
                 <div className="heade_menunavs">
                   <div className="wrap_main">
@@ -181,18 +182,21 @@ export default function Header_2() {
                 className="col-xl-2 col-lg-3 col-md-3"
                 style={{ textAlign: "center" }}
               >
-                <a href="index.html">
+                <Link to="/">
                   <img
                     className="logo"
                     src={appTheme.logo_url}
                     alt="ND Fresh"
                   />
-                </a>
+                </Link>
               </div>
               <div className="col-xl-5 col-lg-9 col-md-9 col-sm-12 col-12 header-right">
                 <div className="nd-header-search nd-searchs">
                   <form className="nd-header-search-form" onSave={handleSearch}>
                     <input
+                      style={{
+                        "margin-top": "5px",
+                      }}
                       type="text"
                       className="search-auto form-control"
                       value={searchValue}
@@ -203,7 +207,6 @@ export default function Header_2() {
                     <input type="hidden" name="type" defaultValue="product" />
                     <button
                       onClick={handleSearch}
-                      style={{ background: appTheme.color_main_1 }}
                       className="btn btn-default"
                     >
                       <svg
@@ -264,9 +267,8 @@ export default function Header_2() {
                     <li class="user">
                       <div class="icon">
                         <a
-                          href="/account"
+                          // href="#"
                           title="Tài khoản của bạn"
-                          rel="nofollow"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -282,13 +284,65 @@ export default function Header_2() {
                           </svg>
                         </a>
                       </div>
-                      <div class="drop-account">
-                        <a onClick={handleShowPhonePopup}>Đăng nhập</a>
-                        <a onClick={handleShowPhonePopup}>Đăng ký</a>
-                      </div>
-                    </li>
-                    <li className="d-xl-none d-inline-block">
-                      <div className="category-action"></div>
+                      {tokenInfo ? (
+                        <div class="drop-account">
+                          <a>{profile.name}</a>
+                          <a>{profile.phone_number}</a>
+
+                          <li>
+                            <img src="/img/check-list.png" alt="" />
+                            <Link to="/don-hang">Đơn hàng của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/home.png" alt="" />
+                            <Link to="/dia-chi">Địa chỉ nhận hàng</Link>
+                          </li>
+                          <li>
+                            <img src="/img/star.png" alt="" />
+                            <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
+                          </li>
+                          <li>
+                            <img src="/img/check-mark.png" alt="" />
+                            <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/heart.png" alt="" />
+                            <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
+                          </li>
+                          {profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                            </li>
+                          )}
+
+                          {!profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link
+                                onClick={handleShowCollaboratorRegisForm}
+                                to="/cong-tac-vien"
+                              >
+                                Đăng ký cộng tác viên
+                              </Link>
+                            </li>
+                          )}
+
+                          <li onClick={handleShowProfile}>
+                            <img src="/img/refresh.png" alt="" />
+                            Cập nhật thông tin
+                          </li>
+                          <li onClick={handleLogout}>
+                            <img src="/img/log-out.png" alt="" />
+                            Thoát tài khoản
+                          </li>
+                        </div>
+                      ) : (
+                        <div class="drop-account">
+                          <a onClick={handleShowPhonePopup}>Đăng nhập</a>
+                          <a onClick={handleShowPhonePopup}>Đăng ký</a>
+                        </div>
+                      )}
                     </li>
                   </ul>
                 </div>

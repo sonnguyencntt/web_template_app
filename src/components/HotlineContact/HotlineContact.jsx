@@ -63,7 +63,7 @@ export default function HotlineContact(props) {
               </a>
             </div>
           </div>
-          {isMobile ? (
+          {/* {isMobile ? (
             ""
           ) : (
             <div className="hotline-bar">
@@ -74,7 +74,7 @@ export default function HotlineContact(props) {
                 </span>{" "}
               </a>
             </div>
-          )}
+          )} */}
         </div>
       )}
       <div className="float-icon-hotline" style={styleFb()}>

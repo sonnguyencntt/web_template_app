@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { handleImgErr } from "../../../helper";
+import BannerVertical from "../../../components/BannerVertical";
+import { constants as c } from "../../../constants";
+
 export default function CategoryColumn2(props) {
+  const { homeInfo } = props;
+
   const categories = useSelector((state) => state.category.categories);
   const appTheme = useSelector((state) => state.app.appTheme);
-
+console.log(homeInfo)
   return (
-    <aside className="blog-aside aside-item sidebar-category">
-      <div className="aside-title text-center text-xl-left" style={{backgroundColor:appTheme.color_main_1}}>
-
-        <h2 className="title-head" >
+    <aside className="blog-aside aside-item sidebar-category categories-column-1">
+      <div
+        className="aside-title text-center text-xl-left"
+        style={{ backgroundColor: appTheme.color_main_1 }}
+      >
+        <h2 className="title-head">
           <span>Danh mục</span>
         </h2>
       </div>
@@ -38,7 +45,13 @@ export default function CategoryColumn2(props) {
               : null}
           </ul>
         </div>
+      
       </div>
+      {homeInfo.status === c.SUCCESS
+          ? homeInfo.banner_ads.type_6.length > 0 && (
+              <BannerVertical banners={homeInfo.banner_ads.type_6} />
+            )
+          : null}
     </aside>
-  )
+  );
 }

@@ -6,7 +6,12 @@ import { newsActions as a } from "../../actions/newsActions";
 import { constants as c } from "../../constants";
 import NewsCard from "./child/NewsCard";
 import PageLoading from "../../components/PageLoading";
+import BannerVertical from "../../components/BannerVertical";
+import { appActions } from "../../actions/appActions";
+
 function NewsPage(props) {
+  const homeInfo = useSelector((state) => state.app.home);
+
   const dispatch = useDispatch();
   const pageInfo = useSelector(state => state.news.info);
   const latestNews = useSelector(state => state.news.list);
@@ -21,6 +26,9 @@ function NewsPage(props) {
     if (props.match.params.id) {
       let arr = props.match.params.id.split("-");
       newsId = arr[arr.length - 1];
+    }
+    if (homeInfo.status === c.LOADING) {
+      dispatch(appActions.getHomeInfo());
     }
     if (pageInfo.status === c.LOADING)
       dispatch(a.getNewsInfo(newsId));
@@ -80,14 +88,19 @@ function NewsPage(props) {
                   </div>
                 </div>
                 <div className="latest-news">
-                  <h3>Tin mới nhất</h3>
-                  <div className="column">
+                  <h3 style = {{background : "white" , marginBottom : "0px"}}>Tin mới nhất</h3>
+                  <div className="column" style = {{background : "white"}}>
                     {
                       latestNews.data.map((v, i) =>
                         i < 6 && <NewsCard key={v.id} {...v} />
                       )
                     }
                   </div>
+                  {homeInfo.status === c.SUCCESS
+          ? homeInfo.banner_ads.type_7.length > 0 && (
+              <BannerVertical banners={homeInfo.banner_ads.type_7} />
+            )
+          : null}
                 </div>
               </div>
             </div>

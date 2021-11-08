@@ -4,6 +4,8 @@ import Header from "../../components/Header";
 import Blog from "./child/HomePage3/Blog";
 import { constants as c } from "../../constants";
 import CategoryProduct from "./child/HomePage3/CategoryProduct";
+import CategoryProduct1 from "./child/HomePage3/CategoryProduct1";
+
 import Banner from "./child/HomePage3/Banner";
 import BannerAds from "./child/HomePage3/BannerAds";
 
@@ -58,37 +60,24 @@ function HomePage3(props) {
       ) : (
         <React.Fragment>
           {<Banner banners={info.banners} />}
+          <CategoryProduct1 categories={info.categories} />
 
           {info.hot_products.length > 0 && (
             <SpecialProduct products={info.hot_products} />
           )}
-              {homeInfo.banner_ads.type_0.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_0} />}
+          {homeInfo.banner_ads.type_0.length > 0 && (
+            <BannerAds banners={homeInfo.banner_ads.type_0} />
+          )}
 
           <div class="container">
             <div class="row">
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <CategoryProduct categories={info.categories} />
+                <CategoryProduct categories={info.categories} homeInfo = {homeInfo} />
               </div>
               <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-              {homeInfo.banner_ads.type_1.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_1} />}
-
-                {info.hot_products.length > 0 && (
-                  <Product
-                    title="Sản phẩm nổi bật"
-                    categories={info.categories}
-                    products={info.hot_products}
-                  />
+                {homeInfo.banner_ads.type_3.length > 0 && (
+                  <BannerAds banners={homeInfo.banner_ads.type_3} />
                 )}
-            {homeInfo.banner_ads.type_2.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_2} />}
-
-                {info.new_products.length > 0 && (
-                  <Product
-                    title="Sản phẩm mới"
-                    categories={info.categories}
-                    products={info.new_products}
-                  />
-                )}
-                {homeInfo.banner_ads.type_3.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_3} />}
 
                 {info.sale_products.length > 0 && (
                   <Product
@@ -97,15 +86,41 @@ function HomePage3(props) {
                     products={info.sale_products}
                   />
                 )}
+                {homeInfo.banner_ads.type_2.length > 0 && (
+                  <BannerAds banners={homeInfo.banner_ads.type_2} />
+                )}
+
+                {info.new_products.length > 0 && (
+                  <Product
+                    title="Sản phẩm mới"
+                    categories={info.categories}
+                    products={info.new_products}
+                  />
+                )}
+
+                {homeInfo.banner_ads.type_1.length > 0 && (
+                  <BannerAds banners={homeInfo.banner_ads.type_1} />
+                )}
+
+                {info.hot_products.length > 0 && (
+                  <Product
+                    title="Sản phẩm nổi bật"
+                    categories={info.categories}
+                    products={info.hot_products}
+                  />
+                )}
               </div>{" "}
             </div>
           </div>
 
-          {homeInfo.banner_ads.type_4.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_4} />}
+          {homeInfo.banner_ads.type_4.length > 0 && (
+            <BannerAds banners={homeInfo.banner_ads.type_4} />
+          )}
 
           {info.new_posts.length > 0 && <Blog posts={info.new_posts} />}
-          {homeInfo.banner_ads.type_5.length > 0 && <BannerAds banners={homeInfo.banner_ads.type_5} />}
-
+          {homeInfo.banner_ads.type_5.length > 0 && (
+            <BannerAds banners={homeInfo.banner_ads.type_5} />
+          )}
         </React.Fragment>
       )}
     </React.Fragment>

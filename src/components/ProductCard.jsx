@@ -2,10 +2,10 @@ import { formatPrice, formatPriceOrContact, handleImgErr } from "../helper";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import { standardProductLink } from "../helper"
+import { standardProductLink } from "../helper";
 
 export default function ProductCard(props) {
-  const appTheme = useSelector(state => state.app.appTheme);
+  const appTheme = useSelector((state) => state.app.appTheme);
   const myLink = useRef(null);
   const badges = useSelector((state) => state.user.badges);
   let {
@@ -19,7 +19,8 @@ export default function ProductCard(props) {
     is_favorite,
     product_discount,
     percent_collaborator,
-    is_top_sale } = props.product;
+    is_top_sale,
+  } = props.product;
   let discount = 0;
   let discount_percent = 0;
   let avt = "/img/default_product.jpg";
@@ -28,17 +29,21 @@ export default function ProductCard(props) {
     discount = min_price * 0.01 * product_discount.value;
     price = min_price - discount;
   }
-  if (images.length)
-    avt = images[0].image_url;
+  if (images.length) avt = images[0].image_url;
   function handleClick() {
     myLink.current.click();
   }
+
+  console.log(discount);
   return (
     <div onClick={handleClick} className="product-card">
       <div style={{ display: "none" }}>
-        <Link ref={myLink} to={`/san-pham/${standardProductLink(name)}-${id}`} />
+        <Link
+          ref={myLink}
+          to={`/san-pham/${standardProductLink(name)}-${id}`}
+        />
       </div>
-      <div className="image">
+     <div className="image">
         {
           is_new &&
           <div className="new-tag">
@@ -74,34 +79,45 @@ export default function ProductCard(props) {
         </div>
       </div>
       <div style={{ padding: "0.5em" }}>
-        <div className="name">
-          {name}
+        <div className="name">{name}</div>
+
+        <div style = {{display : "flex"}}>
+        <div
+              className="current-price"
+              style={{ color: appTheme.color_main_1 }}
+            >
+              {"  "}₫{formatPriceOrContact(price - discount)}
+            </div>
+        <span
+        style = {{margin : "auto 0px" , paddingLeft : "15px"}}
+          class={`old-price ${
+            product_discount == null ||
+            product_discount == 0 ||
+            formatPriceOrContact(discount) == "Liên hệ"
+              ? "hide"
+              : ""
+          }`}
+        >
+          ₫{formatPriceOrContact(price)}
+        </span>
         </div>
         <div className="row">
           <div>
-            <div className="current-price" style={{ color: appTheme.color_main_1 }}>
-              ₫{formatPriceOrContact(price)}
-            </div>
-            {
-              badges.status_collaborator === 1 &&
+       
+            {badges.status_collaborator === 1 && (
               <div className="coll-price">
-                <span>
-                  Hoa hồng:
-                </span><br />
-                <label >
-                  {` ₫${formatPrice(min_price * percent_collaborator / 100)}`}
+                <span>Hoa hồng:</span>
+                <br />
+                <label>
+                  {` ₫${formatPrice((min_price * percent_collaborator) / 100)}`}
                 </label>
               </div>
-            }
+            )}
           </div>
-          {
-            view > 0 &&
-            <div className="view-count">
-              Đã xem: {view}
-            </div>
-          }
+          {/* {view > 0 && <div className="view-count">Đã mua: {view}</div>} */}
+          <div className="view-count">Đã mua: {view}</div>
         </div>
       </div>
     </div>
-  )
+  );
 }

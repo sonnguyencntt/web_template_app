@@ -108,32 +108,8 @@ export default function Header_2() {
                 <img width={170} height={58} src={appTheme.logo_url} />
               </Link>
             </div>
-            <div className="d-md-none d-block col-2 order-3">
-              <div className="category-action">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  version="1.1"
-                  id="Capa_xx"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 480 480"
-                  style={{ enableBackground: "new 0 0 480 480" }}
-                  xmlSpace="preserve"
-                >
-                  <g xmlns="http://www.w3.org/2000/svg">
-                    <path d="M240,0C107.452,0,0,107.452,0,240s107.452,240,240,240c132.486-0.15,239.85-107.514,240-240C480,107.452,372.548,0,240,0     z M240,464C116.288,464,16,363.712,16,240S116.288,16,240,16c123.653,0.141,223.859,100.347,224,224     C464,363.712,363.712,464,240,464z" />
-                    <path d="M360,232H168c-4.418,0-8,3.582-8,8s3.582,8,8,8h192c4.418,0,8-3.582,8-8S364.418,232,360,232z" />
-                    <path d="M360,312H168c-4.418,0-8,3.582-8,8s3.582,8,8,8h192c4.418,0,8-3.582,8-8S364.418,312,360,312z" />
-                    <path d="M360,152H168c-4.418,0-8,3.582-8,8s3.582,8,8,8h192c4.418,0,8-3.582,8-8S364.418,152,360,152z" />
-                    <path d="M136,152h-16c-4.418,0-8,3.582-8,8s3.582,8,8,8h16c4.418,0,8-3.582,8-8S140.418,152,136,152z" />
-                    <path d="M136,232h-16c-4.418,0-8,3.582-8,8s3.582,8,8,8h16c4.418,0,8-3.582,8-8S140.418,232,136,232z" />
-                    <path d="M136,312h-16c-4.418,0-8,3.582-8,8s3.582,8,8,8h16c4.418,0,8-3.582,8-8S140.418,312,136,312z" />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div className="col-lg-6 col-xl-6 col-md-6 col-10 col-search order-3 order-md-2">
+           
+            <div className="col-lg-6 col-xl-6 col-md-6 col-10 col-search order-3 order-md-2 search-lg">
               <div className="theme-search-smart">
                 <div className="header_search theme-searchs">
                
@@ -434,7 +410,132 @@ export default function Header_2() {
                 </li>
               </ul>
             </div>
+          
           </div>
+          <div className="col-lg-12 col-xl-12 col-md-12 col-12 col-search order-3 order-md-2 search-mobile">
+              <div className="theme-search-smart">
+                <div className="header_search theme-searchs">
+               
+                  <form
+                    onSave={handleSearch}
+                    className="input-group search-bar theme-header-search-form ultimate-search"
+                  >
+                    <input
+                      type="text"
+                      value={searchValue}
+                      onChange={handleInputChange}
+                      placeholder="Tìm kiếm sản phẩm..."
+                      className="search-auto input-group-field auto-search"
+                      required
+                    />
+                    <span className="input-group-btn">
+                      <button
+                        onClick={handleSearch}
+                        className="btn icon-fallback-text"
+                        aria-label="Justify"
+                      >
+                        <svg
+                          enableBackground="new 0 0 612.01 612.01"
+                          version="1.1"
+                          viewBox="0 0 612.01 612.01"
+                          xmlSpace="preserve"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="m606.21 578.71-158.01-155.49c41.378-44.956 66.802-104.41 66.802-169.84-0.02-139.95-115.3-253.39-257.51-253.39s-257.49 113.44-257.49 253.39 115.28 253.39 257.49 253.39c61.445 0 117.8-21.253 162.07-56.586l158.62 156.1c7.729 7.614 20.277 7.614 28.006 0 7.747-7.613 7.747-19.971 0.018-27.585zm-348.72-110.91c-120.33 0-217.87-95.993-217.87-214.41s97.543-214.41 217.87-214.41c120.33 0 217.87 95.993 217.87 214.41s-97.542 214.41-217.87 214.41z" />
+                        </svg>
+                      </button>
+                    </span>
+                  </form>
+                </div>
+              </div>
+              <div className="contact-phone">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  style={{
+                    margin: "auto",
+                    display: "block",
+                    position: "absolute",
+                    width: "30px",
+                    height: "30px",
+                    left: 0,
+                  }}
+                  width="71px"
+                  height="71px"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="xMidYMid"
+                >
+                  <circle
+                    cx={50}
+                    cy={50}
+                    r="39.7789"
+                    fill="none"
+                    stroke="#fff000"
+                    strokeWidth={8}
+                  >
+                    <animate
+                      attributeName="r"
+                      repeatCount="indefinite"
+                      dur="1s"
+                      values="0;40"
+                      keyTimes="0;1"
+                      keySplines="0 0.2 0.8 1"
+                      calcMode="spline"
+                      begin="-0.5s"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      repeatCount="indefinite"
+                      dur="1s"
+                      values="1;0"
+                      keyTimes="0;1"
+                      keySplines="0.2 0 0.8 1"
+                      calcMode="spline"
+                      begin="-0.5s"
+                    />
+                  </circle>
+                  <circle
+                    cx={50}
+                    cy={50}
+                    r="24.6446"
+                    fill="none"
+                    stroke="#fff000"
+                    strokeWidth={8}
+                  >
+                    <animate
+                      attributeName="r"
+                      repeatCount="indefinite"
+                      dur="1s"
+                      values="0;40"
+                      keyTimes="0;1"
+                      keySplines="0 0.2 0.8 1"
+                      calcMode="spline"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      repeatCount="indefinite"
+                      dur="1s"
+                      values="1;0"
+                      keyTimes="0;1"
+                      keySplines="0.2 0 0.8 1"
+                      calcMode="spline"
+                    />
+                  </circle>
+                </svg>
+                <p>Tư vấn hỗ trợ</p>
+                {appTheme == null ||
+                appTheme.phone_number_hotline == null ||
+                appTheme.phone_number_hotline === "" ||
+                appTheme.is_show_icon_hotline === false ? (
+                  ""
+                ) : (
+                  <a href={`tel:${appTheme.phone_number_hotline}`}>
+                    {" "}
+                    {appTheme.phone_number_hotline}
+                  </a>
+                )}
+              </div>
+            </div>
         </div>
       </div>
       <div className="header_nav_main header-menu d-none d-lg-block clearfix">

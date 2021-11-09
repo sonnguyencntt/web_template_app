@@ -48,6 +48,30 @@
       max-height: 310px !important;
     }
   }
+
+
+  @media only screen and (max-width: 760px) {
+    .search-mobile
+    {
+      display: block;
+    }
+    .search-lg
+    {
+      display: none;
+    }
+  } 
+  @media only screen and (min-width:760px) and (max-width:1280px){
+    .search-lg
+    {
+      display: block;
+    }
+    .search-mobile
+    {
+      display: none;
+    }
+	
+}
+
 .banner-slide{
     padding : 0px 6px
 }

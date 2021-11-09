@@ -100,7 +100,7 @@ export default function Blog(props) {
                 <div
                   className="blog-quote"
                   style={{
-                    display: "-webkit-box",
+                    display: "-webkit-inline-flex",
                     "-webkit-line-clamp": "3",
 
                     overflow: "hidden",
@@ -171,7 +171,7 @@ export default function Blog(props) {
                     <div
                       className=""
                       style={{
-                        "display": "-webkit-box",
+                        "display": "-webkit-inline-flex",
                         "-webkit-line-clamp": "2",
 
                         "-webkit-box-orient": "vertical",

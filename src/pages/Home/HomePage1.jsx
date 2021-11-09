@@ -50,14 +50,14 @@ function HomePage(props) {
   return (
     <React.Fragment>
       <Header />
-      {/* <div className="home-page container"> */}
-      <div className="">
+       <div className="home-page container"> 
+      
 
         {homeInfo.status === c.LOADING ? (
           <PageLoading />
         ) : (
           <React.Fragment>
-            {/* <HomeBanner
+             <HomeBanner
               banners={info.banners}
               categories={info.categories}
               discountProducts={info.sale_products}
@@ -79,11 +79,9 @@ function HomePage(props) {
                 title="Sản phẩm nổi bật"
                 products={info.hot_products}
               />
-            )} */}
+            )} 
 
-            {/* {info.new_posts.length > 0 && (
-              <BlogSection posts={info.new_posts} />
-            )} */}
+         
 
             {info.new_posts.length > 0 && <Blog posts={info.new_posts} />}
           </React.Fragment>

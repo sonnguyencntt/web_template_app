@@ -60,7 +60,7 @@
       display: none;
     }
   } 
-  @media only screen and (min-width:760px) and (max-width:1280px){
+  @media only screen and (min-width:760px) and (max-width:3000px){
     .search-lg
     {
       display: block;

@@ -169,14 +169,15 @@ export default function Blog(props) {
                       </Link>
                     </h3>
                     <div
-                      className="blog-quote"
+                      className=""
                       style={{
-                        display: "-webkit-box",
+                        "display": "-webkit-box",
                         "-webkit-line-clamp": "2",
 
-                        overflow: "hidden",
                         "-webkit-box-orient": "vertical",
-                        "height" : "40px"
+                        "height" : "40px",
+                        "overflow": "hidden",
+
                       }}
                       dangerouslySetInnerHTML={{
                         __html: extractContent(v.content),

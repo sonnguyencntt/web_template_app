@@ -81,9 +81,9 @@ function HomePage(props) {
 
             {/* {info.new_posts.length > 0 && (
               <BlogSection posts={info.new_posts} />
-            )}
+            )} */}
 
-            {info.new_posts.length > 0 && <Blog posts={info.new_posts} />} */}
+            {info.new_posts.length > 0 && <Blog posts={info.new_posts} />}
           </React.Fragment>
         )}
       </div>

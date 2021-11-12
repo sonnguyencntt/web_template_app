@@ -8,6 +8,7 @@ import { cart } from "./cart";
 import { combo } from "./combo";
 import { voucher } from "./voucher";
 import { collaborator } from "./collaborator";
+
 const rootReducer = combineReducers({
   app,
   news,

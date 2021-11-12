@@ -8,6 +8,7 @@ import ForgotPass from "./child/ForgotPass";
 import AutoHidePopup from "./child/AutoHide";
 import OrderSuccess from "./child/OrderSuccess";
 import MessagePopup from "./child/MessagePopup";
+
 import { constants as c } from "../../constants";
 import CollaboratorRegis from "./child/CollaboratorRegis";
 import { appActions as a } from "../../actions/appActions";
@@ -30,6 +31,7 @@ function Popup() {
     [c.PROFILE_POPUP]: <ProfilePopup handleClose={handleClosePopup} />,
     [c.FORGOT_PASS_POPUP]: <ForgotPass handleClose={handleClosePopup} />,
     [c.COLLABORATOR_REGIS_POPUP]: <CollaboratorRegis handleClose={handleClosePopup} />,
+
   }
   const currentPopup = useSelector(state => state.app.currentPopup);
   return (

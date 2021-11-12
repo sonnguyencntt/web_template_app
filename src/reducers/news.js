@@ -26,6 +26,7 @@ export function news(state = initialState, action) {
       return {
         ...state,
         info: {
+          
           status: c.LOADING,
         },
       };
@@ -39,6 +40,7 @@ export function news(state = initialState, action) {
     case c.GET_NEWS_CATEGORY_SUCCESS:
       return {
         ...state,
+
         categories: {
           status: c.SUCCESS,
           list: action.data,

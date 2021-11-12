@@ -61,7 +61,7 @@ export default function ItemProduct(props) {
               }`}
               data-sale={`Giảm ${discount_percent}%`}
             >
-              {is_new && <div className="new-tag">Mới</div>}
+              {is_new && <div className="new-tag-theme">Mới</div>}
               {is_favorite && (
                 <div
                   className="favorite-tag"

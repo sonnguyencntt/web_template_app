@@ -33,7 +33,12 @@ export default function Blog(props) {
       },
     ],
   };
-
+  function extractContent(s) {
+    var span = document.createElement('span');
+    span.innerHTML = s;
+    var text = span.textContent || span.innerText;
+    return text.slice(0, 200);
+  };
   function showBlog() {
     var array = [];
     for (let [i, v] of Object.entries(props.posts)) {
@@ -84,10 +89,9 @@ export default function Blog(props) {
                       "-webkit-box-orient": "vertical",
                       overflow: "hidden",
 
-                      height: "40px",
                     }}
                     className=""
-                    dangerouslySetInnerHTML={{ __html: v.content }}
+                    dangerouslySetInnerHTML={{ __html: extractContent(v.content) }}
                   ></div>
                   <Link
                     style={{

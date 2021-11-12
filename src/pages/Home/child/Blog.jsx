@@ -38,10 +38,11 @@ export default function Blog(props) {
   };
 
   function extractContent(s) {
-    var span = document.createElement("span");
+    var span = document.createElement('span');
     span.innerHTML = s;
-    return span.textContent || span.innerText;
-  }
+    var text = span.textContent || span.innerText;
+    return text.slice(0, 200);
+  };
 
   function showBlog() {
     var array = [];

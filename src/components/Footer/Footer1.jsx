@@ -98,7 +98,7 @@ export default function Footer1() {
         </div>
       </div>
       <div className="footer">
-        <div className="container row">
+        <div className="container row" >
           <div>
             <div>{appTheme.contact_individual_organization_name}</div>
             <div>{appTheme.title}</div>

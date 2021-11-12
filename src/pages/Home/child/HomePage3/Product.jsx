@@ -25,7 +25,7 @@ export default function HomeBanner(props) {
         breakpoint: 768,
         settings: {
           infinite: props.products.length > 2,
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -33,7 +33,7 @@ export default function HomeBanner(props) {
         breakpoint: 992,
         settings: {
           infinite: props.products.length > 3,
-          slidesToShow: 4,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },

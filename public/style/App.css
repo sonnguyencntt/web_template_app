@@ -63,7 +63,7 @@ button, .news-page img {
 }
 
 .footer .container > div:first-of-type {
-  /* width: 350px; */
+  width: 350px;
   padding-right: 1em;
 }
 
@@ -752,9 +752,10 @@ body {
 .blog-card .image .img-container {
   display: block;
   width: 100%;
-  padding-top: 75%;
+  /* padding-top: 75%; */
   position: relative;
   margin: auto;
+  height: 300px;
 }
 
 .blog-card .image .img-container img {
@@ -2228,7 +2229,9 @@ body {
 .home-page .blog-section .blog-card {
   margin-bottom: 0.5em;
   /* /* min-height: 100%; */
-  height: 505px; 
+  /* height: 505px;  */
+  height: 470px; 
+
   width: 100%;
   border: 1px solid #e4e4e4;
 }

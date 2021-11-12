@@ -26,15 +26,16 @@ export default function ProductCard(props) {
   let avt = "/img/default_product.jpg";
   if (product_discount) {
     discount_percent = product_discount.value;
-    discount = min_price * 0.01 * product_discount.value;
-    price = min_price - discount;
+    // discount = min_price * 0.01 * product_discount.value;
+    discount = product_discount.discount_price;
+
+    // price = min_price - discount;
   }
   if (images.length) avt = images[0].image_url;
   function handleClick() {
     myLink.current.click();
   }
 
-  console.log(discount);
   return (
     <div onClick={handleClick} className="product-card">
       <div style={{ display: "none" }}>
@@ -86,14 +87,14 @@ export default function ProductCard(props) {
               className="current-price"
               style={{ color: appTheme.color_main_1 }}
             >
-              {"  "}₫{formatPriceOrContact(price - discount)}
+              {"  "}₫{formatPriceOrContact(discount == 0  ? price : discount )}
             </div>
         <span
         style = {{margin : "auto 0px" , paddingLeft : "15px"}}
           class={`old-price ${
             product_discount == null ||
             product_discount == 0 ||
-            formatPriceOrContact(discount) == "Liên hệ"
+            formatPriceOrContact(price) == "Liên hệ"
               ? "hide"
               : ""
           }`}
@@ -109,7 +110,7 @@ export default function ProductCard(props) {
                 <span>Hoa hồng:</span>
                 <br />
                 <label>
-                  {` ₫${formatPrice((min_price * percent_collaborator) / 100)}`}
+                  {` ₫${formatPrice(((discount == 0  ? price : discount ) * percent_collaborator) / 100)}`}
                 </label>
               </div>
             )}

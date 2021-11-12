@@ -1,15 +1,11 @@
 import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import HomeBanner from "./child/HomeBanner";
 import Header from "../../components/Header";
-import BlogSection from "./child/BlogSection";
-import Blog from "./child/Blog";
 
 import { constants as c } from "../../constants";
-import ProductSection from "./child/ProductSection";
 import { appActions } from "../../actions/appActions";
-import PageLoading from "../../components/PageLoading";
-function HomePage(props) {
+import Main from "../../components/Booking/Child/Main"
+function Booking(props) {
   const dispatch = useDispatch();
   const homeInfo = useSelector((state) => state.app.home);
   const appTheme = useSelector((state) => state.app.appTheme);
@@ -50,44 +46,8 @@ function HomePage(props) {
   return (
     <React.Fragment>
       <Header />
-      <div className="home-page container">
-
-        {homeInfo.status === c.LOADING ? (
-          <PageLoading />
-        ) : (
-          <React.Fragment>
-            <HomeBanner
-              banners={info.banners}
-              categories={info.categories}
-              discountProducts={info.sale_products}
-            />
-            {info.sale_products.length > 0 && (
-              <ProductSection
-                title="Sản phẩm giảm giá"
-                products={info.sale_products}
-              />
-            )}
-            {info.new_products.length > 0 && (
-              <ProductSection
-                title="Sản phẩm mới"
-                products={info.new_products}
-              />
-            )}
-            {info.hot_products.length > 0 && (
-              <ProductSection
-                title="Sản phẩm nổi bật"
-                products={info.hot_products}
-              />
-            )}
-
-            {info.new_posts.length > 0 && (
-              <BlogSection posts={info.new_posts} />
-            )}
-
-          </React.Fragment>
-        )}
-      </div>
+     <Main/>
     </React.Fragment>
   );
 }
-export default HomePage;
+export default Booking;

@@ -31,8 +31,10 @@ export default function ItemProduct(props) {
   let avt = "/img/default_product.jpg";
   if (product_discount) {
     discount_percent = product_discount.value;
-    discount = min_price * 0.01 * product_discount.value;
-    price = min_price - discount;
+    // discount = min_price * 0.01 * product_discount.value;
+    discount = product_discount.discount_price;
+
+    // price = min_price - discount;
   }
   if (images.length) avt = images[0].image_url;
 
@@ -69,17 +71,7 @@ export default function ItemProduct(props) {
                     {is_top_sale && (
                       <div className="top-sale-tag">Bán chạy</div>
                     )}{" "}
-                    <Link to={`/san-pham/${standardProductLink(name)}-${id}`}>
-                      <img
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          "object-fit": "cover",
-                        }}
-                        src={avt}
-                        alt="Quả Kiwi xanh"
-                      />
-                    </Link>
+        
                     <div
                       class={`sale-flash ${
                         product_discount == null || product_discount == 0
@@ -118,14 +110,14 @@ export default function ItemProduct(props) {
                         }}
                       >
                         {" "}
-                        {"  "}₫{formatPriceOrContact(price - discount)}
+                        {"  "}₫{formatPriceOrContact(discount == 0  ? price : discount )}
                       </span>
 
                       <span
                         class={`old-price ${
                           product_discount == null ||
                           product_discount == 0 ||
-                          formatPriceOrContact(discount) == "Liên hệ"
+                          formatPriceOrContact(price) == "Liên hệ"
                             ? "hide"
                             : ""
                         }`}
@@ -149,9 +141,8 @@ export default function ItemProduct(props) {
                                   Hoa hồng:{" "}
                                 </span>
                                 <label style={{ color: "deeppink" }}>
-                                  {` ₫${formatPrice(
-                                    (min_price * percent_collaborator) / 100
-                                  )}`}
+                                {` ₫${formatPrice(((discount == 0  ? price : discount ) * percent_collaborator) / 100)}`}
+
                                 </label>
                               </div>
                             )}

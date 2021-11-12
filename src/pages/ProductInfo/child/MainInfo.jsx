@@ -23,12 +23,20 @@ export default function MainInfo(props) {
     content_for_collaborator,
     min_price,
     max_price,
+    price,
     percent_collaborator,
   } = props.product;
   if (!images.length) images.push({ image_url: "/img/default_product.jpg" });
   let discount_percent = null;
+  let discount = 0;
+
   if (product_discount)
+  {
+
     discount_percent = product_discount.value;
+    discount = product_discount.discount_price;
+
+  }
   const dispatch = useDispatch();
   const myShareBtn = useRef(null);
   const vouchers = useSelector((state) => state.voucher.list);
@@ -340,7 +348,7 @@ export default function MainInfo(props) {
                     >
                       Hoa hồng: ₫
                       {formatPrice(
-                        min_price *
+                        (discount == 0  ? min_price : discount)  *
                         (percent_collaborator * 0.01) 
                       )}
                     </div>

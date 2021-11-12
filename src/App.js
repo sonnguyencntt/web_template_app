@@ -21,6 +21,13 @@ import FavoritePage from "./pages/FavoriteProduct/FavoritePage";
 import ProductInfoPage from "./pages/ProductInfo/ProductInfoPage";
 import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";
 import ProductsListPage from "./pages/ProductsList/ProductsListPage";
+import {ServicePage} from "./pages/Beso/Service/ServicePage";
+import {Blog} from "./pages/Beso/Blog/Blog";
+import {BlogDiscovery} from "./pages/Beso/BlogDiscovery/BlogDiscovery";
+import Booking from "./pages/Booking/BookingPage";
+
+
+
 import { categoryActions } from "./actions/categoryActions";
 import { constants as c } from "./constants";
 import { appActions } from "./actions/appActions";
@@ -70,6 +77,11 @@ function App() {
           <Route path="/ma-giam-gia" component={VoucherPage} />
           <Route path="/combo-giam-gia" component={ComboPage} />
           <Route path="/cong-tac-vien" component={CollaboratorPage} />
+          <Route path="/dich-vu" component={ServicePage} />
+          <Route path="/kham-pha" component={BlogDiscovery} />
+          <Route path="/hanh-trinh" component={Blog} />
+          <Route path="/dat-lich" component={Booking} />
+
           <Route path="/" exact component={HomePage} />
           <Route path="/*" component={ErrorPage} />
         </Switch>

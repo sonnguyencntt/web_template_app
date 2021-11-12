@@ -79,9 +79,9 @@ export default function Blog(props) {
 
                       overflow: "hidden",
                       "-webkit-box-orient": "vertical",
-                      height: "80px",
+                      // height: "50px",
                     }}
-                    dangerouslySetInnerHTML={{ __html: v.content }}
+                    dangerouslySetInnerHTML={{ __html: extractContent(v.content) }}
                   ></div>
                 </span>
               </div>
@@ -92,6 +92,12 @@ export default function Blog(props) {
     }
     return array;
   }
+
+  function extractContent(s) {
+    var span = document.createElement('span');
+    span.innerHTML = s;
+    return span.textContent || span.innerText;
+  };
 
   return (
     <section className="awe-section-9">

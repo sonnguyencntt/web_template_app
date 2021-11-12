@@ -8,9 +8,9 @@ export default function BlogCard(props) {
   }
   return (
     <div className="blog-card" onClick={handleClick}>
-      {/* <div style={{ display: "none" }}>
+      <div style={{ display: "none" }}>
         <Link ref={myLink} to={props.title ? `/tin-tuc/${props.title.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, '-')}-${props.id}` : `/tin-tuc/${props.id}`} />
-      </div> */}
+      </div>
       <div className="image">
         <div className="img-container">
           <img src={props.img} alt="" onError={handleImgErr} />
@@ -26,13 +26,13 @@ export default function BlogCard(props) {
         <div className="line"></div>
         <div className=""
          style={{
-          display: "-webkit-box",
+          display: "-webkit-inline-box",
           "-webkit-line-clamp": "2",
           "-webkit-box-orient": "vertical",
           overflow: "hidden",
-          height: "40px"
+          width : "100%",
         }}
-        dangerouslySetInnerHTML={{ __html: props.quote }}
+        dangerouslySetInnerHTML={{ __html: extractContent(props.quote) }}
          >
         </div>
       </div>
@@ -42,6 +42,7 @@ export default function BlogCard(props) {
   function extractContent(s) {
     var span = document.createElement('span');
     span.innerHTML = s;
-    return span.textContent || span.innerText;
+    var text = span.textContent || span.innerText;
+    return text.slice(0, 200);
   };
 }

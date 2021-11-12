@@ -71,10 +71,10 @@ function HomePage3(props) {
 
           <div class="container">
             <div class="row">
-              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3">
                 <CategoryProduct categories={info.categories} homeInfo = {homeInfo} />
               </div>
-              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+              <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                 {homeInfo.banner_ads.type_3.length > 0 && (
                   <BannerAds banners={homeInfo.banner_ads.type_3} />
                 )}

@@ -9634,12 +9634,12 @@ input[type="checkbox"], input[type="radio"] {
     display: inline;
     margin: 0;
     padding: 0;
-    width: 100%;
+    /* width: 100%; */
     height: 40px;
-    position: absolute;
+    /* position: absolute; */
     background: transparent;
     outline: none;
-    opacity: 0
+    opacity: 1
 }
 
 select {

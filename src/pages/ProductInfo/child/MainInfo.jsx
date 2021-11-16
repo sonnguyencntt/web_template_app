@@ -138,10 +138,23 @@ export default function MainInfo(props) {
     dispatch(productActions.toggleWishList(id, props.isLiked));
     dispatch(userActions.getUserBadges());
   }
+  const sliderRef = useRef();
+  const goToImage = index => {
+    sliderRef.current.slickGoTo(index);
+  };
   function handleSelectDistribute(index) {
     setSelectedDistributes(index);
     let p;
     let q;
+    var image = distributes[0].element_distributes[index].image_url;
+    if (image) {
+      if (currentImages[0].name !== undefined) {
+        currentImages.shift();
+      }
+      currentImages.unshift(distributes[0].element_distributes[index]);
+      setCurrentImages(currentImages);
+      goToImage(0);
+    }
     if (selectedSubDistribute !== -1) {
       if (
         distributes[0].element_distributes[index].sub_element_distributes
@@ -163,11 +176,6 @@ export default function MainInfo(props) {
       setCurrentQuantityInStock(q);
       return;
     }
-    if (
-      distributes[0].element_distributes[index].image_url &&
-      Array.isArray(distributes[0].element_distributes[index].image_url) &&
-      distributes[0].element_distributes[index].image_url.length)
-      setCurrentImages(distributes[0].element_distributes[index].image_url);
     if (distributes[0].element_distributes[index].sub_element_distributes.length === 0) {
       p = distributes[0].element_distributes[index].price;
       q = distributes[0].element_distributes[index].quantity_in_stock;
@@ -237,7 +245,7 @@ export default function MainInfo(props) {
             )}
           </button>
      
-          <Slider {...settings}>
+          <Slider ref={sliderRef} {...settings}>
             {currentImages.map((v, i) => (
               <div className="image" key={i}>
                 <div className="img-container">

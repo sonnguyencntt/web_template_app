@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatPrice } from "../../../helper";
+import { constants as c } from "../../../constants";
 export default function CartItem(props) {
   let {
     price,
@@ -74,16 +75,19 @@ export default function CartItem(props) {
       }
     }
   }
+  
+  const dispatch = useDispatch();
 
   function handleIncrease() {
-
-    if (
-      quantity + 1 <=
-      getMaxQuantity(
+    var maxQuantity = getMaxQuantity();
+    if (props.distributes_selected !== null) {
+      maxQuantity = getMaxQuantity(
         props.distributes_selected[0]?.name,
         props.distributes_selected[0]?.sub_element_distributes
-      )
-    ) {
+      );
+    }
+    
+    if (maxQuantity == -1 || (quantity + 1) <= maxQuantity) {
       props.changeQuantity({
         line_item_id: props.line_item_id,
         product_id: id,
@@ -92,6 +96,12 @@ export default function CartItem(props) {
         code_voucher: "",
       });
       setQuantity(quantity + 1);
+    } else {
+      dispatch({
+        type: c.CHANGE_POPUP,
+        popupType: c.AUTOHIDE_POPUP,
+        messageInfo: "Đã vượt quá số lượng trong kho!",
+      });
     }
   }
   function handleDecrease() {

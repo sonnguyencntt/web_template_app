@@ -18,6 +18,7 @@ export default function OrderInfo(props) {
     bonus_points_amount_can_use,
     balance_collaborator_can_use,
     voucher_discount_amount,
+    combo_discount_amount,
   } = props.cartInfo;
   const defaultAddressArr = props.userAddress.filter((v) => v.is_default);
   const appTheme = useSelector((state) => state.app.appTheme);
@@ -475,6 +476,10 @@ export default function OrderInfo(props) {
           <div className="row">
             <div>Voucher</div>
             <span>₫ {formatPrice(voucher_discount_amount)}</span>
+          </div>
+          <div className="row">
+            <div>Combo</div>
+            <span>-₫ {formatPrice(combo_discount_amount)}</span>
           </div>
           <div className="point-use">
             <div className="row">

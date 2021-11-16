@@ -4987,6 +4987,11 @@ body {
   background-color: rgba(188, 4, 18, 0.5);
 }
 
+.combo-page .combo-card .buy-now-btn {
+  background-color: red;
+  right: 75px;
+}
+
 .combo-page .combo-card .top {
   display: flex;
 }

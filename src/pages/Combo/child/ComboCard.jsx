@@ -1,6 +1,8 @@
 import ProductCombo from "./ProductCombo";
 import Slider from "react-slick";
 import { formatPrice } from "../../../helper";
+import { cartActions } from "../../../actions/cartActions";
+import { useDispatch } from "react-redux";
 export default function ComboCard(props) {
   const { name, value, type, products, end, set_limit_amount } = props;
   var settings = {
@@ -34,8 +36,30 @@ export default function ComboCard(props) {
       },
     ]
   };
+  
+  const dispatch = useDispatch();
+  
+  function handleBuyNow(products) {
+    products.forEach((product) => {
+      dispatch(
+        cartActions.addCart(
+          {
+            product_id: product.product.id,
+            quantity: 1,
+            distributes: [],
+          },
+          true
+        )
+      );
+    });
+    setTimeout(() => {
+      window.location.href = '/gio-hang';
+    }, 3000);
+  }
+  
   return (
     <div className="combo-card">
+      <button className="info-btn buy-now-btn" onClick={() => handleBuyNow(products)}>Mua ngay</button>
       <button className="info-btn">Combo</button>
       <div className="top">
         <div className="name">

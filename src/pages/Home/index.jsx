@@ -4,6 +4,7 @@ import HomePage1 from "./HomePage1"
 import HomePage2 from "./HomePage2"
 import HomePage3 from "./HomePage3"
 import HomePage4 from "./HomePage4"
+import HomePage5 from "./HomePage5"
 
 
 export default function Footer() {
@@ -12,7 +13,7 @@ export default function Footer() {
   console.log(appTheme)
   return <React.Fragment>
     {
-      appTheme == 1 || appTheme == null ? <HomePage1/> : appTheme == 2 ? <HomePage2/> :   appTheme == 3 ? <HomePage3 /> :  <HomePage4 /> 
+      appTheme == 1 || appTheme == null ? <HomePage1/> : appTheme == 2 ? <HomePage2/> :   appTheme == 3 ? <HomePage3 /> : appTheme == 4 ? <HomePage4 /> : <HomePage5 /> 
     }
 
   </React.Fragment>;

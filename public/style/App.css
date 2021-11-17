@@ -14,7 +14,9 @@
 button, .news-page img {
   max-width: 100%;
 }
-
+.product-info-page .detail-info img{
+  max-width: 100%;
+}
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .footer .container {
     flex-direction: column;
@@ -650,6 +652,10 @@ body {
   font-weight: 500;
   border-radius: 2px;
 }
+
+
+
+
 
 .product-card .image .favorite-tag {
   position: absolute;

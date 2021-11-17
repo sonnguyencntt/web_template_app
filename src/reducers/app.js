@@ -5,6 +5,8 @@ const initialState = {
   home: {
     status: c.LOADING,
   },
+  isLoaded : false,
+
   currentPopup: c.NO_POPUP,
   messagePopup: {
     message: "",
@@ -206,6 +208,14 @@ export function app(state = initialState, action) {
         ...state,
         message: action.msg,
       };
+      case c.SET_IS_LOADED:
+        let info = { ...action.data };
+
+        return {
+          ...state,
+
+          isLoaded : info,
+        };
     default:
       return state;
   }

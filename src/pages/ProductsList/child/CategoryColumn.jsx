@@ -3,16 +3,20 @@ import { useSelector } from "react-redux";
 import { handleImgErr } from "../../../helper";
 import BannerVertical from "../../../components/BannerVertical";
 import { constants as c } from "../../../constants";
-
+import CategoryC from "../../../components/CategoryColumn"
 export default function CategoryColumn(props) {
   const categories = useSelector((state) => state.category.categories);
   const { homeInfo } = props;
+  const appTheme = useSelector((state) => state.app.appTheme.home_page_type);
 
   return (
     <div className="categories-column">
-      <div className="main-title">
-        <h3>Danh mục</h3>
-      </div>
+         {
+      appTheme == 5 ? <CategoryC title = "Danh mục sản phẩm"/> :  <div className="main-title">
+      <h3>Danh mục</h3>
+    </div>
+    }
+     
       <div className="column">
         <Link
           style={{ cursor: "pointer", display: "flex" }}

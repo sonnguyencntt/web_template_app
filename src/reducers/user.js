@@ -48,6 +48,7 @@ const initialState = {
         favorite_products: 0,
         voucher_total: 0,
         status_collaborator: 0,
+        config_user_vip : null,
         status: c.LOADING,
       },
 };

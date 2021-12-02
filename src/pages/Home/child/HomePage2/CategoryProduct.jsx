@@ -42,7 +42,7 @@ export default function HomeBanner(props) {
                             style={{
                      
                               width: "100%",
-                              maxHeight: "410px",
+                              height: "407px",
                               "object-fit": "cover",
                             }}
                           />

@@ -20,7 +20,7 @@ export default function Blog(props) {
     if (props.posts.length > 0) {
       let mainArr = props.posts.slice(0, 1);
       let firstArr = props.posts.slice(1, 3);
-      let secondArr = props.posts.slice(3);
+      let secondArr = props.posts.slice(3,5);
       setFirstLine(firstArr);
       setSecondLine(secondArr);
       setMainLine(mainArr);
@@ -94,7 +94,7 @@ export default function Blog(props) {
                     : `/tin-tuc/${v.id}`
                 }
               >
-                {extractContent(v.content)}
+                {extractContent(v.title)}
               </Link>
             </div>
           </div>
@@ -114,9 +114,9 @@ export default function Blog(props) {
                 Kinh nghiệm, mẹo vặt hay
               </div>
               <div className="view-more-desktop hidden-mobile">
-                <a className="flex flex-center" href="tu-van.html">
+                <Link className="flex flex-center" to="/tin-tuc">
                   Tất cả bài viết
-                </a>
+                </Link>
               </div>
             </div>
             <div className="tip-list">

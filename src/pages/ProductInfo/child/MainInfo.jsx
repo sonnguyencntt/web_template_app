@@ -25,6 +25,7 @@ export default function MainInfo(props) {
     max_price,
     price,
     percent_collaborator,
+    sku
   } = props.product;
   if (!images.length) images.push({ image_url: "/img/default_product.jpg" });
   let discount_percent = null;
@@ -218,9 +219,9 @@ export default function MainInfo(props) {
   }
   function copySharedLink() {
     const link = `${window.location.origin}/san-pham/${id}?cowc=${profile.id}`
-   // navigator.clipboard.writeText(link);
+   navigator.clipboard.writeText(link);
     togglePopup();
-  //  dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, ""));
+   dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Copy Link thành công"));
   }
   return (
     <div>
@@ -264,6 +265,11 @@ export default function MainInfo(props) {
         </div>
         <div className="product-order-info">
           <div className="name">{name}</div>
+          <div className={`sku ${sku == null || sku.length == 0 ? "hide" : ""}`} style = {{margin : "10px 0"}}>
+            <span>Mã SKU: {sku}</span>
+
+          </div>
+
           <div className="price-wraper">
             {currentPrice == null ? (
               min_price === max_price ? (
@@ -581,7 +587,7 @@ export default function MainInfo(props) {
           <div>
             {`${window.location.origin}/san-pham/${id}?cowc=${profile.id}`}
           </div>
-          <button onClick={copySharedLink}>Đóng</button>
+          <button onClick={copySharedLink}>Copy</button>
         </div>
       </div>
     </div>

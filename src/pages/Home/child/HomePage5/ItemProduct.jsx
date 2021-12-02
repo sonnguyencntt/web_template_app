@@ -44,40 +44,81 @@ export default function ItemProduct(props) {
   console.log(discount_percent);
   return (
     <div className="swiper-slide">
-    <div className="product-item">
-      <a
-        className="product-img"
-        href="me-be/bim/bim-genki/bim-genki-premium-soft-c-l54-dang-dan.html"
-      >
-        <img
-          src={avt}
-    
-        />
-        <div className={`product-deal-coupon
-        
-            `
-          }
+      <div className="product-item">
+        <Link
+          className="product-img"
+          to={`/san-pham/${standardProductLink(name)}-${id}`}
+        >
+          {is_new && <div className="new-tag">Mới</div>}
+          {is_favorite && (
+            <div
+              className="favorite-tag"
+              style={{ bottom: is_top_sale ? "23px" : "0" }}
             >
-          Giảm {discount_percent}%
-        </div>
-      </a>
-      <h3 className="product-name leading-snug">
-        <Link                to={`/san-pham/${standardProductLink(name)}-${id}`}
->
-          {name}
+              Yêu thích
+            </div>
+          )}
+          {is_top_sale && <div className="top-sale-tag">Bán chạy</div>}{" "}
+          <img src={avt} />
+          <div
+            className={`product-deal-coupon
+        ${product_discount == null || product_discount == 0 ? "visible" : ""}
+            `}
+          >
+            Giảm {discount_percent}%
+          </div>
         </Link>
-      </h3>
-      <div className="product-price flex items-end">
-        <strong className="price text-main">
-        {"  "}₫{formatPriceOrContact(discount == 0  ? price : discount )}
-        </strong>
-        <del className="old-price">
-        ₫{formatPriceOrContact(price)}{" "}
-
-        </del>
+        <h3 className="product-name leading-snug">
+          <Link to={`/san-pham/${standardProductLink(name)}-${id}`}>
+            {name}
+          </Link>
+        </h3>
+        <div className="product-price flex items-end">
+          <strong className="price text-main">
+            {"  "}₫{formatPriceOrContact(discount == 0 ? price : discount)}
+          </strong>
+          <del
+            className={`old-price ${
+              product_discount == null ||
+              product_discount == 0 ||
+              formatPriceOrContact(price) == "Liên hệ"
+                ? "visible"
+                : ""
+            }`}
+          >
+            ₫{formatPriceOrContact(price)}{" "}
+          </del>
+        </div>
+        <div className="special-price" style = {{marginTop : "7px"}}>
+                        <div
+                          className="price"
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div>
+                            {badges.status_collaborator === 1 && (
+                        <div className="coll-price">
+                        <span
+                          className="price product-price"
+                          style={{ color: "#9e9e9e"  , "font-size": "15px"}}
+                        >
+                          Hoa hồng:{" "}
+                        </span>
+                        <br/>
+                        <label style={{ color: "deeppink" }}>
+                        {` ₫${formatPrice(((discount == 0  ? price : discount ) * percent_collaborator) / 100)}`}
+    
+                        </label>
+                      </div>
+                            )}
+                          </div>
+                          &nbsp;
+                          <span style={{ color: "#999" , fontSize : "13px" }}>Đã mua:{view} </span>
+                        </div>
+                      </div>
       </div>
-
     </div>
-  </div>
   );
 }

@@ -1,9 +1,13 @@
 import React, { useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import Slider from "react-slick";
 
 export default function HomeBanner(props) {
   const { banners, categories, discountProducts } = props;
+  const appTheme = useSelector((state) => state.app.appTheme);
+
   var bannerSettings = {
     infinite: true,
     slidesToShow: 1,
@@ -71,20 +75,25 @@ export default function HomeBanner(props) {
                       {categories.length > 0
                         ? categories.map((v, i) => (
                             <li>
-                              <a
+                              <Link
                                 className="product-category-link flex items-center justify-between"
-                                href="me-be.html"
-                              >
+                                to={`/danh-sach-san-pham?danh-muc=${v.name.replace(
+                                  /\s/g,
+                                  "-"
+                                )}-${v.id}`}                              >
                                 <span className="text flex items-center">
                                   <span className="icon">
                                     <img src={v.image_url} />
                                   </span>{" "}
+                                  <span>
                                   {v.name}
+
+                                  </span>
                                 </span>
-                                <span className="arrow">
+                                {/* <span className="arrow">
                                   <em className="ri-arrow-right-s-line" />
-                                </span>
-                              </a>
+                                </span> */}
+                              </Link>
                             </li>
                           ))
                         : null}
@@ -116,31 +125,23 @@ export default function HomeBanner(props) {
           <div className="small-banner-promo-wrapper hidden-mobile Module Module-223">
             <div className="ModuleContent">
               <div className="small-banner-promo">
-                <ul>
-                  <li>
-                    <a
-                      className="object-fit-img img"
-                      href="ho-tro/chinh-sach-tich-diem-1.html"
-                    >
-                      <img src="https://sakukostore.com.vn/Data/Sites/1/Banner/chinh-sach-web-01.jpg" />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="object-fit-img img"
-                      href="ho-tro/huong-dan-thanh-toan.html"
-                    >
-                      <img src="https://sakukostore.com.vn/Data/Sites/1/Banner/chinh-sach---2-02.jpg" />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="object-fit-img img"
-                      href="ho-tro/chinh-sach-doi-tra-hang.html"
-                    >
-                      <img src="https://sakukostore.com.vn/Data/Sites/1/Banner/chinh-sach---2-03.jpg" />
-                    </a>
-                  </li>
+                <ul className = "list-banner" style = {{"max-height": "450px",
+    "overflow": "auto"}}>
+
+
+{props.banners_ads.map((v, i) => (
+                         <li>
+                         <a
+                           className="object-fit-img img"
+                           href= {v.link_to == null ? "#" : v.link_to }
+                         >
+                           <img                       src={v.image_url}
+ />
+                         </a>
+                       </li>
+                      ))}
+      
+           
                 </ul>
               </div>
             </div>
@@ -151,7 +152,7 @@ export default function HomeBanner(props) {
                 style={{ textAlign: "center" }}
                 className="section-title text-blue"
               >
-                HỆ THỐNG SIÊU THỊ HÀNG NHẬT NỘI ĐỊA - SAKUKO JAPANESE STORE
+                {appTheme.contact_individual_organization_name}
               </h1>
             </div>
           </div>

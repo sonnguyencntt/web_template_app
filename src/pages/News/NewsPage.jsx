@@ -82,7 +82,7 @@ function NewsPage(props) {
                       {pageInfo.updated_at.split(" ")[0]}
                     </div>
                     <div className="paragraph">
-                      <div dangerouslySetInnerHTML={{ __html: pageInfo.content }}>
+                      <div className = "sun-editor-editable" dangerouslySetInnerHTML={{ __html: pageInfo.content }}>
                       </div>
                     </div>
                   </div>

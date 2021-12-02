@@ -112,7 +112,9 @@ export default function Header_2() {
             <div className="container container-template-2">
               Hotline:
               <span>
-                <a href="tel:0912117494">{appTheme.phone_number_hotline}</a>
+                <a href={"tel:" + appTheme.phone_number_hotline}>
+                  {appTheme.phone_number_hotline}
+                </a>
               </span>
             </div>
           )}
@@ -129,24 +131,18 @@ export default function Header_2() {
                     <li>
                       Hotline:
                       <span>
-                        <a href="tel:0912117494">
+                        <a href={"tel:" + appTheme.phone_number_hotline}>
                           {appTheme.phone_number_hotline}
                         </a>
                       </span>
                     </li>
-                    {/* <li className="margin-left-20">
-                        <b>Địa chỉ</b>:
-                        <span>
-                          Ladeco Building, 266 Doi Can Street, Hà Nội, Vietnam
-                        </span>
-                      </li> */}
                   </ul>
                 </div>
                 <div className="col-sm-6 col-md-3">
                   {tokenInfo ? (
                     <div className="account-info header-dropdown">
                       <button
-                        style={{ border: "none", padding: 0 , color : "white" }}
+                        style={{ border: "none", padding: 0, color: "white" }}
                         onClick={() => handleToggleActive("account")}
                       >
                         Tài khoản của tôi
@@ -162,7 +158,7 @@ export default function Header_2() {
                             : "menu-dropdown dropdown"
                         }
                       >
-                        <h4 style = {{color : "#3d3b3b"}}>
+                        <h4 style={{ color: "#3d3b3b" }}>
                           {profile.name} <br />
                           <span>{profile.phone_number}</span>
                         </h4>
@@ -221,93 +217,50 @@ export default function Header_2() {
                   ) : (
                     <React.Fragment>
                       <ul className="list-inline f-right">
-                    <li>
-                      <a onClick={handleShowPhonePopup}>
-                        <i className="fa fa-user" /> Đăng nhập
-                      </a>
-                    </li>
-                    <li>
-                      <span>hoặc</span>
-                    </li>
-                    <li>
-                      <a onClick={handleShowPhonePopup}>Đăng ký</a>
-                    </li>
-                    <li className="li-search hidden">
-                      <a href="javscrript:;">
-                        <i className="fa fa-search" />
-                      </a>
-                      <div className="dropdown topbar-dropdown hidden-md hidden-sm hidden-xs">
-                        <div className="content a-center">
-                          <div className="header_search search_form">
-                            <form
-                              className="input-group search-bar search_form"
-                              action="https://dualeo-x.mysapo.net/search"
-                              method="get"
-                              role="search"
-                            >
-                              <input
-                                type="search"
-                                name="query"
-                                placeholder="Tìm sản phẩm"
-                                className="input-group-field st-default-search-input search-text"
-                                autoComplete="off"
-                              />
-                              <span className="input-group-btn">
-                                <button className="btn icon-fallback-text">
-                                  <i className="fa fa-search" />
-                                </button>
-                              </span>
-                            </form>
+                        <li>
+                          <a onClick={handleShowPhonePopup}>
+                            <i className="fa fa-user" /> Đăng nhập
+                          </a>
+                        </li>
+                        <li>
+                          <span>hoặc</span>
+                        </li>
+                        <li>
+                          <a onClick={handleShowPhonePopup}>Đăng ký</a>
+                        </li>
+                        <li className="li-search hidden">
+                          <a href="javscrript:;">
+                            <i className="fa fa-search" />
+                          </a>
+                          <div className="dropdown topbar-dropdown hidden-md hidden-sm hidden-xs">
+                            <div className="content a-center">
+                              <div className="header_search search_form">
+                                <form
+                                  className="input-group search-bar search_form"
+                                  action="https://dualeo-x.mysapo.net/search"
+                                  method="get"
+                                  role="search"
+                                >
+                                  <input
+                                    type="search"
+                                    name="query"
+                                    placeholder="Tìm sản phẩm"
+                                    className="input-group-field st-default-search-input search-text"
+                                    autoComplete="off"
+                                  />
+                                  <span className="input-group-btn">
+                                    <button className="btn icon-fallback-text">
+                                      <i className="fa fa-search" />
+                                    </button>
+                                  </span>
+                                </form>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                        </li>
+                      </ul>
                     </React.Fragment>
                   )}
-                  {/* <ul className="list-inline f-right">
-                    <li>
-                      <a onClick={handleShowPhonePopup}>
-                        <i className="fa fa-user" /> Đăng nhập
-                      </a>
-                    </li>
-                    <li>
-                      <span>hoặc</span>
-                    </li>
-                    <li>
-                      <a onClick={handleShowPhonePopup}>Đăng ký</a>
-                    </li>
-                    <li className="li-search hidden">
-                      <a href="javscrript:;">
-                        <i className="fa fa-search" />
-                      </a>
-                      <div className="dropdown topbar-dropdown hidden-md hidden-sm hidden-xs">
-                        <div className="content a-center">
-                          <div className="header_search search_form">
-                            <form
-                              className="input-group search-bar search_form"
-                              action="https://dualeo-x.mysapo.net/search"
-                              method="get"
-                              role="search"
-                            >
-                              <input
-                                type="search"
-                                name="query"
-                                placeholder="Tìm sản phẩm"
-                                className="input-group-field st-default-search-input search-text"
-                                autoComplete="off"
-                              />
-                              <span className="input-group-btn">
-                                <button className="btn icon-fallback-text">
-                                  <i className="fa fa-search" />
-                                </button>
-                              </span>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul> */}
                 </div>
               </div>
             </div>
@@ -352,7 +305,7 @@ export default function Header_2() {
                       ) : (
                         <p>
                           Hotline:{" "}
-                          <a href="callto:19001009">
+                          <a href={"tel:" + appTheme.phone_number_hotline}>
                             {" "}
                             {appTheme.phone_number_hotline}
                           </a>
@@ -404,20 +357,42 @@ export default function Header_2() {
               </div>
             </div>
           </div>
-          {/* <div className="menu-bar hidden-md hidden-lg">
-            <img
-              src="../bizweb.dktcdn.net/100/308/325/themes/801947/assets/menu-barca33.png?1623316806453"
-              alt="menu bar"
-            />
-          </div> */}
-          <div
-            className="icon-cart-mobile hidden-md hidden-lg f-left absolute"
-            onclick="window.location.href='cart.html'"
-          >
+
+          <div className="icon-cart-mobile hidden-md hidden-lg f-left absolute">
             <div className="icon relative">
               <i className="fa fa-shopping-bag" />
-              <span className="cartCount count_item_pr">0</span>
+              <span className="cartCount count_item_pr">
+                {" "}
+                {badges.cart_quantity}
+              </span>
             </div>
+          </div>
+          <div className="hidden-md hidden-lg">
+            <div className = "search-bar-input" onKeyDown={handleEnter}>
+            <div
+                    className="input-group search-bar search_form"
+                    onKeyDown={handleEnter}
+                  >
+                    <input
+                      type="search"
+                      name="query"
+                      value={searchValue}
+                      onChange={handleInputChange}
+                      placeholder="Tìm sản phẩm"
+                      className="input-group-field st-default-search-input search-text auto-search"
+                      autoComplete="off"
+                    />
+                    <span className="input-group-btn">
+                      <button
+                        className="btn icon-fallback-text"
+                        onClick={handleSearch}
+                      >
+                        <i className="fa fa-search" />
+                      </button>
+                    </span>
+                  </div>
+      
+            </div>{" "}
           </div>
         </div>
         <nav style={{ background: appTheme.color_main_1 }}>

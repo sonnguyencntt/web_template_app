@@ -58,8 +58,7 @@ export default function ItemProduct(props) {
           <Link to={`/san-pham/${standardProductLink(name)}-${id}`}>
             <img
               style={{
-                width: "100%",
-                height: "100%",
+        
                 "object-fit": "cover",
               }}
               src={avt}
@@ -77,7 +76,7 @@ export default function ItemProduct(props) {
           </div>
         </div>
         <div className="product-info a-center">
-          <h3 className="product-name">
+          <h3 className="product-name" style = {{height : "35px"}}>
             <Link
               to={`/san-pham/${standardProductLink(name)}-${id}`}
               style={{
@@ -85,7 +84,7 @@ export default function ItemProduct(props) {
                 "-webkit-line-clamp": "2",
                 "-webkit-box-orient": "vertical",
                 overflow: "hidden",
-                height: "48px",
+                // height: "48px",
               }}
               title="Quả Kiwi xanh"
             >

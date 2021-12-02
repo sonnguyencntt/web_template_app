@@ -66,7 +66,7 @@
     transition: 0.3s;
     margin-right: 0.5em;
 }
-.new-tag {
+.product-transition .new-tag {
     position: absolute;
     font-size: 1em;
     color: #FFF;
@@ -74,11 +74,11 @@
    
     line-height: 25px;
     text-align: center;
-    top: 20px;
     right: 0px;
     z-index: 10;
     background-color: #fe9705;
-    padding: 0 10px;
+    padding: 0 13px;
+    border-end-start-radius: 10px;
   }
 .drop-account li
 {
@@ -14484,9 +14484,9 @@ a:hover, a:focus {
 }
 
 .section_category .cate-item .image img {
-    width: 156px;
+    max-width: 156px;
     margin: auto;
-    height: 156px;
+    min-height: 156px;
     object-fit: cover;
     border-radius: 50%;
     transition: all 0.5s

@@ -1,12 +1,22 @@
 // import ProductCard from "../../../components/ProductCard";
 import Slider from "react-slick";
-import { useEffect, useState , useRef } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import { useSelector } from "react-redux";
 import ItemProduct from "./ItemProduct";
 export default function ProductSection(props) {
   const [firstLine, setFirstLine] = useState(props.products);
   const [secondLine, setSecondLine] = useState([]);
+
+
+  var bannerSettings = {
+    infinite: false,
+    slidesToShow: 1 ,
+    slidesToScroll: 1,
+
+  };
   var settings1 = {
+
+
     infinite: false,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -42,14 +52,14 @@ export default function ProductSection(props) {
     ]
   };
   var settings2 = {
-    infinite: props.products.length > 4,
+   
+    infinite: false,
     slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 600,
         settings: {
-          infinite: props.products.length > 2,
           slidesToShow: 2,
           slidesToScroll: 1,
         }
@@ -57,7 +67,6 @@ export default function ProductSection(props) {
       {
         breakpoint: 768,
         settings: {
-          infinite: props.products.length > 3,
           slidesToShow: 3,
           slidesToScroll: 1,
         }
@@ -65,7 +74,6 @@ export default function ProductSection(props) {
       {
         breakpoint: 992,
         settings: {
-          infinite: props.products.length > 3,
           slidesToShow: 3,
           slidesToScroll: 1,
         }
@@ -73,7 +81,6 @@ export default function ProductSection(props) {
       {
         breakpoint: 1500,
         settings: {
-          infinite: props.products.length > 4,
           slidesToShow: 4,
           slidesToScroll: 1,
         }
@@ -131,19 +138,38 @@ export default function ProductSection(props) {
       setSecondLine(secondArr);
     }
   }, [])
-console.log(firstLine,secondLine)
+
+  function showBanner(i,v)
+  {
+    var arr = []
+    if(i==0)
+    {
+      arr.push(
+        <div className="product-deal-image" style = {{height : "100%"}}>
+        <img style = {{height : "100%" , objectFit : "cover"}}   src={v.image_url} />
+      </div>
+      )
+    }
+    return arr.length == 0 ? null : arr
+  }
 
   return (
+
 
     <section className="home-2 section">
     <div className="container">
       <div className="row">
-        <div className="col-lg-4 Module Module-1290">
+        <div className="col-lg-4 Module Module-1290 hidden-mobile ">
           <div className="ModuleContent">
             <div className="product-deal-wrapper product-deal-no-slider hidden-mobile">
-              <div className="product-deal-image">
-                <img src="https://sakukostore.com.vn/Data/Sites/1/media/deal_banner.jpg" />
-              </div>
+              {props.banners_ads.length > 0 ?  <React.Fragment>
+              {props.banners_ads.map((v, i) => {
+                    return showBanner(i,v)
+     
+})}
+            </React.Fragment> : null}
+           
+           
             </div>
           </div>
         </div>

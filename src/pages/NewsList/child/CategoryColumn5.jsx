@@ -14,7 +14,7 @@ export default function CategoryColumn(props) {
   return (
     <div className="categories-column">
           {
-      appTheme == 5 ? <CategoryC title = "Danh mục tin tức"/> :  <div className="main-title">
+      appTheme == 5 ? <CategoryC border  = {false} title = "Danh mục tin tức"/> :  <div className="main-title">
       <h3>Danh mục</h3>
     </div>
     }
@@ -23,7 +23,7 @@ export default function CategoryColumn(props) {
           categories.list.map((v, i) =>
             <Link
               key={i}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", display: "flex" , "border-top": `${i==0 ? null : "2px dotted #e5e5e5"}` , margin : "0 13px" , padding : "0.5em"  }}
               to={
                 v.title ?
                   `/tin-tuc?danh-muc=${v.title.replace(/\s/g, "-")}-${v.id}`

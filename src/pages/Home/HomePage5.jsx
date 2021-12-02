@@ -58,9 +58,11 @@ function HomePage(props) {
             <PageLoading />
           ) : (
             <React.Fragment>
-              <HomeBanner banners={info.banners} categories={info.categories} />
+              <HomeBanner banners_ads={homeInfo.banner_ads.type_0} banners={info.banners} categories={info.categories} />
               {info.sale_products.length > 0 && (
                 <ProductDeal
+                banners_ads={homeInfo.banner_ads.type_3}
+
                 title="Sản phẩm giảm giá"
                 products={info.sale_products}
                 />

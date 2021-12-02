@@ -40,7 +40,7 @@ export default function DetailInfo(props) {
               <React.Fragment>
                 {
                   description ?
-                    <div className="description"
+                    <div className="description sun-editor-editable"
                       style={{ paddingLeft: "1em" }}
                       dangerouslySetInnerHTML={{ __html: description }}>
                     </div>

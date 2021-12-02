@@ -11,31 +11,35 @@ export default function HomeBanner(props) {
   }
 
   var settings = {
-    infinite: props.categories.length > 5,
+    infinite: false,
     slidesToShow: 6,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 600,
         settings: {
-          infinite: props.categories.length > 1,
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          infinite: props.categories.length > 2,
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 992,
         settings: {
-          infinite: props.categories.length > 3,
           slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 5,
           slidesToScroll: 1,
         },
       },
@@ -67,7 +71,7 @@ export default function HomeBanner(props) {
                               <Link  to={`/danh-sach-san-pham?danh-muc=${v.name.replace(
                               /\s/g,
                               "-"
-                            )}-${v.id}`} title="Trứng và bơ">
+                            )}-${v.id}`} >
                               {v.name}
                               </Link>
                             </h3>

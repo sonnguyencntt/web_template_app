@@ -309,8 +309,95 @@ export default function OrderInfo(props) {
           />
         </div>
       </div>
-
-      <div className="payment-method">
+      <div className="price-info">
+          <div className="row">
+            <div>Tạm tính</div>
+            <span>₫ {formatPrice(total_before_discount)}</span>
+          </div>
+          <div className="row">
+            <div>Giảm giá</div>
+            <span>-₫ {formatPrice(product_discount_amount)}</span>
+          </div>
+          <div className="row">
+            <div>Voucher</div>
+            <span>-₫ {formatPrice(voucher_discount_amount)}</span>
+          </div>
+          <div className="row">
+            <div>Combo</div>
+            <span>-₫ {formatPrice(combo_discount_amount)}</span>
+          </div>
+          <div className="point-use">
+            <div className="row">
+              {/* <div className="row">
+                <label>
+                  Dùng <span>{formatPrice(bonus_points_amount_can_use)}</span>{" "}
+                  xu [<span>-₫ {formatPrice(bonus_points_amount_can_use)}</span>
+                  ]
+                </label>
+              </div> */}
+              {/* <label className="switch">
+                <input
+                  type="checkbox"
+                  onChange={() => props.handleChangeCheckBox("bonus")}
+                  checked={props.is_use_points}
+                />
+                <span
+                  style={{
+                    background: props.is_use_points
+                      ? appTheme.color_main_1
+                      : "#ccc",
+                  }}
+                  className="slider round"
+                ></span>
+              </label> */}
+            </div>
+            {badges.status_collaborator == 1 &&
+              balance_collaborator_can_use > 0 && (
+                <div className="row">
+                  {/* <div className="row">
+                    <label>
+                      Dùng số dư CTV [
+                      <span>
+                        -₫ {formatPrice(balance_collaborator_can_use)}
+                      </span>
+                      ]
+                    </label>
+                  </div> */}
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      onChange={() =>
+                        props.handleChangeCheckBox("collaborator")
+                      }
+                      checked={props.is_use_balance_collaborator}
+                    />
+                    <span
+                      style={{
+                        background: props.is_use_balance_collaborator
+                          ? appTheme.color_main_1
+                          : "#ccc",
+                      }}
+                      className="slider round"
+                    ></span>
+                  </label>
+                </div>
+              )}
+          </div>
+          <div className="total row">
+            <div>Tổng cộng</div>
+            <span style={{ color: appTheme.color_main_1 }}>
+              ₫{formatPrice(total_after_discount + shipmentInfo.fee)}
+            </span>
+          </div>
+          <button
+            id="order-btn"
+            style={{ background: appTheme.color_main_1 }}
+            onClick={handleOrderNonLogin}
+            >
+            Đặt hàng
+          </button>
+        </div>
+      {/* <div className="payment-method">
         <div
           className="total price-info row"
           style={{
@@ -331,7 +418,7 @@ export default function OrderInfo(props) {
           Đặt hàng
         </button>
 
-        {/* <button
+        <button
           id="order-btn"
           style={{ background: appTheme.color_main_1 }}
           onClick={() => {
@@ -342,8 +429,8 @@ export default function OrderInfo(props) {
           }}
         >
           Đặt hàng
-        </button> */}
-      </div>
+        </button>
+      </div> */}
     </div>
   ) : (
     <div className="order-info">
@@ -471,11 +558,11 @@ export default function OrderInfo(props) {
           </div>
           <div className="row">
             <div>Giảm giá</div>
-            <span>₫ {formatPrice(product_discount_amount)}</span>
+            <span>-₫ {formatPrice(product_discount_amount)}</span>
           </div>
           <div className="row">
             <div>Voucher</div>
-            <span>₫ {formatPrice(voucher_discount_amount)}</span>
+            <span>-₫ {formatPrice(voucher_discount_amount)}</span>
           </div>
           <div className="row">
             <div>Combo</div>

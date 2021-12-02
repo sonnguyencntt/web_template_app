@@ -4,8 +4,10 @@ const provinces = localStorage.getItem("provinces");
 const initialState = {
   home: {
     status: c.LOADING,
+
   },
-  isLoaded : false,
+  isLoaded: false,
+  isShowPopup: false,
 
   currentPopup: c.NO_POPUP,
   messagePopup: {
@@ -162,7 +164,7 @@ export function app(state = initialState, action) {
         ...state,
         messagePopup: {
           message: action.message,
-          fromCart:action.fromCart,
+          fromCart: action.fromCart,
           status: c.SUCCESS,
           willReload: true,
         },
@@ -208,14 +210,21 @@ export function app(state = initialState, action) {
         ...state,
         message: action.msg,
       };
-      case c.SET_IS_LOADED:
-        let info = { ...action.data };
+    case c.SET_IS_LOADED:
+      let info = { ...action.data };
 
-        return {
-          ...state,
+      return {
+        ...state,
 
-          isLoaded : info,
-        };
+        isLoaded: info,
+      };
+    case c.SHOW_POPUP_MAIN:
+
+      return {
+        ...state,
+
+        isShowPopup: action.data,
+      };
     default:
       return state;
   }

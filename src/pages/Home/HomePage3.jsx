@@ -62,8 +62,8 @@ function HomePage3(props) {
           {<Banner banners={info.banners} />}
           <CategoryProduct1 categories={info.categories} />
 
-          {info.hot_products.length > 0 && (
-            <SpecialProduct products={info.hot_products} />
+          {info.sale_products.length > 0 && (
+            <SpecialProduct  products={info.sale_products} />
           )}
           {homeInfo.banner_ads.type_0.length > 0 && (
             <BannerAds banners={homeInfo.banner_ads.type_0} />
@@ -71,21 +71,21 @@ function HomePage3(props) {
 
           <div class="container">
             <div class="row">
-              <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3">
+              {/* <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3">
                 <CategoryProduct categories={info.categories} homeInfo = {homeInfo} />
-              </div>
-              <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+              </div> */}
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 {homeInfo.banner_ads.type_3.length > 0 && (
                   <BannerAds banners={homeInfo.banner_ads.type_3} />
                 )}
 
-                {info.sale_products.length > 0 && (
+                {/* {info.sale_products.length > 0 && (
                   <Product
                     title="Sản phẩm giảm giá"
                     categories={info.categories}
                     products={info.sale_products}
                   />
-                )}
+                )} */}
                 {homeInfo.banner_ads.type_2.length > 0 && (
                   <BannerAds banners={homeInfo.banner_ads.type_2} />
                 )}

@@ -10,7 +10,9 @@ export default function Header_2() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const [currentActive, setCurrentActive] = useState("");
-  const [isLoadedHeader , setIsLoaded] = useState(false)
+  const [isLoadedHeader, setIsLoaded] = useState(false);
+  const [isShowBanner, setIsShowBanner] = useState(true);
+
   const cartInfo = useSelector((state) => state.cart.cartInfo);
   const categories = useSelector((state) => state.category.categories);
   const provincesList = useSelector((state) => state.app.addressData.provinces);
@@ -21,7 +23,6 @@ export default function Header_2() {
   const notify = useSelector((state) => state.user.notify);
   const badges = useSelector((state) => state.user.badges);
   const isLoaded = useSelector((state) => state.app.isLoaded);
-
 
   useEffect(() => {
     if (tokenInfo) {
@@ -44,22 +45,14 @@ export default function Header_2() {
       }
       setCurrentActive("");
     });
-
-
-    
   }, []);
 
-
-
-
-  function checkIsLoaded(){
-    if(isLoaded === false )
-    {
-    
+  function checkIsLoaded() {
+    if (isLoaded === false) {
       const script1 = document.createElement("script");
       const script2 = document.createElement("script");
       const script3 = document.createElement("script");
-    
+
       script1.src = "/js/theme_js_5/jquery.js";
       script1.async = true;
       script2.src = "/js/theme_js_5/core.js";
@@ -67,17 +60,14 @@ export default function Header_2() {
       script3.src = "/js/theme_js_5/main.js";
       script3.async = true;
 
- 
       document.body.appendChild(script1);
       document.body.appendChild(script2);
       document.body.appendChild(script3);
 
-
-      dispatch({type : c.SET_IS_LOADED , data:true})
-
+      dispatch({ type: c.SET_IS_LOADED, data: true });
     }
   }
-  
+
   function handleInputChange(e) {
     setSearchValue(e.target.value);
   }
@@ -136,10 +126,13 @@ export default function Header_2() {
     dispatch(appActions.changePopup(c.COLLABORATOR_REGIS_POPUP));
   }
 
+  function closeBanner(){
+    setIsShowBanner(false)
+  }
   return (
     <React.Fragment>
       <header>
-        <div className="top-campaign-banner">
+        <div className={`top-campaign-banner ${isShowBanner ? "" : "hide"}`}>
           <div className="Module Module-1273">
             <div className="ModuleContent">
               <div
@@ -153,7 +146,7 @@ export default function Header_2() {
                       src="https://sakukostore.com.vn/Data/Sites/1/media/default/img/header-banner.png"
                     />
                   </a>
-                  <div className="campaign-banner-close">
+                  <div className="campaign-banner-close" onClick = {closeBanner}>
                     <span className="ri-close-line" />
                   </div>
                 </div>
@@ -164,6 +157,7 @@ export default function Header_2() {
         <div className="top-header">
           <div className="container">
             <div className="top-header-wrap flex justify-between items-center">
+              
               <div className="top-header-left Module Module-207">
                 <div className="ModuleContent">
                   <div className="menu-wrapper">
@@ -181,33 +175,39 @@ export default function Header_2() {
                           </Link>
                         </li>
                         <li>
-                          <Link to="/danh-sach-san-pham" >
+                          <Link to="/danh-sach-san-pham">
                             <em className="ri-file-list-3-line"></em>Sản phẩm
                           </Link>
                         </li>
                         <li>
-                          <Link    to={{
-                          pathname: "/tin-tuc",
-                          state: { prevPath: window.location.pathname },
-                        }} >
+                          <Link
+                            to={{
+                              pathname: "/tin-tuc",
+                              state: { prevPath: window.location.pathname },
+                            }}
+                          >
                             <em className="ri-customer-service-2-line"></em>Tin
                             tức
                           </Link>
                         </li>
                         <li>
-                          <Link  to={{
-                          pathname: "/ma-giam-gia",
-                          state: { prevPath: window.location.pathname },
-                        }} >
+                          <Link
+                            to={{
+                              pathname: "/ma-giam-gia",
+                              state: { prevPath: window.location.pathname },
+                            }}
+                          >
                             <em className="ri-price-tag-3-line"></em>Voucher
                           </Link>
                         </li>
 
                         <li>
-                          <Link  to={{
-                          pathname: "/combo-giam-gia",
-                          state: { prevPath: window.location.pathname },
-                        }} >
+                          <Link
+                            to={{
+                              pathname: "/combo-giam-gia",
+                              state: { prevPath: window.location.pathname },
+                            }}
+                          >
                             <em className="ri-price-tag-3-line"></em>Combo Giảm
                             giá
                           </Link>
@@ -219,47 +219,143 @@ export default function Header_2() {
               </div>
               <div className="top-header-right">
                 <div className="header-util-list flex items-center">
-                  <div className="header-util-item hotline-wrapper">
-                    <div className="hotline">
-                      <div className="Module Module-1269">
-                        <div className="ModuleContent">
-                          <a onClick={handleShowPhonePopup}>
-                            <em className="ri-phone-line" />
-                            <span>Đăng nhập</span>
+                {appTheme.phone_number_hotline == null ||
+      appTheme.phone_number_hotline === "" ||
+      appTheme.is_show_icon_hotline === false ? (
+        ""
+      ) : (
+
+        <div className="header-util-item hotline-wrapper">
+        <div className="hotline">
+          <div className="Module Module-1269"><div className="ModuleContent"><span className="hidden-desktop">Hotline</span>
+              <a  href={"tel:" + appTheme.phone_number_hotline}><em className="ri-phone-line" /><strong> { appTheme.phone_number_hotline} </strong></a></div></div>
+        </div>
+      </div>
+      )}
+
+             
+                  {tokenInfo ? (
+                    <div className="account-info header-dropdown" style = {{position: "relative",
+                      "margin-left": "15px",
+                      "padding-left": "15px",
+                      "border-left": "1px solid"
+                      }}>
+
+<div className="header-util-item hotline-wrapper">
+                        
+                        <div className="order-check">
+                          <a
+                            onClick={() => handleToggleActive("account")}
+                            className="flex items-center"
+                            href="#"
+                            data-fancybox
+                            data-src="#tracking-order"
+                          >
+                            <span>Tài khoản của tôi</span>
+                            <i
+                  style={{ marginLeft: "0.5em" }}
+                  className="fas fa-caret-down"
+                ></i>
                           </a>
                         </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="header-util-item order-check-wrapper">
-                    <div className="order-check">
-                      <a
-                        onClick={handleShowPhonePopup}
-                        className="flex items-center"
-                        href="#"
-                        data-fancybox
-                        data-src="#tracking-order"
+                      <div
+                        className={
+                          currentActive === "account"
+                            ? " menu1 dropdown active"
+                            : "menu1 dropdown"
+                        }
                       >
-                        <em className="ri-draft-line" />
-                        <span>Đăng kí</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="header-util-item account-wrapper">
-                    <div className="account dropdown">
-                      <a
-                        className
-                        rel="nofollow"
-                        href="Secure/Login42a6.html?returnurl=%2f"
-                      >
-                        My account
-                      </a>
-                      <div className="dropdown-content">
-                        <ul></ul>
+                         <div style = {{color : "#3d3b3b" , textAlign : "center" , fontSize : "18px"}}>
+                         <span>{profile.name}</span>
+                         <br/>
+                         <br/>
+
+                          <span style ={{marginTop : "10px"}}>{profile.phone_number}</span>
+                        </div>
+                        <ul>
+                          <li>
+                            <img src="/img/check-list.png" alt="" />
+                            <Link to="/don-hang">Đơn hàng của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/home.png" alt="" />
+                            <Link to="/dia-chi">Địa chỉ nhận hàng</Link>
+                          </li>
+                          <li>
+                            <img src="/img/star.png" alt="" />
+                            <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
+                          </li>
+                          <li>
+                            <img src="/img/check-mark.png" alt="" />
+                            <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
+                          </li>
+                          <li>
+                            <img src="/img/heart.png" alt="" />
+                            <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
+                          </li>
+                          {profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
+                            </li>
+                          )}
+
+                          {!profile.is_collaborator && (
+                            <li>
+                              <img src="/img/handshake.png" alt="" />
+                              <Link
+                                onClick={handleShowCollaboratorRegisForm}
+                                to="/cong-tac-vien"
+                              >
+                                Đăng ký cộng tác viên
+                              </Link>
+                            </li>
+                          )}
+
+                          <li onClick={handleShowProfile}>
+                            <img src="/img/refresh.png" alt="" />
+                              <a>Cập nhật thông tin</a>
+                          </li>
+                          <li onClick={handleLogout}>
+                            <img src="/img/log-out.png" alt="" />
+                            <a>                            Thoát tài khoản
+</a>
+
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <React.Fragment>
+                      <div className="header-util-item hotline-wrapper">
+                        <div className="hotline">
+                          <div className="Module Module-1269">
+                            <div className="ModuleContent">
+                              <a onClick={handleShowPhonePopup}>
+                                <span>Đăng nhập</span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="header-util-item order-check-wrapper">
+                        <div className="order-check">
+                          <a
+                            onClick={handleShowPhonePopup}
+                            className="flex items-center"
+                            href="#"
+                            data-fancybox
+                            data-src="#tracking-order"
+                          >
+                            <span>Đăng kí</span>
+                          </a>
+                        </div>
+                      </div>
+                    </React.Fragment>
+                  )}
                 </div>
               </div>
             </div>
@@ -272,15 +368,12 @@ export default function Header_2() {
                 <div className="Module Module-216">
                   <div className="ModuleContent">
                     <div className="logo hidden-mobile">
-                      <a href="index.html">
+                      <Link to="/">
                         <img
                           style={{ width: "180px", height: "59px" }}
                           src={appTheme.logo_url}
                         />
-                      </a>
-                    </div>
-                    <div className="menu-mobile-toggle hidden-desktop">
-                      <em className="ri-menu-line" />
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -292,7 +385,7 @@ export default function Header_2() {
                   <em className="ri-arrow-left-s-line" />
                 </a>
               </div>
-              <div className="col col-lg-7">
+              <div className="col col-lg-7 col-sm-8">
                 <div className="product-detail-menu hidden-desktop">
                   <ul>
                     <li>
@@ -315,10 +408,15 @@ export default function Header_2() {
                     </li>
                   </ul>
                 </div>
-                <div className="search-wrapper Module Module-217">
+
+                <form
+                  onSave={handleSearch}
+                  className="search-wrapper Module Module-217"
+                >
                   <div
                     id="ctl00_mdl217_ctl00_Search_pnlSearch"
                     className="searchbox productsearchbox"
+                    style={{ background: "white" }}
                   >
                     <input
                       value={searchValue}
@@ -338,19 +436,15 @@ export default function Header_2() {
                       <i class="fa fa-search"></i>
                     </button>
                   </div>
-                </div>
+                </form>
               </div>
-              <div className="col col-lg-1">
+              <div className="col col-lg-1 col-sm-2">
                 <div className="cart-wrapper Module Module-218">
                   <div className="ModuleContent">
                     <div className="cart">
                       <div className="cart-toggle position-relative inline-block">
-                        <Link>
-                          <img
-                            to="/gio-hang"
-                            src="https://sakukostore.com.vn/Data/Sites/1/skins/default/img/cart.png"
-                            alt="Cart icon"
-                          />
+                        <Link to="/gio-hang">
+                          <img src="/img/cart-5.png" alt="Cart icon" />
                         </Link>
                         <div className="cart-amount flex flex-center rounded position-absolute background-main text-white">
                           {badges.cart_quantity}
@@ -2938,7 +3032,6 @@ export default function Header_2() {
           </div>
         </div>
       </header>
-
     </React.Fragment>
   );
 }

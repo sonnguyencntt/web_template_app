@@ -96,6 +96,7 @@ export default function Blog(props) {
                   <Link
                     style={{
                       "margin-top": "10px",
+                       background: appTheme.color_main_1
                     }}
                     to={
                       v.title

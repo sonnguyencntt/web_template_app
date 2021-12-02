@@ -4,6 +4,7 @@ import Footer1 from "./Footer/Footer1";
 import Footer2 from "./Footer/Footer2";
 import Footer3 from "./Footer/Footer3";
 import Footer4 from "./Footer/Footer4";
+import Footer5 from "./Footer/Footer5";
 
 import { ToastContainer } from "react-toastify";
 import MessengerCustomerChat from "react-messenger-customer-chat";
@@ -22,7 +23,7 @@ export default function Footer() {
           //  htmlRef="<REF_STRING>"
         />
       )}
-      {       appTheme == 1 || appTheme == null ? <Footer1/> : appTheme == 2 ? <Footer1/> :appTheme == 3 ?  <Footer1/> : <Footer1/>
+      {       appTheme == 5 ? <Footer5/> : <Footer1/>
 }
     </React.Fragment>
   );

@@ -43,7 +43,7 @@ export default function ItemProduct(props) {
   }
   return (
     <div className="section_product product_1" id="product_1">
-      <div className="container">
+      <div className="" style = {{margin : "0 8px"}}>
         <div className="block-product">
           <div className="swiper-wrapper">
             <div className="swiper-slide">

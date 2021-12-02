@@ -51,7 +51,7 @@ export default function ListNews(props) {
                 date={v.updated_at}
                 title={v.title}
                 img={v.image_url}
-                quote={v.content}
+                quote={v.summary}
               />
             </div>
           )

@@ -42,10 +42,14 @@ export default function ItemProduct(props) {
     window.location.href = `/danh-sach-san-pham?danh-muc-ids=${id}`;
   }
   return (
-    <div className="section_product product_1" id="product_1">
-      <div className="container">
+    <div
+      className="section_product product_1"
+      id="product_1"
+      style={{ margin: "0 5px" }}
+    >
+      <div className="">
         <div className="row">
-          <div className="col-xl-12 col-lg-12 col-md-12 col-12">
+          <div className="">
             <div className="block-product">
               <div className="swiper-container">
                 <div className="swiper-wrapper">
@@ -74,7 +78,10 @@ export default function ItemProduct(props) {
                           {is_top_sale && (
                             <div className="top-sale-tag">Bán chạy</div>
                           )}{" "}
-                   
+                          <img
+                            class="product-thumbnail "
+                            src={avt}
+                          ></img>
                         </div>
                         <div className="product-info">
                           <Link
@@ -85,15 +92,19 @@ export default function ItemProduct(props) {
                             {name}
                           </Link>
                           <div className="product__price">
-                            <span className="price"
-                                  style={{
-                                    color: "rgb(126, 13, 13)",
-                                    "font-size": "18px",
-                                    "font-weight": "500",
-                                  }}
+                            <span
+                              className="price"
+                              style={{
+                                color: "rgb(126, 13, 13)",
+                                "font-size": "18px",
+                                "font-weight": "500",
+                              }}
                             >
                               {" "}
-                              {"  "}₫{formatPriceOrContact(discount == 0  ? price : discount )}
+                              {"  "}₫
+                              {formatPriceOrContact(
+                                discount == 0 ? price : discount
+                              )}
                             </span>
 
                             <span
@@ -109,30 +120,41 @@ export default function ItemProduct(props) {
                             </span>
                           </div>
                           <div className="special-price">
-                          <div
-                            className="price"
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <div>
-                              {badges.status_collaborator === 1 && (
-                                <div className="coll-price">
-                                  <span className="price product-price" style ={{color: "#999" , fontSize : "13px"}}>
-                                    Hoa hồng:{" "}
-                                  </span>
-                                  <label style={{ color: "deeppink" }}>
-                                  {` ₫${formatPrice(((discount == 0  ? price : discount ) * percent_collaborator) / 100)}`}
-
-                                  </label>
-                                </div>
-                              )}
+                            <div
+                              className="price"
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <div>
+                                {badges.status_collaborator === 1 && (
+                                  <div className="coll-price">
+                                    <span
+                                      className="price product-price"
+                                      style={{
+                                        color: "#999",
+                                        fontSize: "13px",
+                                      }}
+                                    >
+                                      Hoa hồng:{" "}
+                                    </span>
+                                    <label style={{ color: "deeppink" }}>
+                                      {` ₫${formatPrice(
+                                        ((discount == 0 ? price : discount) *
+                                          percent_collaborator) /
+                                          100
+                                      )}`}
+                                    </label>
+                                  </div>
+                                )}
+                              </div>
+                              &nbsp;
+                              <span style={{ color: "#999", fontSize: "13px" }}>
+                                Đã mua:{view}{" "}
+                              </span>
                             </div>
-                            &nbsp;
-                            <span style={{ color: "#999" , fontSize : "13px" }}>Đã mua:{view} </span>
                           </div>
-                        </div>
                         </div>
                       </div>
                     </div>
@@ -144,48 +166,5 @@ export default function ItemProduct(props) {
         </div>
       </div>
     </div>
-
-    // <div className="swiper-slide">
-    //   <div className=" item_product_main">
-    //     <div className="product-block-item">
-    //       <div
-    //         class={`sale-label sale-top-right ${
-    //           product_discount == null || product_discount == 0
-    //             ? "hide"
-    //             : "show"
-    //         }`}
-    //       >
-    //         <span>- {discount_percent}%</span>
-    //       </div>
-    //       <div className="product-transition">
-    //         <Link
-    //           className="product-thumb"
-    //           to={`/san-pham/${standardProductLink(name)}-${id}`}
-    //           href="oi-le-ruot-do.html"
-    //         >
-    //           <img
-    //             className="product-thumbnail lazy"
-    //             src={avt}
-    //             alt="Ổi lê ruột đỏ"
-    //           />
-    //         </Link>
-
-    //       </div>
-    //       <div className="product-info">
-    //         <a
-    //           href="oi-le-ruot-do.html"
-    //           title="Ổi lê ruột đỏ"
-    //           className="item-product-name"
-    //         >
-    //           {name}
-    //         </a>
-    //         <div className="product__price">
-    //           <span className="price"> ₫{formatPriceOrContact(price)}</span>
-    //           {/* <span className="old-price">50.000₫</span> */}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }

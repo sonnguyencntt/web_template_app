@@ -6,7 +6,61 @@ a, abbr, acronym, address, applet, article, aside, b, big, blockquote, caption, 
     font: inherit;
     font-size: 100%
 }
-
+.footer-copyright .show-mobile {
+    margin : 20px;
+     display : none
+}
+.top-sale-tag {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 2;
+    padding: 6px;
+    font-size: 10px;
+    color: white;
+    background-color: #333;
+    opacity: 0.7;
+    border-radius: 2px;
+  }
+  .account-info .menu1 {
+    position: absolute;
+    right: 40px;
+    padding: 10px 0;
+    width: 250px;
+    margin-top: 10px;
+  
+  }
+  .account-info .menu1 li {
+    list-style: none;
+    line-height: 2.5em;
+    padding: 0 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .account-info  .menu1 li img {
+    border: none;
+    width: 20px;
+    object-fit: contain;
+    opacity: 0.5;
+    transition: 0.3s;
+    margin-right: 0.5em;
+  }
+  .account-info .menu1 li a {
+    color: #757575;
+  }
+.new-tag {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 2px;
+    padding: 4px 12px;
+    font-size: 12px;
+    background-color: #f57224;
+    color: white;
+    font-weight: 500;
+    border-radius: 2px;
+  }
 audio, body, canvas, html, iframe, img, video {
     margin: 0;
     border: 0;
@@ -21,6 +75,10 @@ audio, body, canvas, html, iframe, img, video {
     .category-column-5::-webkit-scrollbar{
         display: none;
     }
+    .list-banner::-webkit-scrollbar{
+        display: none;
+    }
+    
 body, html {
     vertical-align: baseline;
     color: #333;
@@ -81,7 +139,7 @@ button {
 }
 
 .row {
-    -webkit-box-orient: horizontal;
+    /* -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-flow: row wrap;
     display: -webkit-box;
@@ -89,10 +147,16 @@ button {
     display: flex;
     flex-flow: row wrap;
     margin-bottom: -1.875rem;
-    margin-left: -1.875rem
+    margin-left: -1.875rem */
 }
-
-.row>* {
+.categories-column>.main-title {
+    background: white;
+}
+.categories-column>.column {
+    min-height: initial !important;
+    background: white;
+}
+.home-2 .row>* {
     padding: 0 0 1.875rem 1.875rem;
     width: 100%
 }
@@ -1026,7 +1090,7 @@ div[id*=popup_] .fancybox-button svg path {
         overflow: hidden
     }
     .product-deal-wrapper, .product-promo-wrapper {
-        height: 715px;
+        height: 710px;
         overflow: hidden
     }
 }
@@ -1218,7 +1282,7 @@ footer {
 
 @media screen and (max-width:1024.9px) {
     footer {
-        padding-bottom: 60px
+        /* padding-bottom: 60px */
     }
 }
 
@@ -1489,6 +1553,9 @@ footer {
     .footer-bottom {
         display: none
     }
+    .footer-copyright .show-mobile {
+        display: flex  !important;
+    }
 }
 
 @media screen and (max-width:576px) {
@@ -1534,7 +1601,9 @@ footer {
 .footer-copyright .web-term span, .modulepager .pagination li, .product-category .product-category-toggle strong {
     margin: 0 5px
 }
-
+.product-category-toggle-1 strong {
+    margin: 0 5px
+}
 @media screen and (max-width:768.98px) {
     .footer-copyright .bct, .footer-copyright .company-info, .footer-copyright .copyright, .footer-copyright .web-term {
         font-size: 1.125rem;
@@ -2332,12 +2401,21 @@ header:not(.checkout-header) .cart .cart-button a em {
     width: 250px
 }
 
-.product-category .product-category-toggle {
+.product-category-toggle {
     cursor: pointer;
     padding-left: 20px;
     height: 40px;
     color: #223771
 }
+
+
+.product-category-toggle-1 {
+    cursor: pointer;
+    padding-left: 20px;
+    height: 40px;
+    color: #223771
+}
+
 
 .product-category .product-category-toggle em {
     font-size: 24px
@@ -2364,23 +2442,23 @@ header:not(.checkout-header) .cart .cart-button a em {
 }
 
 @media screen and (min-width:1024px) {
-    .product-category .product-category-list>ul>li:not(:first-child):hover {
+    .product-category .product-category-list>ul>li:hover {
         -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1)
     }
-    .product-category .product-category-list>ul>li:not(:first-child):hover .product-category-link, .product-category .product-category-list>ul>li:not(:first-child):hover .product-category-link .arrow {
+    .product-category .product-category-list>ul>li:hover .product-category-link, .product-category .product-category-list>ul>li:hover .product-category-link .arrow {
         color: #ec5993
     }
-    .product-category .product-category-list>ul>li:not(:first-child):hover .product-category-link:before {
+    .product-category .product-category-list>ul>li:hover .product-category-link:before {
         background: #fff
     }
-    .product-category .product-category-list>ul>li:not(:first-child):hover .product-category-link:after {
+    .product-category .product-category-list>ul>li:hover .product-category-link:after {
         border: 1px solid #ec5993;
         border-right: 3px solid #fff
     }
-    .product-category .product-category-list>ul>li:not(:first-child):hover .text .icon img {
-        -webkit-filter: invert(50%) sepia(10%) saturate(6184%) hue-rotate(302deg) brightness(99%) contrast(87%);
-        filter: invert(50%) sepia(10%) saturate(6184%) hue-rotate(302deg) brightness(99%) contrast(87%)
+    .product-category .product-category-list>ul>li:hover .text .icon img {
+        /* -webkit-filter: invert(50%) sepia(10%) saturate(6184%) hue-rotate(302deg) brightness(99%) contrast(87%); */
+        /* filter: invert(50%) sepia(10%) saturate(6184%) hue-rotate(302deg) brightness(99%) contrast(87%) */
     }
     .product-category .product-category-list>ul>li:not(:first-child):hover .product-category-subnav-container {
         display: block
@@ -5997,7 +6075,14 @@ div[class*=landing-page-] .view-more-wrap .btn {
     width: 250px
 }
 
-.home-1 .product-category-wrapper .product-category-toggle {
+.product-category-toggle-1 {
+    background-image: url(../img//cate-bg-removebg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-left: 20px
+}
+
+.product-category-toggle {
     background-image: url(../img//cate-bg.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -6489,7 +6574,7 @@ div[class*=landing-page-] .view-more-wrap .btn {
 @media screen and (min-width:1024.98px) {
     .home-4 .swiper-wrapper {
         display: block;
-        margin-bottom: -20px
+        /* margin-bottom: -20px */
     }
     .home-4 .swiper-wrapper:after {
         display: block;
@@ -10056,7 +10141,7 @@ div[class*=landing-page-] .view-more-wrap .btn {
 }
 
 .section {
-    padding: 3.125rem 0
+    padding: 1.5rem 0
 }
 
 .section-small {

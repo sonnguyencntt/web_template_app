@@ -8,6 +8,8 @@ import { constants as c } from "../../constants";
 import CategoryColumn from "./child/CategoryColumn";
 import CategoryColumn2 from "./child/CategoryColumn2";
 import CategoryColumn3 from "./child/CategoryColumn3";
+import CategoryColumn5 from "./child/CategoryColumn5";
+
 import { appActions } from "../../actions/appActions";
 
 import PageLoading from "../../components/PageLoading";
@@ -71,7 +73,9 @@ function NewsListPage(props) {
               <CategoryColumn2 homeInfo={homeInfo} />
             ) : appTheme == 3 ? (
               <CategoryColumn3 homeInfo={homeInfo} />
-            ) : (
+            ) : appTheme == 5 ? (
+              <CategoryColumn5 homeInfo={homeInfo} />
+            ):(
               <CategoryColumn homeInfo={homeInfo} />
             )}
 
